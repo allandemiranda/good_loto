@@ -25,12 +25,13 @@ Demais informações descritas em cada arquivo de regra.
 
 - Normal
 
-15 acertos - 1 em 3.268.760
-14 acertos - 1 em 21.791
-13 acertos - 1 em 691
-12 acertos - 1 em 59
-11 acertos - 1 em 11
+15 acertos -> 1 em 3.268.760
+14 acertos -> 1 em 21.791
+13 acertos -> 1 em 691
+12 acertos -> 1 em 59
+11 acertos -> 1 em 11
+
 
 - Com o sistema
 
-15 acertos – 1 em 500.000
+15 acertos –> 1 em 500.000
