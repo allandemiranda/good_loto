@@ -13,6 +13,7 @@
 #include "../numeros_sorteados.h"
 
 // ### REGRA FIBONACCI PARA BINÁRIO ###
+// Verifique os padroes seguindo fribonacci de 5 a 55 (incluindo 15)
 
 /**
  * @brief Main
