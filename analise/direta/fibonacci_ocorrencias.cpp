@@ -84,4 +84,6 @@ int main(int argc, char *argv[ ]){
         }
         std::cout << "Valor " << i << " saiu " << cont << " vezes." << std::endl;
     }
+
+    return 0;
 }

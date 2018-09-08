@@ -81,4 +81,6 @@ int main(int argc, char *argv[ ]){
         }
         std::cout << "Soma " << i << " saiu " << cont << " vezes." << std::endl;
     }
+
+    return 0;
 }
