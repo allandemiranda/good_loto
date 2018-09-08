@@ -13,7 +13,7 @@
 
 // ### REGRA FIBONACCI PARA SOMA ###
 // A cada 2 números a soma dos números fibonacci que sairão nunca será 12, 17, 19, 20, 25, 27, 28, 30, 31, 32, 33 ou maiores que 34
-// A cada 3 números a soma dos números fibonacci que sairão nunca será 12, 17, 19, 20, 25, 27, 28, 30, 31, 32, 33 ou maiores que 34
+// A cada 3 números a soma dos números fibonacci que sairão nunca será 33, 38, 40, 41 ou maiores que 42
 // A cada 5 números a soma dos números fibonacci que sairão nunca será 33, 38, 40, 41 ou maiores que 42
 // A cada 8 números a soma dos números fibonacci que sairão nunca será 33, 40, 41, 45, 46 ou maiores que 47
 // A cada 13 números a soma dos números fibonacci que sairão nunca será 0, 51 ou maiores que 52
