@@ -12,16 +12,13 @@
 
 
 // ### REGRA FIBONACCI PARA OCORRÊNCIAS ###
-// A cada 5 números sorteados saem 0, 1, 2, 3 ou 4 números fibonacci
-// A cada 8 números sorteados saem 0, 1, 2, 3, 4 e 5 números fibonacci
-// A cada 13 números sorteados saem 1, 2, 3, 4, 5, 6 ou 7 números fibonacci
-// A cada 15 números sorteados saem 2, 3, 4, 5, 6 ou 7 números fibonacci **
-// A cada 21 números sorteados saem 3, 4, 5, 6, 7, 8 ou 9 números fibonacci
-// A cada 34 números sorteados saem 6, 7, 8, 9, 10, 11, 12, 13 ou 14 números fibonacci
-// A cada 55 números sorteados saem 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 ou 21 números fibonacci ***
-// A cada 89 números sorteados saem 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 ou 31 números fibonacci
-// A cada 144 números sorteados saem 34, 35, 36, 37, 38, 39 ou 40 números fibonacci
-// A cada 233 números sorteados saem 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71 ou 72 números fibonacci
+// A cada 2 números a soma dos números fibonacci que sairão nunca será 12, 17, 19, 20, 25, 27, 28, 30, 31, 32, 33 ou maiores que 34
+// A cada 3 números a soma dos números fibonacci que sairão nunca será 12, 17, 19, 20, 25, 27, 28, 30, 31, 32, 33 ou maiores que 34
+// A cada 5 números a soma dos números fibonacci que sairão nunca será 33, 38, 40, 41 ou maiores que 42
+// A cada 8 números a soma dos números fibonacci que sairão nunca será 33, 40, 41, 45, 46 ou maiores que 47
+// A cada 13 números a soma dos números fibonacci que sairão nunca será 0, 51 ou maiores que 52
+// A cada 15 números a soma dos números fibonacci que sairão nunca será 0, 1, 2, 4, 5, 7, 12 ou maiores que 53
+// A cada 21 números a soma dos números fibonacci que sairão nunca será menores que 13, 15, 17, 18, 23, 69, 70, 72 ou amiores que 74
 
 
 /**
@@ -39,7 +36,7 @@ int main(int argc, char *argv[ ]){
     // Verificar as ocorrências
     int tamanho_amostra = atoi(argv[1]);
     for(auto *i = std::begin(numeros_sorteados); i<std::end(numeros_sorteados); i += tamanho_amostra){        
-        int cont(0);
+        int soma(0);
         bool flag = true;
         for(int j(0); j<tamanho_amostra; ++j){
             for(auto *k = std::begin(fibonacci_numeros); k<std::end(fibonacci_numeros); ++k){
@@ -48,7 +45,7 @@ int main(int argc, char *argv[ ]){
                     break;
                 }
                 if(*k == *(i+j)){
-                    cont += *k;
+                    soma += *k;
                     break;
                 }
             }
@@ -57,7 +54,7 @@ int main(int argc, char *argv[ ]){
             }
         }
         if(flag){
-            ocorencias.push_back(cont);
+            ocorencias.push_back(soma);
         } else {
             break;
         }        
@@ -83,6 +80,6 @@ int main(int argc, char *argv[ ]){
                 ++cont;
             }
         }
-        std::cout << "Valor " << i << " saiu " << cont << " vezes." << std::endl;
+        std::cout << "Soma " << i << " saiu " << cont << " vezes." << std::endl;
     }
 }
