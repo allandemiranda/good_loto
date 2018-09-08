@@ -32,7 +32,8 @@
         "sstream": "cpp",
         "tuple": "cpp",
         "utility": "cpp",
-        "deque": "cpp"
+        "deque": "cpp",
+        "algorithm": "cpp"
     },
     "doxdocgen.generic.authorTag": "@author Allan de Miranda Silva",
     "doxdocgen.generic.dateFormat": "DD-MM-YYYY"
