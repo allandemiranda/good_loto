@@ -1,10 +1,9 @@
-/** @brief Jogos que serão anlisados.
- * Aqui ficará a lista de jogos que serão analisados.
+/**
+ * @brief Arquivo contendo todo os jogos sorteados até o presente momento, em ordem de sorteio
+ * 
  */
-/** @param numeros_sorteados[][] Guarda todos os núermos sorteados em ordem de sorteio. */
-// Os sorteios são de 6 números por jogo,
-// uma maneira de selecioanr o jogo é nuemros_sorteados[<int>número do jogo][<int>posição... 0,1,2,3,4,5 (for)]
-int numeros_sorteados[] =  {
+
+int numeros_sorteados[] =  { // variável global
 18,20,25,23,10,11,24,14,6,2,13,9,5,16,3,
 23,15,5,4,12,16,20,6,11,19,24,1,9,13,7,
 20,23,12,8,6,1,7,11,14,4,16,10,9,17,24,
