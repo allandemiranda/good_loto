@@ -1,7 +1,7 @@
 /**
  * @brief Programa para gerar analise em cima dos núemros de Fibonacci
  * 
- * @file fibonacci_ocorrencias.cpp
+ * @file fibonacci_ocorrencias_individual.cpp
  * @author Allan de Miranda Silva
  * @date 2018-09-07
  */
