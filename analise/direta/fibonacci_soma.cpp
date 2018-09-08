@@ -46,7 +46,6 @@ int main(int argc, char *argv[ ]){
                 }
                 if(*k == *(i+j)){
                     soma += *k;
-                    break;
                 }
             }
             if(!flag){

@@ -49,7 +49,6 @@ int main(int argc, char *argv[ ]){
                 }
                 if(*k == *(i+j)){
                     ++cont;
-                    break;
                 }
             }
             if(!flag){

@@ -8,9 +8,10 @@
 #include <iostream>
 #include <iterator>
 #include <vector>
+#include <cmath>
 #include "../numeros_sorteados.h"
 
-// ### REGRA FIBONACCI PARA SOMA ###
+// ### REGRA FIBONACCI PARA BINÁRIO ###
 
 /**
  * @brief Main
@@ -20,35 +21,38 @@
  * @return int 
  */
 int main(int argc, char *argv[ ]){
-    int numeros_p_analise[0] = {1,2,3,5,8,13,21}; // números Fibonacci da cartela
+    int numeros_p_analise[] = {1,2,3,5,8,13,21}; // números Fibonacci da cartela
 
     std::vector <int> ocorencias; // Qunatidade de ocorrencias por jogo
 
     // Verificar as ocorrências
     int tamanho_amostra = atoi(argv[1]);
     for(auto *i = std::begin(numeros_sorteados); i<std::end(numeros_sorteados); i += tamanho_amostra){        
-        int soma(0);
-        bool flag = true;
-        for(int j(0); j<tamanho_amostra; ++j){
-            for(auto *k = std::begin(numeros_p_analise); k<std::end(numeros_p_analise); ++k){
-                if((i+j)>=std::end(numeros_sorteados)){
-                    flag = false;
-                    break;
-                }
-                if(*k == *(i+j)){
-                    soma += *k;
-                    break;
+        if((i+tamanho_amostra) > std::end(numeros_p_analise)){
+            break;
+        }
+        int tamanho_analise = std::distance(std::begin(numeros_p_analise), std::end(numeros_p_analise));
+        int binario[tamanho_analise];
+        for(int j(0); j<tamanho_analise; ++j){
+            binario[j] = 0;
+        }
+        int posicao (0);
+        for(auto *j = std::begin(numeros_p_analise); j<std::end(numeros_p_analise); ++j){
+            for(auto k(0); k<tamanho_amostra; ++k){
+                if(*j == *(i+k)){
+                    binario[posicao] = 1;
                 }
             }
-            if(!flag){
-                break;
+            ++posicao;
+        }
+        int tamanho_binario = std::distance(std::begin(binario), std::end(binario));
+        int binario_final(0);
+        for(int j(0); j<tamanho_binario; ++j){
+            if(binario[j]==1){
+                binario_final += std::pow(10, j);
             }
         }
-        if(flag){
-            ocorencias.push_back(soma);
-        } else {
-            break;
-        }        
+        ocorencias.push_back(binario_final);    
     }
 
     // Verificar qual a maior e menor ocorrência para montar tabela
@@ -71,6 +75,8 @@ int main(int argc, char *argv[ ]){
                 ++cont;
             }
         }
-        std::cout << "Soma " << i << " saiu " << cont << " vezes." << std::endl;
+        if(cont){
+            std::cout << "Binário " << i << " saiu " << cont << " vezes." << std::endl;
+        }        
     }
 }
