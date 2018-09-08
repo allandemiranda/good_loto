@@ -1,25 +1,16 @@
 /**
- * @brief Programa para gerar analise em cima dos núemros de Fibonacci - Soma
+ * @brief Programa para gerar analise em cima dos núemros de Fibonacci - Binário
  * 
- * @file fibonacci_soma.cpp
+ * @file fibonacci_binario.cpp
  * @author Allan de Miranda Silva
- * @date 2018-09-07
+ * @date 2018-09-08
  */
 #include <iostream>
 #include <iterator>
 #include <vector>
 #include "../numeros_sorteados.h"
 
-
 // ### REGRA FIBONACCI PARA SOMA ###
-// A cada 2 números a soma dos números fibonacci que sairão nunca será 12, 17, 19, 20, 25, 27, 28, 30, 31, 32, 33 ou maiores que 34
-// A cada 3 números a soma dos números fibonacci que sairão nunca será 12, 17, 19, 20, 25, 27, 28, 30, 31, 32, 33 ou maiores que 34
-// A cada 5 números a soma dos números fibonacci que sairão nunca será 33, 38, 40, 41 ou maiores que 42
-// A cada 8 números a soma dos números fibonacci que sairão nunca será 33, 40, 41, 45, 46 ou maiores que 47
-// A cada 13 números a soma dos números fibonacci que sairão nunca será 0, 51 ou maiores que 52
-// A cada 15 números a soma dos números fibonacci que sairão nunca será 0, 1, 2, 4, 5, 7, 12 ou maiores que 53
-// A cada 21 números a soma dos números fibonacci que sairão nunca será menores que 13, 15, 17, 18, 23, 69, 70, 72 ou amiores que 74
-
 
 /**
  * @brief Main
@@ -29,7 +20,7 @@
  * @return int 
  */
 int main(int argc, char *argv[ ]){
-    int numeros_p_analise[] = {1,2,3,5,8,13,21}; // números Fibonacci da cartela
+    int numeros_p_analise[0] = {1,2,3,5,8,13,21}; // números Fibonacci da cartela
 
     std::vector <int> ocorencias; // Qunatidade de ocorrencias por jogo
 

@@ -32,7 +32,7 @@
  * @return int 
  */
 int main(int argc, char *argv[ ]){
-    int fibonacci_numeros[7] = {1,2,3,5,8,13,21}; // números Fibonacci da cartela
+    int numeros_p_analise[] = {1,2,3,5,8,13,21}; // números Fibonacci da cartela
 
     std::vector <int> ocorencias; // Qunatidade de ocorrencias por jogo
 
@@ -42,7 +42,7 @@ int main(int argc, char *argv[ ]){
         int cont(0);
         bool flag = true;
         for(int j(0); j<tamanho_amostra; ++j){
-            for(auto *k = std::begin(fibonacci_numeros); k<std::end(fibonacci_numeros); ++k){
+            for(auto *k = std::begin(numeros_p_analise); k<std::end(numeros_p_analise); ++k){
                 if((i+j)>=std::end(numeros_sorteados)){
                     flag = false;
                     break;
