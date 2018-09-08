@@ -33,5 +33,7 @@
         "tuple": "cpp",
         "utility": "cpp",
         "deque": "cpp"
-    }
+    },
+    "doxdocgen.generic.authorTag": "@author Allan de Miranda Silva",
+    "doxdocgen.generic.dateFormat": "DD-MM-YYYY"
 }
