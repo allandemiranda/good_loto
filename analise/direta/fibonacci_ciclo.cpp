@@ -14,8 +14,8 @@
 
 // ### REGRA FIBONACCI PARA CICLO ###
 // y y F 1 2 3 "4" F 1 2 3 4 "5" F .....
-
-
+// Menor ciclo 0 (números seguidos)
+// Maior ciclo 20 (passou 20 números sem sair)
 
 
 int main(void){
@@ -23,30 +23,28 @@ int main(void){
 
     std::vector <int> ocorencias; // Qunatidade de ocorrencias por jogo
 
-    // Verificar ciclos
-    int *inicial;
+    // Verificar ciclos    
     for(auto *i = std::begin(numeros_sorteados); i<std::end(numeros_sorteados); ++i){
         for(int *j = std::begin(numeros_p_analise); j<std::end(numeros_p_analise); ++j){
             if(*j == *i){
-                inicial = i;
-            }
-        }
-    }
-    int ciclo(0);
-    bool flag = false;
-    for(auto *i = inicial; i<std::end(numeros_sorteados); ++i){
-        for(int *j = std::begin(numeros_p_analise); j<std::end(numeros_p_analise); ++j){
-            if(*j == *i){
-                ocorencias.push_back(ciclo);                
-                flag = true;
+                int ciclo(0);
+                for(auto *k = i + 1; k<std::end(numeros_sorteados); ++k){
+                    bool flag = false;
+                    for(int *m = std::begin(numeros_p_analise); m<std::end(numeros_p_analise); ++m){
+                        if(*k == *m){
+                            ocorencias.push_back(ciclo);
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if(flag){
+                        ciclo = 0;
+                    } else {
+                        ++ciclo;
+                    }
+                }
                 break;
             }
-        }
-        if(flag){
-            ciclo = 0;
-            flag = false;
-        } else {
-            ++ciclo;
         }
     }
 
