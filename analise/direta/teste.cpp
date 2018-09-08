@@ -48,7 +48,7 @@ int main(int argc, char *argv[ ]){
                     break;
                 }
                 if(*k == *(i+j)){
-                    ++cont;
+                    cont += *k;
                     break;
                 }
             }
