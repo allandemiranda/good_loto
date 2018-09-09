@@ -69,15 +69,15 @@ int main(int argc, char *argv[ ]){
         if(valor == *i){
             ++cont;
             if(i+1 == ocorencias.cend()){
-                std::cout << "(" << ++quantidade << ") Binário " << valor << " saiu " << cont << " vezes." << std::endl;
-                // std::cout <<  valor << ", " << std::endl;
+                //std::cout << "(" << ++quantidade << ") Binário " << valor << " saiu " << cont << " vezes." << std::endl;
+                std::cout <<  valor << ", " << std::endl;
                 break;
             }
         } else {
-             std::cout << "(" << ++quantidade << ") Binário " << valor << " saiu " << cont << " vezes." << std::endl;
-             // std::cout <<  valor << ", " << std::endl;
-             cont = 1;
-             valor = *i;
+            //std::cout << "(" << ++quantidade << ") Binário " << valor << " saiu " << cont << " vezes." << std::endl;
+            std::cout <<  valor << ", " << std::endl;
+            cont = 1;
+            valor = *i;
         }
     }
 

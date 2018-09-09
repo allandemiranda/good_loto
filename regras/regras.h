@@ -16,9 +16,11 @@
  * @return false Para se pelomenos uma regra não está valendo
  */
 bool regras_gerais(int *primeiro){
-    if(fibonacci_binario_soma(primeiro)){
-        if(fibonacci_binario_ocorrencias(primeiro)){
-            return true;
+    if(fibonacci_soma(primeiro)){
+        if(fibonacci_ocorrencias(primeiro)){
+            if(fibonacci_binario(primeiro)){
+                return true;
+            }            
         }        
     }
 
