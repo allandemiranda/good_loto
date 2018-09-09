@@ -5,8 +5,10 @@
  * @author Allan de Miranda Silva
  * @date 09-09-2018
  */
-
+#include "../analise/numeros_sorteados.h" // Para as regras funcionarem
 #include "fibonacci.h" // Regras de Fibonacci
+#include "multiplos_3.h"
+
 
 /**
  * @brief Função que verifica todas as regras
@@ -20,7 +22,9 @@ bool regras_gerais(int *primeiro){
         if(fibonacci_ocorrencias(primeiro)){
             if(fibonacci_binario(primeiro)){
                 //if(fibonacci_ciclo(primeiro)){
-                    return true;
+                    if(multiplos_3_soma(primeiro)){
+                        return true;
+                    }
                 //}
             }            
         }        

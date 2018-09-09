@@ -5,7 +5,6 @@
  * @author Allan de Miranda Silva
  * @date 08-09-2018
  */
-#include "../analise/numeros_sorteados.h"
 #include <iterator>
 #include <vector>
 #include <algorithm>

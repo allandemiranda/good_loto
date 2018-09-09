@@ -42,7 +42,8 @@
         "ratio": "cpp",
         "thread": "cpp",
         "cinttypes": "cpp",
-        "typeindex": "cpp"
+        "typeindex": "cpp",
+        "iterator": "cpp"
     },
     "doxdocgen.generic.authorTag": "@author Allan de Miranda Silva",
     "doxdocgen.generic.dateFormat": "DD-MM-YYYY"
