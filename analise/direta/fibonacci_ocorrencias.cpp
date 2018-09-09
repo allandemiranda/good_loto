@@ -27,7 +27,7 @@
  * @brief Main
  * 
  * @param argc  
- * @param argv recebe o número do tamanho da amostra
+ * @param argv recebe o número de jogos a analisar
  * @return int 
  */
 int main(int argc, char *argv[ ]){
@@ -36,7 +36,7 @@ int main(int argc, char *argv[ ]){
     std::vector <int> ocorencias; // Qunatidade de ocorrencias por jogo
 
     // Verificar as ocorrências
-    int tamanho_amostra = atoi(argv[1]);
+    int tamanho_amostra = 15 * atoi(argv[1]);
     for(auto *i = std::begin(numeros_sorteados); i<std::end(numeros_sorteados); i += tamanho_amostra){        
         int cont(0);
         bool flag = true;
