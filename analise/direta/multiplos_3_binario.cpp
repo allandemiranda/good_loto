@@ -1,9 +1,9 @@
 /**
- * @brief Programa para gerar analise em cima dos núemros de Fibonacci - Binário
+ * @brief Programa para gerar analise em cima dos núemros de Multiplo de 3 - Binário
  * 
- * @file fibonacci_binario.cpp
+ * @file multiplos_3_binario.cpp
  * @author Allan de Miranda Silva
- * @date 2018-09-08
+ * @date 09-09-2018
  */
 #include <iostream>
 #include <iterator>
@@ -12,9 +12,9 @@
 #include <cmath>
 #include "../numeros_sorteados.h"
 
-// ### REGRA FIBONACCI PARA BINÁRIO ###
-// Com 1 jogos, existem somente ... padrões
-// Com 2 jogos, existem somente 64 padrões
+// ### REGRA PARA BINÁRIO ###
+// Com 1 jogos, existem somente 126 padrões 
+// Com 2 jogos, existem somente 64 padrões 
 // Com 3 jogos, existem somente 25 padrões
 // Com 5 jogos, existem somente 7 padrões
 // Com 8 jogos ou mais, todos os números são sorteados
@@ -27,7 +27,7 @@
  * @return int 
  */
 int main(int argc, char *argv[ ]){
-    int numeros_p_analise[] = {1,2,3,5,8,13,21}; // números Fibonacci da cartela
+    int numeros_p_analise[] = {3,6,9,12,15,18,21}; // números da cartela
     int tamanho_analise = std::distance(std::begin(numeros_p_analise), std::end(numeros_p_analise));
 
     std::vector <int> ocorencias; // Quantidade de ocorrencias por jogo
@@ -70,17 +70,17 @@ int main(int argc, char *argv[ ]){
         if(valor == *i){
             ++cont;
             if(i+1 == ocorencias.cend()){
-                //std::cout << "(" << ++quantidade << ") Binário " << valor << " saiu " << cont << " vezes." << std::endl;
-                std::cout <<  valor << ", ";
+                std::cout << "(" << ++quantidade << ") Binário " << valor << " saiu " << cont << " vezes." << std::endl;
+                //std::cout <<  valor << ", " << std::endl;
                 break;
             }
         } else {
-            //std::cout << "(" << ++quantidade << ") Binário " << valor << " saiu " << cont << " vezes." << std::endl;
-            std::cout <<  valor << ", ";
+            std::cout << "(" << ++quantidade << ") Binário " << valor << " saiu " << cont << " vezes." << std::endl;
+            //std::cout <<  valor << ", " << std::endl;
             cont = 1;
             valor = *i;
         }
     }
-    std::cout << std::endl;
+
     return 0;
 }
