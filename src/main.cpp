@@ -8,7 +8,7 @@
 #include <iostream>
 #include <algorithm>
 #include <fstream>
-#include "../analise/numeros_sorteados.h"
+#include "../regras/regras.h"
 
 int main(void){
     //std::ofstream outFile ("jogos_certos.txt", std::ios::app);
@@ -71,7 +71,7 @@ int main(void){
                                                                 jogo[14] = o;
                                                                 
                                                                 
-                                                                if(regras(&jogo[0])){                                                                
+                                                                if(regras_gerais(&jogo[0])){                                                                
                                                                     /*
                                                                     for(int gravar(0); gravar < 14; ++gravar){
                                                                         outFile << jogo[gravar] << " ";

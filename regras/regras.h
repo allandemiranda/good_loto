@@ -17,7 +17,9 @@
  */
 bool regras_gerais(int *primeiro){
     if(fibonacci_binario_soma(primeiro)){
-        return true;
+        if(fibonacci_binario_ocorrencias(primeiro)){
+            return true;
+        }        
     }
 
     return false;

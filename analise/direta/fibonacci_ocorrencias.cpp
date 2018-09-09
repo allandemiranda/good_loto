@@ -19,18 +19,6 @@
 // A cada 8 jogo, saem 30, 31, 32, 33, 34, 35, 36, 37 ou 38 números fibonacci
 
 
-
-// A cada 5 números sorteados saem 0, 1, 2, 3 ou 4 números fibonacci
-// A cada 8 números sorteados saem 0, 1, 2, 3, 4 e 5 números fibonacci
-// A cada 13 números sorteados saem 1, 2, 3, 4, 5 ou 6 números fibonacci
-// A cada 15 números sorteados saem 2, 3, 4, 5, 6 ou 7 números fibonacci **
-// A cada 21 números sorteados saem 3, 4, 5, 6, 7, 8 ou 9 números fibonacci
-// A cada 34 números sorteados saem 6, 7, 8, 9, 10, 11, 12, 13 ou 14 números fibonacci
-// A cada 55 números sorteados saem 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 ou 21 números fibonacci ***
-// A cada 89 números sorteados saem 20, 21, 22, 23, 24, 25, 26, 27 ou 28 números fibonacci
-// A cada 144 números sorteados saem 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45 ou 46 números fibonacci
-
-
 /**
  * @brief Main
  * 
