@@ -11,7 +11,7 @@
 #include "../analise/numeros_sorteados.h"
 
 int main(void){
-    std::ofstream outFile ("jogos_certos.txt", std::ios::app);
+    //std::ofstream outFile ("jogos_certos.txt", std::ios::app);
 
     // Verificar menor e maiores números que saem em suas posições
     int vetor_maior[15];
@@ -69,14 +69,16 @@ int main(void){
                                                             jogo[13] = n;
                                                             for(int o = n + 1; (vetor_menor[14] <= o) and (vetor_maior[14] >= o); ++o){ // 15
                                                                 jogo[14] = o;
-                                                                ++contar_jogos_possiveis;
                                                                 
-                                                                //if(regras(&jogo[0])){
-                                                                if(true){
+                                                                
+                                                                if(regras(&jogo[0])){                                                                
+                                                                    /*
                                                                     for(int gravar(0); gravar < 14; ++gravar){
                                                                         outFile << jogo[gravar] << " ";
                                                                     }
                                                                     outFile << jogo[14] << std::endl;
+                                                                    */
+                                                                    ++contar_jogos_possiveis;
                                                                 }
 
 
