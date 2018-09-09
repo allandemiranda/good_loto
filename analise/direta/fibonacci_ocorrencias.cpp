@@ -12,9 +12,17 @@
 
 
 // ### REGRA FIBONACCI PARA OCORRÊNCIAS ###
+// A cada 1 jogo, saem 2, 3, 4, 5, 6 ou 7 números fibonacci ***
+// A cada 2 jogo, saem 5, 6, 7, 8, 9, 10, 11 ou 12 números fibonacci
+// A cada 3 jogo, saem 9, 10, 11, 12, 13, 14, 15 ou 16 números fibonacci
+// A cada 5 jogo, saem 17, 18, 19, 20, 21, 22, 23, 24 ou 25 números fibonacci
+// A cada 8 jogo, saem 30, 31, 32, 33, 34, 35, 36, 37 ou 38 números fibonacci
+
+
+
 // A cada 5 números sorteados saem 0, 1, 2, 3 ou 4 números fibonacci
 // A cada 8 números sorteados saem 0, 1, 2, 3, 4 e 5 números fibonacci
-// A cada 13 números sorteados saem 1, 2, 3, 4, 5, 6 ou 7 números fibonacci
+// A cada 13 números sorteados saem 1, 2, 3, 4, 5 ou 6 números fibonacci
 // A cada 15 números sorteados saem 2, 3, 4, 5, 6 ou 7 números fibonacci **
 // A cada 21 números sorteados saem 3, 4, 5, 6, 7, 8 ou 9 números fibonacci
 // A cada 34 números sorteados saem 6, 7, 8, 9, 10, 11, 12, 13 ou 14 números fibonacci
