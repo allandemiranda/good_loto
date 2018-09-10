@@ -1,7 +1,7 @@
 /**
  * @brief Regras geradas pela analise dos númros de fibonacci
  * 
- * @file fibonacci.h
+ * @file fibonacci_all.h
  * @author Allan de Miranda Silva
  * @date 08-09-2018
  */
@@ -422,4 +422,21 @@ bool fibonacci_binario(int *inicial){
     }    
     
     return true;
+}
+
+/**
+ * @brief Função que verifica somente todas as regras fibonacci
+ * 
+ * @param primeiro Aponta para o primeiro número do jogo que queremos analisar
+ * @return true Para se todas as regras estão valendo
+ * @return false Para se pelomenos uma regra não está valendo
+ */
+bool regras_gerais_fibonacci(int *primeiro){
+    if(fibonacci_soma(primeiro)){
+        if(fibonacci_ocorrencias(primeiro)){
+            if(fibonacci_binario(primeiro)){
+                return true;                
+            }            
+        }        
+    }
 }
