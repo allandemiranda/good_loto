@@ -159,15 +159,9 @@ bool fibonacci_binario(int *inicial){
     std::vector <int> novo_jogo; 
     int quantidade_de_jogos_sorteados = std::distance(std::begin(numeros_sorteados), std::end(numeros_sorteados)) / 15;
 
-    //ANALISE EXTRA POR ERRO INICIAL
-    tamanho_amostra = 1; // cinco jogos
-    if((quantidade_de_jogos_sorteados+1)%tamanho_amostra != 0){
-        return true;
-    }
+    //ANALISE EXTRA POR ERRO INICIA &&&&&&&&& 
+    
     for(int *i=inicial; i<(inicial+15); ++i){
-        novo_jogo.push_back(*i);
-    }
-    for(int *i=((std::begin(numeros_sorteados))+(15*(quantidade_de_jogos_sorteados + 2 - tamanho_amostra))); i<std::end(numeros_sorteados); ++i){
         novo_jogo.push_back(*i);
     }
 
@@ -177,7 +171,7 @@ bool fibonacci_binario(int *inicial){
     
     posicao = 0;
     for(auto *j = std::begin(numeros_p_analise); j<std::end(numeros_p_analise); ++j){
-        for(auto k(0); k<tamanho_amostra*15; ++k){
+        for(auto k(0); k<15; ++k){
             if(*j == novo_jogo[k]){
                 binario[posicao] = 1;
             }

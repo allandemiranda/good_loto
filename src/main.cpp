@@ -69,17 +69,17 @@ int main(void){
                                                             jogo[13] = n;
                                                             for(int o = n + 1; (vetor_menor[14] <= o) and (vetor_maior[14] >= o); ++o){ // 15
                                                                 jogo[14] = o;                                                                
-                                                                int jogo_a[] = {1,2,3,4,6,7,8,9,10,12,13,14,17,18,22};
-                                                                if(regras_gerais(&jogo_a[0])){   
-                                                                //if(regras_gerais(&jogo[0])){ 
+                                                                //int jogo_a[] = {1,2,3,4,6,7,8,9,10,12,13,14,17,18,22};
+                                                                //if(regras_gerais(&jogo_a[0])){   
+                                                                if(regras_gerais(&jogo[0])){ 
                                                                     //for(int gravar(0); gravar < 14; ++gravar){
                                                                         //outFile << jogo[gravar] << " ";
                                                                     //}
                                                                     //outFile << jogo[14] << std::endl;
                                                                     ++contar_jogos_possiveis;
                                                                 }
-                                                                std::cout << contar_jogos_possiveis << std::endl;
-                                                                return 0;
+                                                                //std::cout << contar_jogos_possiveis << std::endl;
+                                                                //return 0;
                                                             }
                                                         }
                                                     }
