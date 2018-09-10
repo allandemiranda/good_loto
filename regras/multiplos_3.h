@@ -34,41 +34,8 @@ bool multiplos_3_soma(int *inicial){
         }
     }
     if(bandeira){
-        return false;
-    }
-
-    int quantidade_de_jogos_sorteados = std::distance(std::begin(numeros_sorteados), std::end(numeros_sorteados)) / 15;
-    int analise_padrao;
-    int soma_analise_padrao;
-
-    // segunda definição
-    analise_padrao = 2;
-    bandeira = true;
-    if((quantidade_de_jogos_sorteados+1)%analise_padrao != 0){
-        return true;
-    }
-    soma_analise_padrao = 0;
-    for(int *i=((std::begin(numeros_sorteados))+(15*(quantidade_de_jogos_sorteados + 2 - analise_padrao))); i<std::end(numeros_sorteados); ++i){
-        for(int *j=std::begin(numeros_p_analise); j<std::end(numeros_p_analise); ++j){
-            if(*i == *j){
-                soma_analise_padrao += *i;
-                break;
-            }
-        }
-    }
-    if(((soma + soma_analise_padrao) < 20) or ((soma + soma_analise_padrao) > 100)){
-        return false;
-    }
-    int numeros_verdade_dois[] = {39, 42, 45, 48, 51, 54, 57, 60, 63, 66, 69, 72, 75, 78, 81, 84, 87, 90, 93, 96, 99, 102, 105, 108, 111, 114, 117, 120, 123, 126, 129, 132, 135, 138, 141, 144, 147, 150, 153, 156, 159, 165};
-    for(int *i=std::begin(numeros_verdade_dois); i<std::end(numeros_verdade_dois); ++i){
-        if(*i == soma){
-            bandeira = false;
-            break;
-        }
-    }
-    if(bandeira){
-        //return false;
-    }
+        return false;        
+    }    
 
     // fim
     return true;
@@ -76,7 +43,7 @@ bool multiplos_3_soma(int *inicial){
 
 bool multiplos_3_ocorrencias(int *inicial){
     // primeiro definição
-    int numeros_p_analise[] = {3,6,9,12,15,18,21}; // números  da cartela
+    int numeros_p_analise[] = {3,6,9,12,15,18,21}; // números da cartela
     int cont(0);
     for(int *i=inicial; i<(inicial+15); ++i){
         for(int *j=std::begin(numeros_p_analise); j<std::end(numeros_p_analise); ++j){
@@ -87,7 +54,7 @@ bool multiplos_3_ocorrencias(int *inicial){
         }
     }
     if((cont < 2) or (cont > 6)){
-        return false;
+        return false;        
     }
 
     int quantidade_de_jogos_sorteados = std::distance(std::begin(numeros_sorteados), std::end(numeros_sorteados)) / 15;
@@ -96,57 +63,55 @@ bool multiplos_3_ocorrencias(int *inicial){
 
     // segunda definição
     analise_padrao = 2;
-    if((quantidade_de_jogos_sorteados+1)%analise_padrao != 0){
-        return true;
-    }
-    cont_analise_padrao = 0;
-    for(int *i=((std::begin(numeros_sorteados))+(15*(quantidade_de_jogos_sorteados + 2 - analise_padrao))); i<std::end(numeros_sorteados); ++i){
-        for(int *j=std::begin(numeros_p_analise); j<std::end(numeros_p_analise); ++j){
-            if(*i == *j){
-                cont_analise_padrao++;
-                break;
+    if((quantidade_de_jogos_sorteados+analise_padrao-1)%analise_padrao == 0){
+        cont_analise_padrao = 0;
+        for(int *i=((std::begin(numeros_sorteados))+(15*(quantidade_de_jogos_sorteados + 1 - analise_padrao))); i<std::end(numeros_sorteados); ++i){
+            for(int *j=std::begin(numeros_p_analise); j<std::end(numeros_p_analise); ++j){            
+                if(*i == *j){
+                    cont_analise_padrao++;
+                    break;
+                }
             }
         }
-    }
-    if(((cont + cont_analise_padrao) < 5) or ((cont + cont_analise_padrao) > 11)){
-        return false;
+        if(((cont + cont_analise_padrao) < 5) or ((cont + cont_analise_padrao) > 11)){        
+            return false;
+        }
     }
 
     // terceira definição
     analise_padrao = 3;
-    if((quantidade_de_jogos_sorteados+1)%analise_padrao != 0){
-        return true;
-    }
-    cont_analise_padrao = 0;
-    for(int *i=((std::begin(numeros_sorteados))+(15*(quantidade_de_jogos_sorteados + 2 - analise_padrao))); i<std::end(numeros_sorteados); ++i){
-        for(int *j=std::begin(numeros_p_analise); j<std::end(numeros_p_analise); ++j){
-            if(*i == *j){
-                cont_analise_padrao++;
-                break;
+    if((quantidade_de_jogos_sorteados+analise_padrao-1)%analise_padrao == 0){
+        cont_analise_padrao = 0;
+        for(int *i=((std::begin(numeros_sorteados))+(15*(quantidade_de_jogos_sorteados + 1 - analise_padrao))); i<std::end(numeros_sorteados); ++i){
+            for(int *j=std::begin(numeros_p_analise); j<std::end(numeros_p_analise); ++j){            
+                if(*i == *j){
+                    cont_analise_padrao++;
+                    break;
+                }
             }
         }
+        if(((cont + cont_analise_padrao) < 8) or ((cont + cont_analise_padrao) > 16)){
+            return false;
+        }
     }
-    if(((cont + cont_analise_padrao) < 8) or ((cont + cont_analise_padrao) > 16)){
-        return false;
-    }
+    
 
     // quarta definição
     analise_padrao = 5;
-    if((quantidade_de_jogos_sorteados+1)%analise_padrao != 0){
-        return true;
-    }
-    cont_analise_padrao = 0;
-    for(int *i=((std::begin(numeros_sorteados))+(15*(quantidade_de_jogos_sorteados + 2 - analise_padrao))); i<std::end(numeros_sorteados); ++i){
-        for(int *j=std::begin(numeros_p_analise); j<std::end(numeros_p_analise); ++j){
-            if(*i == *j){
-                cont_analise_padrao++;
-                break;
+    if((quantidade_de_jogos_sorteados+analise_padrao-1)%analise_padrao == 0){
+        cont_analise_padrao = 0;
+        for(int *i=((std::begin(numeros_sorteados))+(15*(quantidade_de_jogos_sorteados + 1 - analise_padrao))); i<std::end(numeros_sorteados); ++i){
+            for(int *j=std::begin(numeros_p_analise); j<std::end(numeros_p_analise); ++j){            
+                if(*i == *j){
+                    cont_analise_padrao++;
+                    break;
+                }
             }
         }
-    }
-    if(((cont + cont_analise_padrao) < 16) or ((cont + cont_analise_padrao) > 25)){
-        return false;
-    }
+        if(((cont + cont_analise_padrao) < 16) or ((cont + cont_analise_padrao) > 25)){
+            return false;
+        }
+    }    
 
     return true;
 }
@@ -161,12 +126,12 @@ bool multiplos_3_binario(int *inicial){
     std::vector <int> novo_jogo; 
     int quantidade_de_jogos_sorteados = std::distance(std::begin(numeros_sorteados), std::end(numeros_sorteados)) / 15;
 
-    //ANALISE EXTRA POR ERRO INICIA &&&&&&&&& 
+    //primeira analise
     
     for(int *i=inicial; i<(inicial+15); ++i){
         novo_jogo.push_back(*i);
     }
-
+    
     for(int j(0); j<tamanho_analise; ++j){
         binario[j] = 0;
     }
@@ -214,169 +179,13 @@ bool multiplos_3_binario(int *inicial){
         return false;
     }
 
-    //primeira analise
-    tamanho_amostra = 2; // Dois jogos
-    if((quantidade_de_jogos_sorteados+1)%tamanho_amostra != 0){
-        return true;
-    }
-    for(int *i=inicial; i<(inicial+15); ++i){
-        novo_jogo.push_back(*i);
-    }
-    for(int *i=((std::begin(numeros_sorteados))+(15*(quantidade_de_jogos_sorteados + 2 - tamanho_amostra))); i<std::end(numeros_sorteados); ++i){
-        novo_jogo.push_back(*i);
-    }
-
-    for(int j(0); j<tamanho_analise; ++j){
-        binario[j] = 0;
-    }
-    
-    posicao = 0;
-    for(auto *j = std::begin(numeros_p_analise); j<std::end(numeros_p_analise); ++j){
-        for(auto k(0); k<tamanho_amostra*15; ++k){
-            if(*j == novo_jogo[k]){
-                binario[posicao] = 1;
-            }
-        }
-        ++posicao;
-    }
-    binario_final = 0;
-    for(int j(0); j<tamanho_analise; ++j){
-        if(binario[j]==1){
-            binario_final += std::pow(10, j);
-        }
-    }
-    novo_jogo.clear();    
-
-        // #### análise ### Modificar variáveis
-    int lista_um [] = {
-        1110, 1111, 10111, 11011, 11110, 11111, 100011, 100111, 101011, 101110, 101111, 110001, 
-        110011, 110101, 110110, 110111, 111001, 111010, 111011, 111100, 111101, 111110, 111111, 
-        1000111, 1001010, 1001011, 1001101, 1001110, 1001111, 1010001, 1010101, 1010111, 1011001, 
-        1011010, 1011011, 1011100, 1011101, 1011110, 1011111, 1100011, 1100110, 1100111, 1101001, 
-        1101010, 1101011, 1101100, 1101101, 1101110, 1101111, 1110000, 1110001, 1110011, 1110100, 
-        1110101, 1110110, 1110111, 1111000, 1111001, 1111010, 1111011, 1111100, 1111101, 1111110, 
-        1111111
-    };
-    bool flag_um(true);
-    for(int *i=std::begin(lista_um); i<std::end(lista_um); ++i){
-        if(binario_final == *i){
-            flag_um = false;
-            break;
-        }
-    }
-    if(flag_um){
-        return false;
-    }
-
     //segunda analise
-    tamanho_amostra = 3; // três jogos
-    if((quantidade_de_jogos_sorteados+1)%tamanho_amostra != 0){
-        return true;
-    }
-    for(int *i=inicial; i<(inicial+15); ++i){
-        novo_jogo.push_back(*i);
-    }
-    for(int *i=((std::begin(numeros_sorteados))+(15*(quantidade_de_jogos_sorteados + 2 - tamanho_amostra))); i<std::end(numeros_sorteados); ++i){
-        novo_jogo.push_back(*i);
-    }
-
-    for(int j(0); j<tamanho_analise; ++j){
-        binario[j] = 0;
-    }
-    
-    posicao = 0;
-    for(auto *j = std::begin(numeros_p_analise); j<std::end(numeros_p_analise); ++j){
-        for(auto k(0); k<tamanho_amostra*15; ++k){
-            if(*j == novo_jogo[k]){
-                binario[posicao] = 1;
-            }
-        }
-        ++posicao;
-    }
-    binario_final = 0;
-    for(int j(0); j<tamanho_analise; ++j){
-        if(binario[j]==1){
-            binario_final += std::pow(10, j);
-        }
-    }
-    novo_jogo.clear();    
-
-        // #### análise ### Modificar variáveis
-    int lista_dois [] = {
-        1111, 11111, 110001, 110111, 111011, 111101, 111110, 111111, 1001111, 1010111, 
-        1011101, 1011111, 1100111, 1101011, 1101101, 1101110, 1101111, 1110011, 1110111, 
-        1111001, 1111011, 1111100, 1111101, 1111110, 1111111
-    };
-    bool flag_dois(true);
-    for(int *i=std::begin(lista_dois); i<std::end(lista_dois); ++i){
-        if(binario_final == *i){
-            flag_dois = false;
-            break;
-        }
-    }
-    if(flag_dois){
-        return false;
-    }
-
-    //terceiro analise
-    tamanho_amostra = 5; // cinco jogos
-    if((quantidade_de_jogos_sorteados+1)%tamanho_amostra != 0){
-        return true;
-    }
-    for(int *i=inicial; i<(inicial+15); ++i){
-        novo_jogo.push_back(*i);
-    }
-    for(int *i=((std::begin(numeros_sorteados))+(15*(quantidade_de_jogos_sorteados + 2 - tamanho_amostra))); i<std::end(numeros_sorteados); ++i){
-        novo_jogo.push_back(*i);
-    }
-
-    for(int j(0); j<tamanho_analise; ++j){
-        binario[j] = 0;
-    }
-    
-    posicao = 0;
-    for(auto *j = std::begin(numeros_p_analise); j<std::end(numeros_p_analise); ++j){
-        for(auto k(0); k<tamanho_amostra*15; ++k){
-            if(*j == novo_jogo[k]){
-                binario[posicao] = 1;
-            }
-        }
-        ++posicao;
-    }
-    binario_final = 0;
-    for(int j(0); j<tamanho_analise; ++j){
-        if(binario[j]==1){
-            binario_final += std::pow(10, j);
-        }
-    }
-    novo_jogo.clear();    
-
-        // #### análise ### Modificar variáveis
-    int lista_tres [] = {
-        111111, 1011111, 1101111, 1110111, 1111011, 1111101, 1111111
-    };
-    bool flag_tres(true);
-    for(int *i=std::begin(lista_tres); i<std::end(lista_tres); ++i){
-        if(binario_final == *i){
-            flag_tres = false;
-            break;
-        }
-    }
-    if(flag_tres){
-        return false;
-    }
-
-    //quarto analise
-    int numeros_adicionais[] = {8, 13, 21, 34, 55, 89, 144};
-    for(int *k=std::begin(numeros_adicionais); k<std::end(numeros_adicionais); ++k){
-        tamanho_amostra = *k; // jogos
-        if((quantidade_de_jogos_sorteados+1)%tamanho_amostra != 0){
-            return true;
-        }
+    tamanho_amostra = 2; // Dois jogos
+    if((quantidade_de_jogos_sorteados+tamanho_amostra-1)%tamanho_amostra == 0){
         for(int *i=inicial; i<(inicial+15); ++i){
             novo_jogo.push_back(*i);
         }
-        for(int *i=((std::begin(numeros_sorteados))+(15*(quantidade_de_jogos_sorteados + 2 - tamanho_amostra))); i<std::end(numeros_sorteados); ++i){
+        for(int *i=((std::begin(numeros_sorteados))+(15*(quantidade_de_jogos_sorteados + 1 - tamanho_amostra))); i<std::end(numeros_sorteados); ++i){
             novo_jogo.push_back(*i);
         }
 
@@ -398,9 +207,175 @@ bool multiplos_3_binario(int *inicial){
             if(binario[j]==1){
                 binario_final += std::pow(10, j);
             }
-        }        
-        if(binario_final != 1111111){
+        }
+        novo_jogo.clear();    
+
+            // #### análise ### Modificar variáveis
+        int lista_um [] = {
+            1110, 1111, 10111, 11011, 11110, 11111, 100011, 100111, 101011, 101110, 101111, 110001, 
+            110011, 110101, 110110, 110111, 111001, 111010, 111011, 111100, 111101, 111110, 111111, 
+            1000111, 1001010, 1001011, 1001101, 1001110, 1001111, 1010001, 1010101, 1010111, 1011001, 
+            1011010, 1011011, 1011100, 1011101, 1011110, 1011111, 1100011, 1100110, 1100111, 1101001, 
+            1101010, 1101011, 1101100, 1101101, 1101110, 1101111, 1110000, 1110001, 1110011, 1110100, 
+            1110101, 1110110, 1110111, 1111000, 1111001, 1111010, 1111011, 1111100, 1111101, 1111110, 
+            1111111
+        };
+        bool flag_um(true);
+        for(int *i=std::begin(lista_um); i<std::end(lista_um); ++i){
+            if(binario_final == *i){
+                flag_um = false;
+                break;
+            }
+        }
+        if(flag_um){
             return false;
+        }
+    }
+    
+
+    //terceira analise
+    tamanho_amostra = 3; // três jogos
+    if((quantidade_de_jogos_sorteados+tamanho_amostra-1)%tamanho_amostra == 0){
+        for(int *i=inicial; i<(inicial+15); ++i){
+            novo_jogo.push_back(*i);
+        }
+        for(int *i=((std::begin(numeros_sorteados))+(15*(quantidade_de_jogos_sorteados + 1 - tamanho_amostra))); i<std::end(numeros_sorteados); ++i){
+            novo_jogo.push_back(*i);
+        }
+
+        for(int j(0); j<tamanho_analise; ++j){
+            binario[j] = 0;
+        }
+        
+        posicao = 0;
+        for(auto *j = std::begin(numeros_p_analise); j<std::end(numeros_p_analise); ++j){
+            for(auto k(0); k<tamanho_amostra*15; ++k){
+                if(*j == novo_jogo[k]){
+                    binario[posicao] = 1;
+                }
+            }
+            ++posicao;
+        }
+        binario_final = 0;
+        for(int j(0); j<tamanho_analise; ++j){
+            if(binario[j]==1){
+                binario_final += std::pow(10, j);
+            }
+        }
+        novo_jogo.clear();    
+
+            // #### análise ### Modificar variáveis
+        int lista_um [] = {
+            1111, 11111, 110001, 110111, 111011, 111101, 111110, 111111, 1001111, 1010111, 
+            1011101, 1011111, 1100111, 1101011, 1101101, 1101110, 1101111, 1110011, 1110111, 
+            1111001, 1111011, 1111100, 1111101, 1111110, 1111111
+        };
+        bool flag_um(true);
+        for(int *i=std::begin(lista_um); i<std::end(lista_um); ++i){
+            if(binario_final == *i){
+                flag_um = false;
+                break;
+            }
+        }
+        if(flag_um){
+            return false;
+        }
+    }
+
+    //quarta analise
+    tamanho_amostra = 5; // cinco jogos
+    if((quantidade_de_jogos_sorteados+tamanho_amostra-1)%tamanho_amostra == 0){
+        for(int *i=inicial; i<(inicial+15); ++i){
+            novo_jogo.push_back(*i);
+        }
+        for(int *i=((std::begin(numeros_sorteados))+(15*(quantidade_de_jogos_sorteados + 1 - tamanho_amostra))); i<std::end(numeros_sorteados); ++i){
+            novo_jogo.push_back(*i);
+        }
+
+        for(int j(0); j<tamanho_analise; ++j){
+            binario[j] = 0;
+        }
+        
+        posicao = 0;
+        for(auto *j = std::begin(numeros_p_analise); j<std::end(numeros_p_analise); ++j){
+            for(auto k(0); k<tamanho_amostra*15; ++k){
+                if(*j == novo_jogo[k]){
+                    binario[posicao] = 1;
+                }
+            }
+            ++posicao;
+        }
+        binario_final = 0;
+        for(int j(0); j<tamanho_analise; ++j){
+            if(binario[j]==1){
+                binario_final += std::pow(10, j);
+            }
+        }
+        novo_jogo.clear();    
+
+            // #### análise ### Modificar variáveis
+        int lista_um [] = {
+            111111, 1011111, 1101111, 1110111, 1111011, 1111101, 1111111
+        };
+        bool flag_um(true);
+        for(int *i=std::begin(lista_um); i<std::end(lista_um); ++i){
+            if(binario_final == *i){
+                flag_um = false;
+                break;
+            }
+        }
+        if(flag_um){
+            return false;
+        }
+    }
+
+    //quinta analise
+    int numeros_adicionais[] = {8, 13, 21, 34, 55, 89, 144};
+    for(int *k=std::begin(numeros_adicionais); k<std::end(numeros_adicionais); ++k){
+        tamanho_amostra = *k; // jogos
+        if((quantidade_de_jogos_sorteados+tamanho_amostra-1)%tamanho_amostra == 0){
+            for(int *i=inicial; i<(inicial+15); ++i){
+                novo_jogo.push_back(*i);
+            }
+            for(int *i=((std::begin(numeros_sorteados))+(15*(quantidade_de_jogos_sorteados + 1 - tamanho_amostra))); i<std::end(numeros_sorteados); ++i){
+                novo_jogo.push_back(*i);
+            }
+
+            for(int j(0); j<tamanho_analise; ++j){
+                binario[j] = 0;
+            }
+            
+            posicao = 0;
+            for(auto *j = std::begin(numeros_p_analise); j<std::end(numeros_p_analise); ++j){
+                for(auto k(0); k<tamanho_amostra*15; ++k){
+                    if(*j == novo_jogo[k]){
+                        binario[posicao] = 1;
+                    }
+                }
+                ++posicao;
+            }
+            binario_final = 0;
+            for(int j(0); j<tamanho_analise; ++j){
+                if(binario[j]==1){
+                    binario_final += std::pow(10, j);
+                }
+            }
+            novo_jogo.clear();    
+
+                // #### análise ### Modificar variáveis
+            int lista_um [] = {
+                1111111
+            };
+            bool flag_um(true);
+            for(int *i=std::begin(lista_um); i<std::end(lista_um); ++i){
+                if(binario_final == *i){
+                    flag_um = false;
+                    break;
+                }
+            }
+            if(flag_um){
+                return false;
+            }
         }
     }    
     

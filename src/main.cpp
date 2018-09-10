@@ -11,6 +11,13 @@
 #include "../regras/regras.h"
 
 int main(void){
+    int jogo_a[] = {1,2,3,4,6,7,8,9,10,12,13,14,17,18,22};
+    if(regras_gerais(&jogo_a[0])){ 
+        std::cout << "OK" << std::endl;
+    } 
+    //return 0;
+
+
     //std::ofstream outFile ("jogos_certos.txt", std::ios::app);
 
     // Verificar menor e maiores números que saem em suas posições
@@ -68,18 +75,14 @@ int main(void){
                                                         for(int n = m + 1; (vetor_menor[13] <= n) and (vetor_maior[13] >= n); ++n){ // 14
                                                             jogo[13] = n;
                                                             for(int o = n + 1; (vetor_menor[14] <= o) and (vetor_maior[14] >= o); ++o){ // 15
-                                                                jogo[14] = o;                                                                
-                                                                int jogo_a[] = {1,2,3,4,6,7,8,9,10,12,13,14,17,18,22};
-                                                                if(regras_gerais(&jogo_a[0])){   
-                                                                //if(regras_gerais(&jogo[0])){ 
+                                                                jogo[14] = o; 
+                                                                if(regras_gerais(&jogo[0])){ 
                                                                     //for(int gravar(0); gravar < 14; ++gravar){
                                                                         //outFile << jogo[gravar] << " ";
                                                                     //}
                                                                     //outFile << jogo[14] << std::endl;
                                                                     ++contar_jogos_possiveis;
                                                                 }
-                                                                std::cout << contar_jogos_possiveis << std::endl;
-                                                                return 0;
                                                             }
                                                         }
                                                     }

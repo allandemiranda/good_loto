@@ -22,21 +22,19 @@ bool regras_gerais(int *primeiro){
     if(fibonacci_soma(primeiro)){
         if(fibonacci_ocorrencias(primeiro)){
             if(fibonacci_binario(primeiro)){
-                //if(fibonacci_ciclo(primeiro)){
-                    if(multiplos_3_soma(primeiro)){
-                        if(multiplos_3_ocorrencias(primeiro)){
-                            if(multiplos_3_binario(primeiro)){
-                                if(multiplos_4_soma(primeiro)){
-                                    if(multiplos_4_ocorrencias(primeiro)){
-                                        if(multiplos_4_binario(primeiro)){
-                                            return true;
-                                        }
-                                    }
+                if(multiplos_3_soma(primeiro)){
+                    if(multiplos_3_ocorrencias(primeiro)){
+                        if(multiplos_3_binario(primeiro)){
+                            if(multiplos_4_soma(primeiro)){
+                                if(multiplos_4_ocorrencias(primeiro)){
+                                    if(multiplos_4_binario(primeiro)){
+                                        return true;
+                                    } 
                                 }
                             }
                         }
                     }
-                //}
+                }                
             }            
         }        
     }
