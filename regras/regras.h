@@ -8,6 +8,7 @@
 #include "../analise/numeros_sorteados.h" // Para as regras funcionarem
 #include "fibonacci.h" // Regras de Fibonacci
 #include "multiplos_3.h" // Regras multiplos de 3
+#include "multiplos_4.h" // Regras multiplos de 4
 
 
 /**
@@ -25,7 +26,13 @@ bool regras_gerais(int *primeiro){
                     if(multiplos_3_soma(primeiro)){
                         if(multiplos_3_ocorrencias(primeiro)){
                             if(multiplos_3_binario(primeiro)){
-                                return true;
+                                if(multiplos_4_soma(primeiro)){
+                                    if(multiplos_4_ocorrencias(primeiro)){
+                                        if(multiplos_4_binario(primeiro)){
+                                            return true;
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
