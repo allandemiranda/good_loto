@@ -9,6 +9,7 @@
 #include "fibonacci.h" // Regras de Fibonacci
 #include "multiplos_3.h" // Regras multiplos de 3
 #include "multiplos_4.h" // Regras multiplos de 4
+#include "multiplos_5.h" // Regras multiplos de 5
 
 
 /**
@@ -28,7 +29,13 @@ bool regras_gerais(int *primeiro){
                             if(multiplos_4_soma(primeiro)){
                                 if(multiplos_4_ocorrencias(primeiro)){
                                     if(multiplos_4_binario(primeiro)){
-                                        return true;
+                                        if(multiplos_5_soma(primeiro)){
+                                            if(multiplos_5_ocorrencias(primeiro)){
+                                                if(multiplos_5_binario(primeiro)){
+                                                    return true;
+                                                } 
+                                            }
+                                        }
                                     } 
                                 }
                             }
