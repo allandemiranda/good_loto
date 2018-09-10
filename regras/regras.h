@@ -14,6 +14,7 @@
 #include "multiplos_7.h" // Regras multiplos de 7
 #include "multiplos_8.h" // Regras multiplos de 8
 #include "multiplos_9.h" // Regras multiplos de 9
+#include "multiplos_10.h" // Regras multiplos de 10
 
 
 /**
@@ -48,7 +49,13 @@ bool regras_gerais(int *primeiro){
                                                                                         if(multiplos_9_soma(primeiro)){
                                                                                             if(multiplos_9_ocorrencias(primeiro)){
                                                                                                 if(multiplos_9_binario(primeiro)){
-                                                                                                    return true;
+                                                                                                    if(multiplos_10_soma(primeiro)){
+                                                                                                        if(multiplos_10_ocorrencias(primeiro)){
+                                                                                                            if(multiplos_10_binario(primeiro)){
+                                                                                                                return true;
+                                                                                                            } 
+                                                                                                        }
+                                                                                                    }
                                                                                                 } 
                                                                                             }
                                                                                         }
