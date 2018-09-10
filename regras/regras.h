@@ -23,7 +23,9 @@ bool regras_gerais(int *primeiro){
             if(fibonacci_binario(primeiro)){
                 //if(fibonacci_ciclo(primeiro)){
                     if(multiplos_3_soma(primeiro)){
-                        return true;
+                        if(multiplos_3_ocorrencias(primeiro)){
+                            return true;
+                        }
                     }
                 //}
             }            
