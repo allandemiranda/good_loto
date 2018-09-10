@@ -10,6 +10,7 @@
 #include "multiplos_3.h" // Regras multiplos de 3
 #include "multiplos_4.h" // Regras multiplos de 4
 #include "multiplos_5.h" // Regras multiplos de 5
+#include "multiplos_6.h" // Regras multiplos de 6
 
 
 /**
@@ -32,7 +33,13 @@ bool regras_gerais(int *primeiro){
                                         if(multiplos_5_soma(primeiro)){
                                             if(multiplos_5_ocorrencias(primeiro)){
                                                 if(multiplos_5_binario(primeiro)){
-                                                    return true;
+                                                    if(multiplos_6_soma(primeiro)){
+                                                        if(multiplos_6_ocorrencias(primeiro)){
+                                                            if(multiplos_6_binario(primeiro)){
+                                                                return true;
+                                                            } 
+                                                        }
+                                                    }
                                                 } 
                                             }
                                         }

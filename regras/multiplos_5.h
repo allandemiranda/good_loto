@@ -397,7 +397,7 @@ bool multiplos_5_binario(int *inicial){
 
                 // #### análise ### Modificar variáveis
             int lista_um [] = {
-                1111111
+                11111
             };
             bool flag_um(true);
             for(int *i=std::begin(lista_um); i<std::end(lista_um); ++i){
