@@ -5,7 +5,6 @@
  * @author Allan de Miranda Silva
  * @date 10-09-2018
  */
-#include <iostream>
 #include <iterator>
 #include <vector>
 #include <algorithm>
