@@ -11,6 +11,9 @@
 #include "multiplos_4.h" // Regras multiplos de 4
 #include "multiplos_5.h" // Regras multiplos de 5
 #include "multiplos_6.h" // Regras multiplos de 6
+#include "multiplos_7.h" // Regras multiplos de 7
+#include "multiplos_8.h" // Regras multiplos de 8
+#include "multiplos_9.h" // Regras multiplos de 9
 
 
 /**
@@ -36,7 +39,25 @@ bool regras_gerais(int *primeiro){
                                                     if(multiplos_6_soma(primeiro)){
                                                         if(multiplos_6_ocorrencias(primeiro)){
                                                             if(multiplos_6_binario(primeiro)){
-                                                                return true;
+                                                                if(multiplos_7_soma(primeiro)){
+                                                                    if(multiplos_7_ocorrencias(primeiro)){
+                                                                        if(multiplos_7_binario(primeiro)){
+                                                                            if(multiplos_8_soma(primeiro)){
+                                                                                if(multiplos_8_ocorrencias(primeiro)){
+                                                                                    if(multiplos_8_binario(primeiro)){
+                                                                                        if(multiplos_9_soma(primeiro)){
+                                                                                            if(multiplos_9_ocorrencias(primeiro)){
+                                                                                                if(multiplos_9_binario(primeiro)){
+                                                                                                    return true;
+                                                                                                } 
+                                                                                            }
+                                                                                        }
+                                                                                    } 
+                                                                                }
+                                                                            }
+                                                                        } 
+                                                                    }
+                                                                }
                                                             } 
                                                         }
                                                     }
