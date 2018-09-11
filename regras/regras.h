@@ -21,7 +21,7 @@ bool regras_gerais(int *primeiro){
     if(regras_gerais_fibonacci(primeiro)){
         if(regras_gerais_multiplos(primeiro)){
             if(regras_gerais_primos(primeiro)){
-                if(regras_gerais_pares(primeiro)){
+                if(regras_gerais_pares_impares(primeiro)){
                     return true;
                 }
             }

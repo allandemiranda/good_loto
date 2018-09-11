@@ -6,6 +6,7 @@
  * @date 11-09-2018
  */
 #include "pares.h"
+#include "impares.h"
 
 /**
  * @brief Função que verifica somente todas as regras pares e impares
@@ -18,7 +19,13 @@ bool regras_gerais_pares_impares(int *primeiro){
     if(pares_soma(primeiro)){
         if(pares_ocorrencias(primeiro)){
             if(pares_binario(primeiro)){
-                return true;                
+                if(impares_soma(primeiro)){
+                    if(impares_ocorrencias(primeiro)){
+                        if(impares_binario(primeiro)){
+                            return true;                
+                        }            
+                    }        
+                }                
             }            
         }        
     }
