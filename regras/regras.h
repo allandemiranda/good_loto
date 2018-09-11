@@ -8,7 +8,17 @@
 #include "fibonacci_all.h" // Regras Fibonacci
 #include "multiplos_all.h" // Regras Multiplos
 #include "primos_all.h" // Regras Primos
-
+#include "pares.h"
+bool regras_gerais_pares(int *primeiro){
+    if(pares_soma(primeiro)){
+        if(pares_ocorrencias(primeiro)){
+            if(pares_binario(primeiro)){
+                return true;                
+            }            
+        }        
+    }
+    return false;
+}
 
 /**
  * @brief Função que verifica todas as regras
@@ -21,7 +31,9 @@ bool regras_gerais(int *primeiro){
     if(regras_gerais_fibonacci(primeiro)){
         if(regras_gerais_multiplos(primeiro)){
             if(regras_gerais_primos(primeiro)){
-                return true;
+                if(regras_gerais_pares(primeiro)){
+                    return true;
+                }
             }
         }
     }

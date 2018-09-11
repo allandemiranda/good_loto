@@ -15,7 +15,9 @@ int main(void){
     int jogo_a[] = {1,2,3,4,6,7,8,9,10,12,13,14,17,18,22};
     if(regras_gerais(&jogo_a[0])){ 
         std::cout << "OK" << std::endl;
-    } 
+    } else {
+        std::cout << "ERRO" << std::endl;
+    }
     //return 0;
 
 
