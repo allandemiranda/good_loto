@@ -5,9 +5,9 @@
  * @author Allan de Miranda Silva
  * @date 09-09-2018
  */
-#include "../analise/numeros_sorteados.h" // Para as regras funcionarem
 #include "fibonacci_all.h" // Regras Fibonacci
 #include "multiplos_all.h" // Regras Multiplos
+#include "primos_all.h" // Regras Primos
 
 
 /**
@@ -18,12 +18,13 @@
  * @return false Para se pelomenos uma regra não está valendo
  */
 bool regras_gerais(int *primeiro){
-    regras_gerais_fibonacci(primeiro){
-        regras_gerais_multiplos(primeiro){
-            return true;
+    if(regras_gerais_fibonacci(primeiro)){
+        if(regras_gerais_multiplos(primeiro)){
+            if(regras_gerais_primos(primeiro)){
+                return true;
+            }
         }
     }
-
     return false;
 }
 

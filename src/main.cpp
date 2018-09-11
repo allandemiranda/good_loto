@@ -8,6 +8,7 @@
 #include <iostream>
 #include <algorithm>
 #include <fstream>
+#include "../analise/numeros_sorteados.h" // Para as regras funcionarem
 #include "../regras/regras.h"
 
 int main(void){

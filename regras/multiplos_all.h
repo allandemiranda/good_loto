@@ -85,4 +85,5 @@ bool regras_gerais_multiplos(int *primeiro){
             }
         }
     }
+    return false;
 }
