@@ -8,17 +8,7 @@
 #include "fibonacci_all.h" // Regras Fibonacci
 #include "multiplos_all.h" // Regras Multiplos
 #include "primos_all.h" // Regras Primos
-#include "pares.h"
-bool regras_gerais_pares(int *primeiro){
-    if(pares_soma(primeiro)){
-        if(pares_ocorrencias(primeiro)){
-            //if(pares_binario(primeiro)){
-                return true;                
-            //}            
-        }        
-    }
-    return false;
-}
+#include "pares_impares_all.h" // Regras Pares e Impares
 
 /**
  * @brief Função que verifica todas as regras
