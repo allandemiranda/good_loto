@@ -12,9 +12,9 @@
 bool regras_gerais_pares(int *primeiro){
     if(pares_soma(primeiro)){
         if(pares_ocorrencias(primeiro)){
-            if(pares_binario(primeiro)){
+            //if(pares_binario(primeiro)){
                 return true;                
-            }            
+            //}            
         }        
     }
     return false;

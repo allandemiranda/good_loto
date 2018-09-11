@@ -43,7 +43,10 @@
         "thread": "cpp",
         "cinttypes": "cpp",
         "typeindex": "cpp",
-        "iterator": "cpp"
+        "iterator": "cpp",
+        "cstdarg": "cpp",
+        "functional": "cpp",
+        "numeric": "cpp"
     },
     "doxdocgen.generic.authorTag": "@author Allan de Miranda Silva",
     "doxdocgen.generic.dateFormat": "DD-MM-YYYY"
