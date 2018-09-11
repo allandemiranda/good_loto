@@ -1,9 +1,23 @@
+/**
+ * @brief Função para gerar binários quando necessário
+ * 
+ * @file gerar_binarios.cpp
+ * @author Allan de Miranda Silva
+ * @date 11-09-2018
+ */
 #include <iostream>
 #include <iterator>
-#include <vector>
 #include <algorithm>
 #include <cmath>
 
+/**
+ * @brief Função bobiná os binários solicitados
+ * 
+ * @param estagio_final Tamanho do binário
+ * @param estagio_atual Zero
+ * @param soma Zero
+ * @return size_t Retorna quantos binários existem
+ */
 size_t rebobinar(int estagio_final, int estagio_atual = 0, size_t soma = 0){
     // Chave de segurança para limite de bits
     if(estagio_final > 10){
@@ -31,9 +45,16 @@ size_t rebobinar(int estagio_final, int estagio_atual = 0, size_t soma = 0){
     return total;
 }
 
+/**
+ * @brief 
+ * 
+ * @param argc 
+ * @param argv Número de bits para ter no binário
+ * @return int 
+ */
 int main(int argc, char *argv[ ]){
     
-    auto aqui = rebobinar(4);
+    auto aqui = rebobinar(atoi(argv[1]));
     std::cout << aqui << std::endl; 
 
     return 0;
