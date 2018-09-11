@@ -27,7 +27,7 @@
 int main(int argc, char *argv[ ]){
     int numeros_p_analise[] = {8,16,24}; // números da cartela
 
-    std::vector <int> ocorencias; // Qunatidade de ocorrencias por jogo
+    std::vector <int> ocorrencias; // Qunatidade de ocorrencias por jogo
 
     // Verificar as ocorrências
     int tamanho_amostra = 15 * atoi(argv[1]);
@@ -49,16 +49,16 @@ int main(int argc, char *argv[ ]){
             }
         }
         if(flag){
-            ocorencias.push_back(soma);
+            ocorrencias.push_back(soma);
         } else {
             break;
         }        
     }
 
     // Verificar qual a maior e menor ocorrência para montar tabela
-    auto maior_ocorrencia = ocorencias[0];
-    auto menor_ocorrencia = ocorencias[0];
-    for(auto i = ocorencias.cbegin(); i < ocorencias.cend(); ++i){
+    auto maior_ocorrencia = ocorrencias[0];
+    auto menor_ocorrencia = ocorrencias[0];
+    for(auto i = ocorrencias.cbegin(); i < ocorrencias.cend(); ++i){
         if(*i > maior_ocorrencia){
             maior_ocorrencia = *i;
         }
@@ -70,7 +70,7 @@ int main(int argc, char *argv[ ]){
     // Montar a tabela de análise
     for(auto i(menor_ocorrencia); i <= maior_ocorrencia; ++i){
         int cont(0);
-        for(auto j = ocorencias.cbegin(); j < ocorencias.cend(); ++j){
+        for(auto j = ocorrencias.cbegin(); j < ocorrencias.cend(); ++j){
             if(i == *j){
                 ++cont;
             }
@@ -80,7 +80,7 @@ int main(int argc, char *argv[ ]){
     std::cout << "---" << std::endl;
     for(auto i(menor_ocorrencia); i <= maior_ocorrencia; ++i){
         int cont(0);
-        for(auto j = ocorencias.cbegin(); j < ocorencias.cend(); ++j){
+        for(auto j = ocorrencias.cbegin(); j < ocorrencias.cend(); ++j){
             if(i == *j){
                 ++cont;
             }

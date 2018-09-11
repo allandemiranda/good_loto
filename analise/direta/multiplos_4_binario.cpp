@@ -30,7 +30,7 @@ int main(int argc, char *argv[ ]){
     int numeros_p_analise[] = {4,8,12,16,20,24}; // números da cartela
     int tamanho_analise = std::distance(std::begin(numeros_p_analise), std::end(numeros_p_analise));
 
-    std::vector <int> ocorencias; // Quantidade de ocorrencias por jogo
+    std::vector <int> ocorrencias; // Quantidade de ocorrencias por jogo
     
 
     // Verificar as ocorrências
@@ -58,18 +58,18 @@ int main(int argc, char *argv[ ]){
                 binario_final += std::pow(10, j);
             }
         }
-        ocorencias.push_back(binario_final);    
+        ocorrencias.push_back(binario_final);    
     }   
 
     // Montar a tabela de análise
-    std::sort(ocorencias.begin(), ocorencias.end());
-    auto valor = ocorencias[0];
+    std::sort(ocorrencias.begin(), ocorrencias.end());
+    auto valor = ocorrencias[0];
     int cont(0);
     int quantidade(0);   
-    for(auto i(ocorencias.cbegin()); i < ocorencias.cend(); ++i){
+    for(auto i(ocorrencias.cbegin()); i < ocorrencias.cend(); ++i){
         if(valor == *i){
             ++cont;
-            if(i+1 == ocorencias.cend()){
+            if(i+1 == ocorrencias.cend()){
                 //std::cout << "(" << ++quantidade << ") Binário " << valor << " saiu " << cont << " vezes." << std::endl;
                 std::cout <<  valor << ", ";
                 break;

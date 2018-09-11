@@ -21,7 +21,7 @@
 int main(void){
     int numeros_p_analise[] = {1,2,3,5,8,13,21}; // números Fibonacci da cartela
 
-    std::vector <int> ocorencias; // Qunatidade de ocorrencias por jogo
+    std::vector <int> ocorrencias; // Qunatidade de ocorrencias por jogo
 
     // Verificar ciclos    
     for(auto *i = std::begin(numeros_sorteados); i<std::end(numeros_sorteados); ++i){
@@ -32,7 +32,7 @@ int main(void){
                     bool flag = false;
                     for(int *m = std::begin(numeros_p_analise); m<std::end(numeros_p_analise); ++m){
                         if(*k == *m){
-                            ocorencias.push_back(ciclo);
+                            ocorrencias.push_back(ciclo);
                             flag = true;
                             break;
                         }
@@ -49,9 +49,9 @@ int main(void){
     }
 
     // Verificar qual a maior e menor ocorrência para montar tabela
-    auto maior_ocorrencia = ocorencias[0];
-    auto menor_ocorrencia = ocorencias[0];
-    for(auto i = ocorencias.cbegin(); i < ocorencias.cend(); ++i){
+    auto maior_ocorrencia = ocorrencias[0];
+    auto menor_ocorrencia = ocorrencias[0];
+    for(auto i = ocorrencias.cbegin(); i < ocorrencias.cend(); ++i){
         if(*i > maior_ocorrencia){
             maior_ocorrencia = *i;
         }
@@ -63,7 +63,7 @@ int main(void){
     // Montar a tabela de análise
     for(auto i(menor_ocorrencia); i <= maior_ocorrencia; ++i){
         int cont(0);
-        for(auto j = ocorencias.cbegin(); j < ocorencias.cend(); ++j){
+        for(auto j = ocorrencias.cbegin(); j < ocorrencias.cend(); ++j){
             if(i == *j){
                 ++cont;
             }

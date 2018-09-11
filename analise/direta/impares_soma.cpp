@@ -13,7 +13,7 @@
 
 // ### REGRA PARA SOMA ###
 // A cada 1 jogo, a soma dos números pares que sairão será
-// {41, 42, 43, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 159, 160, 162, 163}
+// {41, 42, 43, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 159, 160, 162, 163}
 
 /**
  * @brief Main
@@ -25,11 +25,14 @@
 int main(int argc, char *argv[ ]){
     int numeros_p_analise[] = {1,3,5,7,9,11,13,15,17,19,21,23,25}; // números da cartela
 
-    std::vector <int> ocorencias; // Qunatidade de ocorrencias por jogo
+    std::vector <int> ocorrencias; // Qunatidade de ocorrencias por jogo
 
     // Verificar as ocorrências
     int tamanho_amostra = 15 * atoi(argv[1]);
     for(auto *i = std::begin(numeros_sorteados); i<std::end(numeros_sorteados); i += tamanho_amostra){        
+        if((i+tamanho_amostra) >= std::end(numeros_sorteados)){
+            break;
+        }
         int soma(0);
         bool flag = true;
         for(int j(0); j<tamanho_amostra; ++j){
@@ -47,16 +50,16 @@ int main(int argc, char *argv[ ]){
             }
         }
         if(flag){
-            ocorencias.push_back(soma);
+            ocorrencias.push_back(soma);
         } else {
             break;
         }        
     }
 
     // Verificar qual a maior e menor ocorrência para montar tabela
-    auto maior_ocorrencia = ocorencias[0];
-    auto menor_ocorrencia = ocorencias[0];
-    for(auto i = ocorencias.cbegin(); i < ocorencias.cend(); ++i){
+    auto maior_ocorrencia = ocorrencias[0];
+    auto menor_ocorrencia = ocorrencias[0];
+    for(auto i = ocorrencias.cbegin(); i < ocorrencias.cend(); ++i){
         if(*i > maior_ocorrencia){
             maior_ocorrencia = *i;
         }
@@ -68,7 +71,7 @@ int main(int argc, char *argv[ ]){
     // Montar a tabela de análise
     for(auto i(menor_ocorrencia); i <= maior_ocorrencia; ++i){
         int cont(0);
-        for(auto j = ocorencias.cbegin(); j < ocorencias.cend(); ++j){
+        for(auto j = ocorrencias.cbegin(); j < ocorrencias.cend(); ++j){
             if(i == *j){
                 ++cont;
             }
@@ -78,7 +81,7 @@ int main(int argc, char *argv[ ]){
     std::cout << "---" << std::endl;
     for(auto i(menor_ocorrencia); i <= maior_ocorrencia; ++i){
         int cont(0);
-        for(auto j = ocorencias.cbegin(); j < ocorencias.cend(); ++j){
+        for(auto j = ocorrencias.cbegin(); j < ocorrencias.cend(); ++j){
             if(i == *j){
                 ++cont;
             }
