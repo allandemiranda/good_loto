@@ -9,7 +9,7 @@
 #include "fibonacci_all.h" // Regras Fibonacci
 #include "pares_impares_all.h" // Regras Pares e Impares
 #include "primos_all.h" // Regras Primos
-//#include "multiplos_all.h" // Regras Multiplos
+#include "multiplos_all.h" // Regras Multiplos
 
 
 /**
@@ -21,13 +21,13 @@
  */
 bool regras_gerais(int *primeiro){
     if(regras_gerais_fibonacci(primeiro)){
-        //if(regras_gerais_multiplos(primeiro)){
+        if(regras_gerais_multiplos(primeiro)){
             if(regras_gerais_primos(primeiro)){
                 if(regras_gerais_pares_impares(primeiro)){
                     return true;
                 }
             }
-        //}
+        }
     }
     return false;
 }
