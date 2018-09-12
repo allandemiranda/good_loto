@@ -27,7 +27,7 @@ bool regras_gerais_multiplos(int *primeiro){
     if(multiplos_3_analise(primeiro)){
         if(multiplos_4_analise(primeiro)){
             return true;
-    }
+        }
     }
     return false;
 }

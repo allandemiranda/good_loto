@@ -5,9 +5,6 @@
  * @author Allan de Miranda Silva
  * @date 11-09-2018
  */
-#include <iterator>
-#include <vector>
-#include <algorithm>
 #include "pares.h"
 #include "impares.h"
 
