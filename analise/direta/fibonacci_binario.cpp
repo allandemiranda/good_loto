@@ -5,13 +5,6 @@
  * @author Allan de Miranda Silva
  * @date 2018-09-08
  */
-#include <iostream>
-#include <iterator>
-#include <vector>
-#include <algorithm>
-#include <cmath>
-#include "../numeros_sorteados.h"
-#include "../../functions/gerar_binario.h"
 
 // ### REGRA PARA BINÁRIOS ###
 // Para 1 jogo
@@ -32,6 +25,14 @@
 // {1111111}
 // Para 55 jogos
 // {1111111}
+
+#include <iostream>
+#include <iterator>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include "../numeros_sorteados.h"
+#include "../../functions/gerar_binario.h"
 
 /**
  * @brief Main
