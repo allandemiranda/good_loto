@@ -4,7 +4,7 @@
  * @file multiplos_6_soma.cpp
  * @author Allan de Miranda Silva
  * @date 10-09-2018
-  */
+ */
 
 // ### REGRA PARA SOMA ### Soma dos resultados que podem sair
 // Para 2 jogos

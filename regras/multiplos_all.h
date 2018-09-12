@@ -8,8 +8,8 @@
 #include "multiplos_3.h" // Regras multiplos de 3
 #include "multiplos_4.h" // Regras multiplos de 4
 #include "multiplos_5.h" // Regras multiplos de 5
-//#include "multiplos_6.h" // Regras multiplos de 6
-//#include "multiplos_7.h" // Regras multiplos de 7
+#include "multiplos_6.h" // Regras multiplos de 6
+#include "multiplos_7.h" // Regras multiplos de 7
 //#include "multiplos_8.h" // Regras multiplos de 8
 //#include "multiplos_9.h" // Regras multiplos de 9
 //#include "multiplos_10.h" // Regras multiplos de 10
@@ -23,13 +23,18 @@
  * @return true Para se todas as regras estão valendo
  * @return false Para se pelomenos uma regra não está valendo
  */
-bool regras_gerais_multiplos(int *primeiro){
-    if(multiplos_3_analise(primeiro)){
-        if(multiplos_4_analise(primeiro)){
+bool regras_gerais_multiplos(int *primeiro){ 
+    if(multiplos_7_analise(primeiro)){
+        if(multiplos_6_analise(primeiro)){
             if(multiplos_5_analise(primeiro)){
-                return true;
+                if(multiplos_4_analise(primeiro)){
+                    if(multiplos_3_analise(primeiro)){
+                        return true;
+                    }
+                }
             }
         }
     }
+                        
     return false;
 }
