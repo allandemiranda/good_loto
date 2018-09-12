@@ -5,6 +5,9 @@
  * @author Allan de Miranda Silva
  * @date 11-09-2018
  */
+#include <iterator>
+#include <vector>
+#include <algorithm>
 #include "pares.h"
 #include "impares.h"
 
@@ -16,18 +19,10 @@
  * @return false Para se pelomenos uma regra não está valendo
  */
 bool regras_gerais_pares_impares(int *primeiro){
-    if(pares_soma(primeiro)){
-        if(pares_ocorrencias(primeiro)){
-            if(pares_binario(primeiro)){
-                if(impares_soma(primeiro)){
-                    if(impares_ocorrencias(primeiro)){
-                        if(impares_binario(primeiro)){
-                            return true;                
-                        }            
-                    }        
-                }                
-            }            
-        }        
+    if(regras_gerais_impares(primeiro)){
+        if(regras_gerais_pares(primeiro)){
+            return true;
+        }
     }
     return false;
 }
