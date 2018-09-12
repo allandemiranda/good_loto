@@ -14,14 +14,14 @@
  * @param soma 
  * @return size_t Retirna quantidade de binários possivis
  */
-size_t rebobinar(int estagio_final, int estagio_atual = 0, size_t soma = 0){
+int rebobinar(int estagio_final, int estagio_atual = 0, int soma = 0){
     // Chave de segurança para limite de bits
     if(estagio_final > 10){
         return 0;
     }
 
     // Inicializar contagem
-    size_t total(0);
+    int total(0);
 
     // Caso seja a primeira rodada
     if((soma == 0) and (estagio_atual == 0)){

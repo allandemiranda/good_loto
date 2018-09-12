@@ -24,66 +24,10 @@
  * @return false Para se pelomenos uma regra não está valendo
  */
 bool regras_gerais_multiplos(int *primeiro){
-    if(multiplos_3_soma(primeiro)){
-        if(multiplos_3_ocorrencias(primeiro)){
-            if(multiplos_3_binario(primeiro)){
-                if(multiplos_4_soma(primeiro)){
-                    if(multiplos_4_ocorrencias(primeiro)){
-                        if(multiplos_4_binario(primeiro)){
-                            if(multiplos_5_soma(primeiro)){
-                                if(multiplos_5_ocorrencias(primeiro)){
-                                    if(multiplos_5_binario(primeiro)){
-                                        if(multiplos_6_soma(primeiro)){
-                                            if(multiplos_6_ocorrencias(primeiro)){
-                                                if(multiplos_6_binario(primeiro)){
-                                                    if(multiplos_7_soma(primeiro)){
-                                                        if(multiplos_7_ocorrencias(primeiro)){
-                                                            if(multiplos_7_binario(primeiro)){
-                                                                if(multiplos_8_soma(primeiro)){
-                                                                    if(multiplos_8_ocorrencias(primeiro)){
-                                                                        if(multiplos_8_binario(primeiro)){
-                                                                            if(multiplos_9_soma(primeiro)){
-                                                                                if(multiplos_9_ocorrencias(primeiro)){
-                                                                                    if(multiplos_9_binario(primeiro)){
-                                                                                        if(multiplos_10_soma(primeiro)){
-                                                                                            if(multiplos_10_ocorrencias(primeiro)){
-                                                                                                if(multiplos_10_binario(primeiro)){
-                                                                                                    if(multiplos_11_soma(primeiro)){
-                                                                                                        if(multiplos_11_ocorrencias(primeiro)){
-                                                                                                            if(multiplos_11_binario(primeiro)){
-                                                                                                                if(multiplos_12_soma(primeiro)){
-                                                                                                                    if(multiplos_12_ocorrencias(primeiro)){
-                                                                                                                        if(multiplos_12_binario(primeiro)){
-                                                                                                                            return true;
-                                                                                                                        } 
-                                                                                                                    }
-                                                                                                                }
-                                                                                                            } 
-                                                                                                        }
-                                                                                                    }
-                                                                                                } 
-                                                                                            }
-                                                                                        }
-                                                                                    } 
-                                                                                }
-                                                                            }
-                                                                        } 
-                                                                    }
-                                                                }
-                                                            } 
-                                                        }
-                                                    }
-                                                } 
-                                            }
-                                        }
-                                    } 
-                                }
-                            }
-                        } 
-                    }
-                }
-            }
-        }
+    if(multiplos_3_analise(primeiro)){
+        if(multiplos_4_analise(primeiro)){
+            return true;
+    }
     }
     return false;
 }

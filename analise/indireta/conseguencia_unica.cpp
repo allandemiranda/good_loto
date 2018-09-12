@@ -34,6 +34,20 @@ int main(int argc, char const *argv[])
                 }
             }
         }
-    }    
+    }
+
+    std::sort(ocorrencias.begin(), ocorrencias.end());
+
+    int valor = ocorrencias[0];
+    int cont(0);
+    for(int i : ocorrencias){
+        if(valor == i){
+            ++cont;
+        } else {
+            std::cout << i << " - " << cont << std::endl;
+            cont = 1;
+            valor = i;
+        }
+    }
     return 0;
 }
