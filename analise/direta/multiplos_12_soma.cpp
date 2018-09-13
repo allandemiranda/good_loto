@@ -5,17 +5,16 @@
  * @author Allan de Miranda Silva
  * @date 10-09-2018
  */
+
+// ### REGRA PARA SOMA ### Soma dos resultados que podem sair
+// Para 8 jogos
+// {72, 84, 96, 108, 120, 132, 144, 156, 168, 180, 192, 204, 216, 228, 240, 252, 264}
+
 #include <iostream>
 #include <iterator>
 #include <vector>
+#include <algorithm>
 #include "../numeros_sorteados.h"
-
-
-// ### REGRA PARA SOMA ###
-// A cada 3 jogo, a soma dos números mulltiplos de 12 que sairão será
-// {22, 33, 44, 55, 66, 77, 88, 99}
-// A cada 5 jogo, a soma dos números mulltiplos de 12 que sairão será
-// {44, 55, 66, 77, 88, 99, 110, 121, 132, 143}
 
 /**
  * @brief Main
@@ -25,72 +24,85 @@
  * @return int 
  */
 int main(int argc, char *argv[ ]){
-    int numeros_p_analise[] = {12,24}; // números da cartela
+    // Números a analisar na cartela
+    int numeros_para_analise[] = {12,24};
 
-    std::vector <int> ocorrencias; // Qunatidade de ocorrencias por jogo
+    // Vetor com todas as ocorrências
+    std::vector <int> ocorrencias;
+
+    // Quantidade de jogos que será analisado
+    int tamanho_amostra = (atoi(argv[1]) * 15);
 
     // Verificar as ocorrências
-    int tamanho_amostra = 15 * atoi(argv[1]);
-    for(auto *i = std::begin(numeros_sorteados); i<std::end(numeros_sorteados); i += tamanho_amostra){        
-        int soma(0);
-        bool flag = true;
-        for(int j(0); j<tamanho_amostra; ++j){
-            for(auto *k = std::begin(numeros_p_analise); k<std::end(numeros_p_analise); ++k){
-                if((i+j)>=std::end(numeros_sorteados)){
-                    flag = false;
-                    break;
-                }
-                if(*k == *(i+j)){
-                    soma += *k;
+    for(auto *jogo = (std::end(numeros_sorteados) - 1), soma(0); jogo >= (std::begin(numeros_sorteados) + tamanho_amostra - 1) ; jogo -= 15, soma = 0){
+        for(auto i : numeros_para_analise){
+            for(auto j(0); j<tamanho_amostra; ++j){
+                if(i == *(jogo - j)){
+                    soma += i;
                 }
             }
-            if(!flag){
+        }
+        ocorrencias.push_back(soma);
+    }
+
+    // Ordenar ocorrências
+    std::sort(ocorrencias.begin(), ocorrencias.end());
+
+    // Contar respostas
+    std::vector <int> respostas_valor;
+    std::vector <int> respostas_contador;
+    auto valor = ocorrencias[0];
+    int contador(0);
+    for(auto i = ocorrencias.begin(); i<ocorrencias.end(); ++i){      
+        if(*i == valor){            
+            if((ocorrencias.end()-1) == i){
+                ++contador;
+                respostas_valor.push_back(valor);
+                respostas_contador.push_back(contador);
+            } else {
+                ++contador;
+            }
+        } else {
+            respostas_valor.push_back(valor);
+            respostas_contador.push_back(contador);
+            valor = *i;
+            contador = 1; 
+        }
+    }
+
+    // Maior contador para calcular porcentagm
+    int maior_contador = respostas_contador[0];
+    for(int i : respostas_contador){
+        if(i>maior_contador){
+            maior_contador = i;
+        }
+    }
+
+    // Imprimir como uma lista
+    auto tamanho_resposta = respostas_valor.size();
+    for(auto i = respostas_valor[0]; i <= respostas_valor[tamanho_resposta-1]; ++i){
+        bool flag(true);
+        for(auto j(0); j<tamanho_resposta; ++j){
+            if(i == respostas_valor[j]){
+                std::cout << "Soma " << i << " saiu " << respostas_contador[j] << " vezes. " << "( " << (float) ((respostas_contador[j]*100)/maior_contador) << "% )"<< std::endl;
+                flag = false;
                 break;
             }
         }
         if(flag){
-            ocorrencias.push_back(soma);
-        } else {
-            break;
-        }        
-    }
-
-    // Verificar qual a maior e menor ocorrência para montar tabela
-    auto maior_ocorrencia = ocorrencias[0];
-    auto menor_ocorrencia = ocorrencias[0];
-    for(auto i = ocorrencias.cbegin(); i < ocorrencias.cend(); ++i){
-        if(*i > maior_ocorrencia){
-            maior_ocorrencia = *i;
-        }
-        if(*i < menor_ocorrencia){
-            menor_ocorrencia = *i;
+            std::cout << "Soma " << i << " saiu " << 0 << " vezes." << std::endl;
         }
     }
 
-    // Montar a tabela de análise
-    for(auto i(menor_ocorrencia); i <= maior_ocorrencia; ++i){
-        int cont(0);
-        for(auto j = ocorrencias.cbegin(); j < ocorrencias.cend(); ++j){
-            if(i == *j){
-                ++cont;
-            }
-        }
-        std::cout << "Soma " << i << " saiu " << cont << " vezes." << std::endl;
+    std::cout << "-----------------------------------" << std::endl;
+
+    // Imprimir como um vetor    
+    for(auto i(0); i<(tamanho_resposta - 1); ++i){
+        std::cout << respostas_valor[i] << ", ";
     }
-    std::cout << "---" << std::endl;
-    for(auto i(menor_ocorrencia); i <= maior_ocorrencia; ++i){
-        int cont(0);
-        for(auto j = ocorrencias.cbegin(); j < ocorrencias.cend(); ++j){
-            if(i == *j){
-                ++cont;
-            }
-        }
-        // Colocar regra aqui
-        if(cont != 0){
-            std::cout << i << ", ";
-        }
-    }
-    std::cout << "---" << std::endl;
+    std::cout << respostas_valor[(tamanho_resposta - 1)] << std::endl; 
+
+    std::cout << "-----------------------------------" << std::endl;   
 
     return 0;
 }

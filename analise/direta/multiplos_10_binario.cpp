@@ -5,17 +5,28 @@
  * @author Allan de Miranda Silva
  * @date 10-09-2018
  */
+
+// ### REGRA PARA BINÁRIOS ###
+// Para 5 jogos
+// {1, 10, 11}
+// Para 8 jogos
+// {11}
+// Para 13 jogos
+// {11}
+// Para 21 jogos
+// {11}
+// Para 34 jogos
+// {11}
+// Para 55 jogos
+// {11}
+
 #include <iostream>
 #include <iterator>
 #include <vector>
 #include <algorithm>
 #include <cmath>
 #include "../numeros_sorteados.h"
-
-// ### REGRA PARA BINÁRIO ###
-// Com 3 jogos, existem somente 3 padrões
-// Com 5 jogos, existem somente 3 padrões
-// Com 8 jogos ou mais, todos os números são sorteados
+#include "../../functions/gerar_binario.h"
 
 /**
  * @brief Main
@@ -25,78 +36,100 @@
  * @return int 
  */
 int main(int argc, char *argv[ ]){
-    int numeros_p_analise[] = {9,18}; // números da cartela
-    int tamanho_analise = std::distance(std::begin(numeros_p_analise), std::end(numeros_p_analise));
+    // Números a analisar na cartela
+    int numeros_para_analise[] = {10,20};
+    int quantidade_de_numeros_analisar = std::distance(std::begin(numeros_para_analise), std::end(numeros_para_analise));
 
-    std::vector <int> ocorrencias; // Quantidade de ocorrencias por jogo
-    
+    // Teste de capacidade máxima
+    if(quantidade_de_numeros_analisar > 10){
+        std::cout << "TAMANHO MÁXIMO DE ANÁLISE ATINGIDO" << std::endl;
+        return 0;
+    }
+
+    // Vetor com todas as ocorrências
+    std::vector <int> ocorrencias;
+
+    // Quantidade de jogos que será analisado
+    int tamanho_amostra = (atoi(argv[1]) * 15);
 
     // Verificar as ocorrências
-    int tamanho_amostra = 15 * atoi(argv[1]);
-    for(auto *i = std::begin(numeros_sorteados); i<std::end(numeros_sorteados); i += tamanho_amostra){        
-        if((i+tamanho_amostra) > std::end(numeros_p_analise)){
-            break;
-        }        
-        int binario[tamanho_analise];
-        for(int j(0); j<tamanho_analise; ++j){
-            binario[j] = 0;
+    for(auto *jogo = (std::end(numeros_sorteados) - 1); jogo >= (std::begin(numeros_sorteados) + tamanho_amostra - 1) ; jogo -= 15){
+        // Inicializar binário
+        int binario[quantidade_de_numeros_analisar];
+        for(auto i(0); i<quantidade_de_numeros_analisar; ++i){
+            binario[i] = 0;
         }
-        int posicao (0);
-        for(auto *j = std::begin(numeros_p_analise); j<std::end(numeros_p_analise); ++j){
-            for(auto k(0); k<tamanho_amostra; ++k){
-                if(*j == *(i+k)){
-                    binario[posicao] = 1;
+        // Analisar e preencher o binário
+        for(auto i(0); i<quantidade_de_numeros_analisar; ++i){
+            for(auto j(0); j<tamanho_amostra; ++j){
+                if(numeros_para_analise[i] == *(jogo - j)){
+                    binario[i] = 1;
                 }
             }
-            ++posicao;
         }
+        // Gravar binário
         int binario_final(0);
-        for(int j(0); j<tamanho_analise; ++j){
-            if(binario[j]==1){
-                binario_final += std::pow(10, j);
+        for(int i(0); i<quantidade_de_numeros_analisar; ++i){
+            if(binario[i] == 1){
+                binario_final += std::pow(10, i);
             }
         }
-        ocorrencias.push_back(binario_final);    
-    }   
+        ocorrencias.push_back(binario_final);
+    }
 
-    // Montar a tabela de análise
+    // Ordenar ocorrências
     std::sort(ocorrencias.begin(), ocorrencias.end());
+
+    // Contar respostas
+    std::vector <int> respostas_valor;
+    std::vector <int> respostas_contador;
     auto valor = ocorrencias[0];
-    int cont(0);
-    int quantidade(0);   
-    for(auto i(ocorrencias.cbegin()); i < ocorrencias.cend(); ++i){
-        if(valor == *i){
-            ++cont;
-            if(i+1 == ocorrencias.cend()){
-                std::cout << "(" << ++quantidade << ") Binário " << valor << " saiu " << cont << " vezes." << std::endl;
-                break;
+    int contador(0);
+    for(auto i = ocorrencias.begin(); i<ocorrencias.end(); ++i){      
+        if(*i == valor){            
+            if((ocorrencias.end()-1) == i){
+                ++contador;
+                respostas_valor.push_back(valor);
+                respostas_contador.push_back(contador);
+            } else {
+                ++contador;
             }
         } else {
-            std::cout << "(" << ++quantidade << ") Binário " << valor << " saiu " << cont << " vezes." << std::endl;
-            cont = 1;
+            respostas_valor.push_back(valor);
+            respostas_contador.push_back(contador);
             valor = *i;
+            contador = 1; 
         }
     }
-    std::cout << std::endl;
-    std::cout << "-----" << std::endl;
-    std::cout << std::endl;
-    valor = ocorrencias[0];
-    cont = 0;
-    quantidade = 0; 
-    for(auto i(ocorrencias.cbegin()); i < ocorrencias.cend(); ++i){
-        if(valor == *i){
-            ++cont;
-            if(i+1 == ocorrencias.cend()){                
-                std::cout <<  valor << ", ";
-                break;
-            }
-        } else {            
-            std::cout <<  valor << ", ";
-            cont = 1;
-            valor = *i;
+
+    // Maior contador para calcular porcentagm
+    int maior_contador = respostas_contador[0];
+    for(int i : respostas_contador){
+        if(i>maior_contador){
+            maior_contador = i;
         }
     }
-    std::cout << std::endl;
+    
+    // Imprimir como uma lista
+    auto tamanho_resposta = respostas_valor.size();
+    int numerador(1);
+    for(auto i(0); i<tamanho_resposta; ++i){
+        std::cout << "[" << numerador++ << "] " << "Binário " << respostas_valor[i] << " saiu " << respostas_contador[i] << " vezes. " << "( " << (float) ((respostas_contador[i]*100)/maior_contador) << "% )"<< std::endl;
+    }
+
+    std::cout << "-----------------------------------" << std::endl;
+
+    std::cout << "Quantidade máxima de binários possiveis: " << rebobinar(quantidade_de_numeros_analisar) << std::endl;
+
+    std::cout << "-----------------------------------" << std::endl;
+
+    // Imprimir como um vetor    
+    for(auto i(0); i<(tamanho_resposta - 1); ++i){
+        std::cout << respostas_valor[i] << ", ";
+    }
+    std::cout << respostas_valor[(tamanho_resposta - 1)] << std::endl; 
+
+    std::cout << "-----------------------------------" << std::endl;   
 
     return 0;
 }
