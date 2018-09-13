@@ -1,7 +1,7 @@
 /**
  * @brief Para organizar os pares e impares das regras
  * 
- * @file multiplos_all.h
+ * @file pares_impares_all.h
  * @author Allan de Miranda Silva
  * @date 11-09-2018
  */

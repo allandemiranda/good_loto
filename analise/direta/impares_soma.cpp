@@ -1,7 +1,7 @@
 /**
- * @brief Programa para gerar analise em cima dos núemros Pares - Soma
+ * @brief Programa para gerar analise em cima dos núemros Impares - Soma
  * 
- * @file pares_soma.cpp
+ * @file impares_soma.cpp
  * @author Allan de Miranda Silva
  * @date 10-09-2018
  */
