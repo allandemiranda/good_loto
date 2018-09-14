@@ -10,7 +10,7 @@
 #include "pares_impares_all.h" // Regras Pares e Impares
 #include "primos_all.h" // Regras Primos
 #include "multiplos_all.h" // Regras Multiplos
-
+#include "proprio_jogo.h" // Regras com o Próprio jogo
 
 /**
  * @brief Função que verifica todas as regras
@@ -24,7 +24,9 @@ bool regras_gerais(int *primeiro){
         if(regras_gerais_multiplos(primeiro)){
             if(regras_gerais_primos(primeiro)){
                 if(regras_gerais_pares_impares(primeiro)){
-                    return true;
+                    if(regras_gerais_proprio_jogo(primeiro)){
+                        return true;
+                    }                    
                 }
             }
         }

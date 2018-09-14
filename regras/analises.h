@@ -11,6 +11,18 @@
 #include <algorithm>
 #include <cmath>
 
+/**
+ * @brief 
+ * 
+ * @param inicial 
+ * @param numeros_para_analise 
+ * @param quantidade_de_numeros_analisar 
+ * @param tamanho_amostra_vetor 
+ * @param distancia_tamanho_amostra_vetor 
+ * @param respostas 
+ * @return true 
+ * @return false 
+ */
 bool analise_soma(int *inicial, int *numeros_para_analise, int quantidade_de_numeros_analisar, int *tamanho_amostra_vetor, int distancia_tamanho_amostra_vetor, std::vector < std::vector <int> > respostas){
     for(auto posicao(0); posicao < distancia_tamanho_amostra_vetor; ++posicao){
         // Correção de jogos para números de elementos
@@ -55,6 +67,18 @@ bool analise_soma(int *inicial, int *numeros_para_analise, int quantidade_de_num
     return true;
 }
 
+/**
+ * @brief 
+ * 
+ * @param inicial 
+ * @param numeros_para_analise 
+ * @param quantidade_de_numeros_analisar 
+ * @param tamanho_amostra_vetor 
+ * @param distancia_tamanho_amostra_vetor 
+ * @param respostas 
+ * @return true 
+ * @return false 
+ */
 bool analise_ocorrencias(int *inicial, int *numeros_para_analise, int quantidade_de_numeros_analisar, int *tamanho_amostra_vetor, int distancia_tamanho_amostra_vetor, std::vector < std::vector <int> > respostas){
     for(auto posicao(0); posicao < distancia_tamanho_amostra_vetor; ++posicao){
         // Correção de jogos para números de elementos
@@ -99,6 +123,18 @@ bool analise_ocorrencias(int *inicial, int *numeros_para_analise, int quantidade
     return true;
 }
 
+/**
+ * @brief 
+ * 
+ * @param inicial 
+ * @param numeros_para_analise 
+ * @param quantidade_de_numeros_analisar 
+ * @param tamanho_amostra_vetor 
+ * @param distancia_tamanho_amostra_vetor 
+ * @param respostas 
+ * @return true 
+ * @return false 
+ */
 bool analise_binario(int *inicial, int *numeros_para_analise, int quantidade_de_numeros_analisar, int *tamanho_amostra_vetor, int distancia_tamanho_amostra_vetor, std::vector < std::vector <int> > respostas){
     // Teste de capacidade máxima
     if(quantidade_de_numeros_analisar > 10){
