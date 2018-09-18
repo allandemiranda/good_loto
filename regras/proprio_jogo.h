@@ -11,7 +11,7 @@
 #include <algorithm>
 
 /**
- * @brief 
+ * @brief Função para verificar quantos números são sorteados e sairam no jogo anterior
  * 
  * @param inicial 
  * @param tamanho_amostra_vetor 
@@ -63,7 +63,7 @@ bool proprio_jogo_analise_anterior(int *inicial, int *tamanho_amostra_vetor, int
 }
 
 /**
- * @brief 
+ * @brief Função para somar os resultados e dividir pelo seu amior número sorteado
  * 
  * @param inicial 
  * @param tamanho_amostra_vetor 
@@ -119,7 +119,7 @@ bool proprio_jogo_analise_somaDividida(int *inicial, int *tamanho_amostra_vetor,
 }
 
 /**
- * @brief 
+ * @brief Analisar a soma dos resultados obtidos
  * 
  * @param inicial 
  * @param tamanho_amostra_vetor 
@@ -161,6 +161,30 @@ bool proprio_jogo_analise_soma(int *inicial, int *tamanho_amostra_vetor, int dis
         }
     }
 
+    return true;
+}
+
+/**
+ * @brief Função para verificar se já foi sorteado o jogo sabendo que ele nunca se repete
+ * 
+ * @param primeiro 
+ * @return true 
+ * @return false 
+ */
+bool nunca_saiu(int *primeiro){
+    for(auto *jogo=std::begin(numeros_sorteados); jogo<std::end(numeros_sorteados); jogo+=15){
+        int cont(0);
+        for(int i(0); i<15; ++i){
+            for(int j(0); j<15; ++j){
+                if(*(jogo+i)==*(primeiro+j)){
+                    ++cont;
+                }
+            }
+        }
+        if(cont == 15){
+            return false;
+        }
+    }
     return true;
 }
 
@@ -214,10 +238,12 @@ bool regras_gerais_proprio_jogo(int *primeiro){
     };
 
     // Verificar regras
-    if(proprio_jogo_analise_soma(primeiro, std::begin(tamanho_amostra_vetor_soma), std::distance(std::begin(tamanho_amostra_vetor_soma), std::end(tamanho_amostra_vetor_soma)), respostas_soma)){
-        if(proprio_jogo_analise_anterior(primeiro, std::begin(tamanho_amostra_vetor_anterior), std::distance(std::begin(tamanho_amostra_vetor_anterior), std::end(tamanho_amostra_vetor_anterior)), respostas_anterior)){
-            if(proprio_jogo_analise_somaDividida(primeiro, std::begin(tamanho_amostra_vetor_somaDividida), std::distance(std::begin(tamanho_amostra_vetor_somaDividida), std::end(tamanho_amostra_vetor_somaDividida)), respostas_somaDividida)){
-                return true;
+    if(nunca_saiu(primeiro)){
+        if(proprio_jogo_analise_soma(primeiro, std::begin(tamanho_amostra_vetor_soma), std::distance(std::begin(tamanho_amostra_vetor_soma), std::end(tamanho_amostra_vetor_soma)), respostas_soma)){
+            if(proprio_jogo_analise_anterior(primeiro, std::begin(tamanho_amostra_vetor_anterior), std::distance(std::begin(tamanho_amostra_vetor_anterior), std::end(tamanho_amostra_vetor_anterior)), respostas_anterior)){
+                if(proprio_jogo_analise_somaDividida(primeiro, std::begin(tamanho_amostra_vetor_somaDividida), std::distance(std::begin(tamanho_amostra_vetor_somaDividida), std::end(tamanho_amostra_vetor_somaDividida)), respostas_somaDividida)){
+                    return true;
+                }
             }
         }
     }
