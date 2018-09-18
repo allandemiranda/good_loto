@@ -20,53 +20,59 @@ int main(int argc, char const *argv[]){
 
     // Verificar as ocorrências
 
-    // Abra o Número inicial do jogo
-    for(auto *jogo=std::begin(numeros_sorteados); jogo<(std::end(numeros_sorteados)-15); jogo+=15){ 
-        // Abra os números 25 possiveis de sair       
-        for(auto se_sair : numeros_possiveis){  
-            // Crie as duplas possiveis          
-            int dupla[2];            
-            for(auto primeira(0); primeira<(25 - 1); ++primeira){
-                dupla[0] = numeros_possiveis[primeira];
-                for(auto segunda = (primeira + 1); segunda<25; ++segunda){
-                    dupla[1] = numeros_possiveis[segunda];
-                    // Abra o jogo e veja se o número se_sair esta dentro dele
-                    for(auto i(0); i<15; ++i){
-                        // Se o número estiver dentro dele
-                        if(*(jogo+i)==se_sair){
-                            // Verifique se a dupla saiu
-                            bool dupla_presente = false;
-                            // Abra os números da dupla
-                            for(auto j(0); j<2; ++j){
-                                // Abra os números do jogo seguinte
-                                bool presente = false;
-                                for(auto k(0); k<15; ++k){
-                                    // Se o número do jogo seguinte for o número da dupla
-                                    if(*(jogo+15+k)==(dupla[j])){
-                                        // Diga que está presente este número da dupla
-                                        presente = true;
-                                        break;
-                                    }
-                                }
-                                // Se estiver presente pare, pois queremos duplas que não sai
-                                if(presente){
-                                    // Avise que alguem da dupla saiu
-                                    dupla_presente = true;
-                                    break;
-                                }
+    // Abra o núemro a analisar
+    for(int se_sair(0); se_sair<25; ++se_sair){
+        // Abra a dupla
+        int dupla[2];
+        for(int primeiro(0); primeiro<24; ++primeiro){
+            if(numeros_possiveis[primeiro]==numeros_possiveis[se_sair]){
+                continue;
+            }
+            dupla[0] = numeros_possiveis[primeiro]; // Primeiro núemro da dupla
+            for(int segundo(primeiro+1); segundo<25; ++segundo){
+                if(numeros_possiveis[segundo]==numeros_possiveis[se_sair]){
+                    continue;
+                }
+                dupla[1] = numeros_possiveis[segundo]; // Segundo núemro da dupla
+                // Cheque nos jogos já sorteados
+                // Jogo que vai ver se o número saiu
+                bool nova_flag = false;
+                bool flag =  false;
+                for(auto *jogo=std::begin(numeros_sorteados); jogo<(std::end(numeros_sorteados)-15); jogo+=15){
+                    for(int jogo_atual(0); jogo_atual<15; ++jogo_atual){
+                        if(*(jogo+jogo_atual)==numeros_possiveis[se_sair]){
+                            flag = true;
+                        }                        
+                    }
+                    if(flag){
+                        bool flag_seguinte = false;
+                        // Jogo que vai olhar no jogo seguinte se  dupla saiu
+                        for(int jogo_seguinte(15); jogo_seguinte<30; ++jogo_seguinte){
+                            if(*(jogo+jogo_seguinte)==dupla[0]){
+                                flag_seguinte = true;
                             }
-                            // Alguem da dupla saiu, pare de verificar e passe para próxima dupla
-                            if(dupla_presente){
-                                break;
-                            } else {
-                                std::cout << "O número " << se_sair << " saiu, a dupla " << dupla[0] << " e " << dupla[1] << " nunca sairam juntas no jogo seguinte" << std::endl; 
+                            if(*(jogo+jogo_seguinte)==dupla[1]){
+                                flag_seguinte = true;
                             }
                         }
+                        if(flag_seguinte){
+                            break;
+                            nova_flag = true;
+                        }
                     }
+                    if(nova_flag){
+                        continue;
+                    } else {
+                        std::cout << "Se sair número " << numeros_possiveis[se_sair];
+                        std::cout << " , nunca sairá os números " << dupla[0] << " e " << dupla[1];
+                        std::cout << " no jogo seguinte" << std::endl;
+                    }                    
                 }
+
             }
         }
     }
+    
 
     return 0;
 }
