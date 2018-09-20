@@ -31,6 +31,8 @@ int main(int argc, char const *argv[])
 
     std::vector <int> temp;
 
+    int ciclo_um(0);
+
     while(true){        
 
         // Verificar que números da cartela saiu        
@@ -57,6 +59,13 @@ int main(int argc, char const *argv[])
             }
         }
 
+        if(ciclo == 1){
+            ciclo_um = temp.size();
+        }
+        if(ciclo == 2){
+            analise.push_back(ciclo_um - temp.size());
+        }
+
         if(temp.size()>0){
             ++ciclo;
             cartela.clear();
@@ -67,7 +76,7 @@ int main(int argc, char const *argv[])
             ++jogo_analisando;
             temp.clear();           
         } else {
-            analise.push_back(ciclo);
+            //analise.push_back(ciclo);
             ciclo = 0;
             cartela.clear();
             cartela_saiu.clear();
@@ -114,7 +123,7 @@ int main(int argc, char const *argv[])
                 contador++;
             }
         }
-        std::cout << "Ciclo " << i << " saiu " << contador << " vezes (" << (float)((contador*100)/maior_contador) << "%)" << std::endl;
+        std::cout << "Sairam " << i << " numeros " << contador << " vezes (" << (float)((contador*100)/maior_contador) << "%)" << std::endl;
         if(((contador*100)/maior_contador) >= 1){
             respostas_valor.push_back(i);
         }
@@ -131,10 +140,9 @@ int main(int argc, char const *argv[])
     std::cout << "-----------------------------------" << std::endl;
 
 
-// em seguinda (0) n sai todos [concreto]
-// no 1 tb não sai todos
-// e
-// no ciclo 9 todos os núemros devem sair
+/// IMPLEMETAR!!
+
+// ENTRE O CILCO 1 e 2 são sorteados de 1 a 7 números
 
     return 0;
 }

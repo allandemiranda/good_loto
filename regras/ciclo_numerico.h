@@ -72,9 +72,112 @@ bool numero_pode_sair(int *primeiro){
 /**
  * @brief Verificar se atingiu o ciclo máximo e sairá todos os números restantes
  * 
- * @return true 
+ * @return true As regras estão corretas
  * @return false 
  */
-bool dento_do_ciclo(*primeiro){
-    // IMPLEMENTAR ISSO !!!
+bool dento_do_ciclo(int *primeiro){
+    int jogo_analisando(0);
+
+    std::vector <int> analise;
+
+    // Inicialize o ciclo
+    int ciclo(0);
+        
+    // Criar números da cartela
+    std::vector <int> cartela;
+    for(int i(1); i<=25; ++i){
+        cartela.push_back(i);
+    }
+
+    std::vector <int> cartela_saiu;
+
+    std::vector <int> temp;
+
+    while(true){        
+
+        // Verificar que números da cartela saiu        
+        for(int i(0); i<15; ++i){
+            for(int j(0); j<15; ++j){
+                if(*(std::begin(numeros_sorteados)+(jogo_analisando*15)+i)==cartela[j]){
+                    cartela_saiu.push_back(cartela[j]);
+                    break;
+                }
+            }
+        }
+
+        // Atualize cartela com os números que não sairam        
+        for(auto i(cartela.begin()); i<cartela.end(); ++i){
+            bool flag_temp(true);
+            for(auto j(cartela_saiu.begin()); j<cartela_saiu.end(); ++j){
+                if(*i == *j){
+                    flag_temp=false;
+                    break;
+                }
+            }
+            if(flag_temp){
+                temp.push_back(*i);
+            }
+        }
+
+        if(temp.size()>0){
+            ++ciclo;
+            cartela.clear();
+            cartela_saiu.clear();
+            for(int i : temp){
+                cartela.push_back(i);
+            }            
+            ++jogo_analisando;
+            temp.clear();           
+        } else {
+            analise.push_back(ciclo);
+            ciclo = 0;
+            cartela.clear();
+            cartela_saiu.clear();
+            for(int i(1); i<=25; ++i){
+                cartela.push_back(i);
+            }
+            ++jogo_analisando;
+            temp.clear();
+        }
+
+        if(((jogo_analisando*15)+std::begin(numeros_sorteados)) >= std::end(numeros_sorteados)){
+            break;
+        }
+    }
+
+    if(ciclo == 1){
+        int quantidade_para_sair = cartela.size();
+        int contador_direto(0);
+        for(int i(0); i<15; ++i){
+            for(int j(0); j<quantidade_para_sair; ++j){
+                if(*(primeiro+i) == cartela[j]){
+                    ++contador_direto;
+                    break;
+                }
+            }
+        }
+        if(contador_direto < quantidade_para_sair){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    if(ciclo >= 9){
+        int quantidade_para_sair = cartela.size();
+        int contador_direto(0);
+        for(int i(0); i<15; ++i){
+            for(int j(0); j<quantidade_para_sair; ++j){
+                if(*(primeiro+i) == cartela[j]){
+                    ++contador_direto;
+                    break;
+                }
+            }
+        }
+        if(contador_direto == quantidade_para_sair){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    return true;
 }

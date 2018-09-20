@@ -17,7 +17,9 @@
  */
 bool regras_gerais_ciclo(int *primeiro){
     if(numero_pode_sair(primeiro)){
-        return true;
+        if(dento_do_ciclo(primeiro)){
+            return true;
+        }
     }
     return false;
 }
