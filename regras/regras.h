@@ -11,6 +11,7 @@
 #include "primos_all.h" // Regras Primos
 #include "multiplos_all.h" // Regras Multiplos
 #include "proprio_jogo.h" // Regras com o Próprio jogo
+#include "ciclo_all.h" // Regras de Ciclos
 
 /**
  * @brief Função que verifica todas as regras
@@ -25,7 +26,9 @@ bool regras_gerais(int *primeiro){
             if(regras_gerais_primos(primeiro)){
                 if(regras_gerais_pares_impares(primeiro)){
                     if(regras_gerais_proprio_jogo(primeiro)){
-                        return true;
+                        if(regras_gerais_ciclo(primeiro)){
+                            return true;
+                        }
                     }                    
                 }
             }
