@@ -181,3 +181,106 @@ bool dento_do_ciclo(int *primeiro){
     }
     return true;
 }
+
+/**
+ * @brief Função para determinar quantos numeros são sempre sorteados entre o ciclo 1 e 2
+ * 
+ * @param inicial Aponta para posição inicial do jogo que pode sair
+ * @return true Se são sorteados de 2 a 7 números no ciclo para o ciclo 2
+ * @return false 
+ */
+bool ciclo_segundo_quantidade(int *inicial){
+  
+    int jogo_analisando(0);    
+
+    // Inicialize o ciclo
+    int ciclo(0);
+        
+    // Criar números da cartela
+    std::vector <int> cartela;
+    for(int i(1); i<=25; ++i){
+        cartela.push_back(i);
+    }
+
+    std::vector <int> cartela_saiu;
+
+    std::vector <int> temp;
+
+    int ciclo_um(0);
+
+    bool validacao(false);
+
+    while(true){        
+
+        // Verificar que números da cartela saiu        
+        for(int i(0); i<15; ++i){
+            for(int j(0); j<15; ++j){
+                if(*(std::begin(numeros_sorteados)+(jogo_analisando*15)+i)==cartela[j]){
+                    cartela_saiu.push_back(cartela[j]);
+                    break;
+                }
+            }
+        }
+
+        // Atualize cartela com os números que não sairam        
+        for(auto i(cartela.begin()); i<cartela.end(); ++i){
+            bool flag_temp(true);
+            for(auto j(cartela_saiu.begin()); j<cartela_saiu.end(); ++j){
+                if(*i == *j){
+                    flag_temp=false;
+                    break;
+                }
+            }
+            if(flag_temp){
+                temp.push_back(*i);
+            }
+        }
+
+        if(temp.size()>0){
+            ++ciclo;
+            cartela.clear();
+            cartela_saiu.clear();
+            for(int i : temp){
+                cartela.push_back(i);
+            }            
+            ++jogo_analisando;
+            temp.clear();           
+        } else {
+            ciclo = 0;
+            cartela.clear();
+            cartela_saiu.clear();
+            for(int i(1); i<=25; ++i){
+                cartela.push_back(i);
+            }
+            ++jogo_analisando;
+            temp.clear();
+        }
+
+        if(((jogo_analisando*15)+std::begin(numeros_sorteados)) >= std::end(numeros_sorteados)){
+            if(ciclo == 1){
+                validacao = true;
+            }
+            break;
+        }
+    }
+
+    if(validacao){
+        int cont(0);
+        for(int i(0); i<15; ++i){
+            for(int j : cartela){
+                if(*(inicial + i) == j){
+                    cont++;
+                    break;
+                }
+            }
+        }
+        if((cont >= 2) and (cont <= 7)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    return true;
+
+}

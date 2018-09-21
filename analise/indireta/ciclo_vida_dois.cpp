@@ -142,7 +142,7 @@ int main(int argc, char const *argv[])
 
 /// IMPLEMETAR!!
 
-// ENTRE O CILCO 1 e 2 são sorteados de 1 a 7 números
+// ENTRE O CILCO 1 e 2 são sorteados de 2 a 7 números   
 
     return 0;
 }
