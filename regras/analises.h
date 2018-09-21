@@ -38,30 +38,23 @@ bool analise_soma(int *inicial, int *numeros_para_analise, int quantidade_de_num
                     soma += *(numeros_para_analise + i);
                 }
             }
-        }              
+        }     
 
         // Analisar e preencher para o jogo
         for(auto i(0); i<quantidade_de_numeros_analisar; ++i){
-            for(auto j(0); j<15; ++j){
-                if(*(numeros_para_analise + i) == *(inicial + j)){
-                    soma += *(numeros_para_analise + i);
-                }
-            }
+            if(std::binary_search(inicial, inicial+15, numeros_para_analise[i])){
+                soma += numeros_para_analise[i];
+            }            
         }
 
         // Verificar a ocorencia corresponde aos resultados possiveis
-        int tamanho_do_vetor_resposta = respostas[posicao].size();
         bool marcador(true);
-        for(auto i(0); i<tamanho_do_vetor_resposta; ++i){
-            if(soma == respostas[posicao][i]){
-                marcador = false;
-                break;
-            }
+        if(std::binary_search(respostas[posicao].begin(), respostas[posicao].end(), soma)){
+            marcador = false;
         }
-        if(marcador){            
+        if(marcador){
             return false;
-            break;
-        }
+        }  
     }
 
     return true;
@@ -98,26 +91,19 @@ bool analise_ocorrencias(int *inicial, int *numeros_para_analise, int quantidade
 
         // Analisar e preencher para o jogo
         for(auto i(0); i<quantidade_de_numeros_analisar; ++i){
-            for(auto j(0); j<15; ++j){
-                if(numeros_para_analise[i] == *(inicial + j)){
-                    soma++;
-                }
-            }
+            if(std::binary_search(inicial, inicial+15, numeros_para_analise[i])){
+                soma++;
+            }            
         }
 
-        // Verificar a ocorencia corresponde aos resultados possiveis
-        int tamanho_do_vetor_resposta = respostas[posicao].size();
+        // Verificar a ocorencia corresponde aos resultados possiveis        
         bool marcador(true);
-        for(auto i(0); i<tamanho_do_vetor_resposta; ++i){
-            if(soma == respostas[posicao][i]){
-                marcador = false;
-                break;
-            }
+        if(std::binary_search(respostas[posicao].begin(), respostas[posicao].end(), soma)){
+            marcador = false;
         }
         if(marcador){
             return false;
-            break;
-        }
+        }        
     }
 
     return true;
@@ -161,13 +147,11 @@ bool analise_binario(int *inicial, int *numeros_para_analise, int quantidade_de_
             }
         }
 
-        // Analisar e preencher o binário para o jogo
+        // Analisar e preencher para o jogo
         for(auto i(0); i<quantidade_de_numeros_analisar; ++i){
-            for(auto j(0); j<15; ++j){
-                if(numeros_para_analise[i] == *(inicial + j)){
-                    binario[i] = 1;
-                }
-            }
+            if(std::binary_search(inicial, inicial+15, numeros_para_analise[i])){
+                binario[i] = 1;
+            }            
         }
 
         // Gravar binário
@@ -178,18 +162,13 @@ bool analise_binario(int *inicial, int *numeros_para_analise, int quantidade_de_
             }
         }
 
-        // Verificar a ocorencia corresponde aos resultados possiveis
-        int tamanho_do_vetor_resposta = respostas[posicao].size();
+        // Verificar a ocorencia corresponde aos resultados possiveis        
         bool marcador(true);
-        for(auto i(0); i<tamanho_do_vetor_resposta; ++i){
-            if(binario_final == respostas[posicao][i]){
-                marcador = false;
-                break;
-            }
+        if(std::binary_search(respostas[posicao].begin(), respostas[posicao].end(), binario_final)){
+            marcador = false;
         }
         if(marcador){
             return false;
-            break;
         }
     }
 

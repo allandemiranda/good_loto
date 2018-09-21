@@ -44,18 +44,13 @@ bool proprio_jogo_analise_anterior(int *inicial, int *tamanho_amostra_vetor, int
             }
         }
 
-        // Verificar a ocorencia corresponde aos resultados possiveis
-        int tamanho_do_vetor_resposta = respostas[posicao].size();
+        // Verificar a ocorencia corresponde aos resultados possiveis        
         bool marcador(true);
-        for(auto i(0); i<tamanho_do_vetor_resposta; ++i){
-            if(soma == respostas[posicao][i]){
-                marcador = false;
-                break;
-            }
+        if(std::binary_search(respostas[posicao].begin(), respostas[posicao].end(), soma)){
+            marcador = false;
         }
         if(marcador){
             return false;
-            break;
         }
     }
 
@@ -99,19 +94,14 @@ bool proprio_jogo_analise_somaDividida(int *inicial, int *tamanho_amostra_vetor,
             }
         }        
 
-        // Verificar a ocorencia corresponde aos resultados possiveis
-        int tamanho_do_vetor_resposta = respostas[posicao].size();
-        bool marcador(true); 
-        soma = soma / maior;       
-        for(auto i(0); i<tamanho_do_vetor_resposta; ++i){
-            if(soma == respostas[posicao][i]){
-                marcador = false;
-                break;
-            }
+        // Verificar a ocorencia corresponde aos resultados possiveis        
+        bool marcador(true);
+        soma = soma / maior;
+        if(std::binary_search(respostas[posicao].begin(), respostas[posicao].end(), soma)){
+            marcador = false;
         }
-        if(marcador){            
+        if(marcador){
             return false;
-            break;
         }
     }
 
@@ -144,21 +134,16 @@ bool proprio_jogo_analise_soma(int *inicial, int *tamanho_amostra_vetor, int dis
         // Analisar e preencher para o jogo        
         for(auto j(0); j<15; ++j){
             soma += *(inicial + j);
-        }        
+        }    
 
-        // Verificar a ocorencia corresponde aos resultados possiveis
-        int tamanho_do_vetor_resposta = respostas[posicao].size();
+        // Verificar a ocorencia corresponde aos resultados possiveis        
         bool marcador(true);
-        for(auto i(0); i<tamanho_do_vetor_resposta; ++i){
-            if(soma == respostas[posicao][i]){
-                marcador = false;
-                break;
-            }
+        if(std::binary_search(respostas[posicao].begin(), respostas[posicao].end(), soma)){
+            marcador = false;
         }
-        if(marcador){            
+        if(marcador){
             return false;
-            break;
-        }
+        } 
     }
 
     return true;

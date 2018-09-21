@@ -10,6 +10,86 @@
 #include <iterator>
 
 /**
+ * @brief Funções globais para gerar o cilho atual e cossumir menos processo na busca
+ * 
+ */
+std::vector <int> cartela_ciclo_global;
+int global_ciclo_atual(0);
+void ciclo_atual_para_funcoes(){
+    int jogo_analisando(0);
+
+    //std::vector <int> analise;
+
+    // Inicialize o ciclo
+    int ciclo(0);
+        
+    // Criar números da cartela
+    //std::vector <int> cartela;
+    for(int i(1); i<=25; ++i){
+        cartela_ciclo_global.push_back(i);
+    }
+
+    std::vector <int> cartela_saiu;
+
+    std::vector <int> temp;
+
+    while(true){        
+
+        // Verificar que números da cartela saiu        
+        for(int i(0); i<15; ++i){
+            for(int j(0); j<15; ++j){
+                if(*(std::begin(numeros_sorteados)+(jogo_analisando*15)+i)==cartela_ciclo_global[j]){
+                    cartela_saiu.push_back(cartela_ciclo_global[j]);
+                    break;
+                }
+            }
+        }
+
+        // Atualize cartela com os números que não sairam        
+        for(auto i(cartela_ciclo_global.begin()); i<cartela_ciclo_global.end(); ++i){
+            bool flag_temp(true);
+            for(auto j(cartela_saiu.begin()); j<cartela_saiu.end(); ++j){
+                if(*i == *j){
+                    flag_temp=false;
+                    break;
+                }
+            }
+            if(flag_temp){
+                temp.push_back(*i);
+            }
+        }
+
+        if(temp.size()>0){
+            ++ciclo;
+            cartela_ciclo_global.clear();
+            cartela_saiu.clear();
+            for(int i : temp){
+                cartela_ciclo_global.push_back(i);
+            }            
+            ++jogo_analisando;
+            temp.clear();           
+        } else {
+            //analise.push_back(ciclo);
+            ciclo = 0;
+            cartela_ciclo_global.clear();
+            cartela_saiu.clear();
+            for(int i(1); i<=25; ++i){
+                cartela_ciclo_global.push_back(i);
+            }
+            ++jogo_analisando;
+            temp.clear();
+        }
+
+        if(((jogo_analisando*15)+std::begin(numeros_sorteados)) >= std::end(numeros_sorteados)){
+            global_ciclo_atual = ciclo;
+            break;
+        }
+    }
+}
+// ciclo_atual_para_funcoes(); // execultada agora na função main()
+//  ### FIM da função global para retornar o ciclo atual
+
+/**
  * @brief Verifica se o numero pode ou não sair nos proximos 15 números
  * 
  * @param primeiro Aponta para o primeiro número do jogo que queremos analisar
@@ -75,82 +155,13 @@ bool numero_pode_sair(int *primeiro){
  * @return true As regras estão corretas
  * @return false 
  */
-bool dento_do_ciclo(int *primeiro){
-    int jogo_analisando(0);
-
-    std::vector <int> analise;
-
-    // Inicialize o ciclo
-    int ciclo(0);
-        
-    // Criar números da cartela
-    std::vector <int> cartela;
-    for(int i(1); i<=25; ++i){
-        cartela.push_back(i);
-    }
-
-    std::vector <int> cartela_saiu;
-
-    std::vector <int> temp;
-
-    while(true){        
-
-        // Verificar que números da cartela saiu        
-        for(int i(0); i<15; ++i){
-            for(int j(0); j<15; ++j){
-                if(*(std::begin(numeros_sorteados)+(jogo_analisando*15)+i)==cartela[j]){
-                    cartela_saiu.push_back(cartela[j]);
-                    break;
-                }
-            }
-        }
-
-        // Atualize cartela com os números que não sairam        
-        for(auto i(cartela.begin()); i<cartela.end(); ++i){
-            bool flag_temp(true);
-            for(auto j(cartela_saiu.begin()); j<cartela_saiu.end(); ++j){
-                if(*i == *j){
-                    flag_temp=false;
-                    break;
-                }
-            }
-            if(flag_temp){
-                temp.push_back(*i);
-            }
-        }
-
-        if(temp.size()>0){
-            ++ciclo;
-            cartela.clear();
-            cartela_saiu.clear();
-            for(int i : temp){
-                cartela.push_back(i);
-            }            
-            ++jogo_analisando;
-            temp.clear();           
-        } else {
-            analise.push_back(ciclo);
-            ciclo = 0;
-            cartela.clear();
-            cartela_saiu.clear();
-            for(int i(1); i<=25; ++i){
-                cartela.push_back(i);
-            }
-            ++jogo_analisando;
-            temp.clear();
-        }
-
-        if(((jogo_analisando*15)+std::begin(numeros_sorteados)) >= std::end(numeros_sorteados)){
-            break;
-        }
-    }
-
-    if(ciclo == 1){
-        int quantidade_para_sair = cartela.size();
+bool dento_do_ciclo(int *primeiro){  
+    if(global_ciclo_atual == 1){
+        int quantidade_para_sair = cartela_ciclo_global.size();
         int contador_direto(0);
         for(int i(0); i<15; ++i){
             for(int j(0); j<quantidade_para_sair; ++j){
-                if(*(primeiro+i) == cartela[j]){
+                if(*(primeiro+i) == cartela_ciclo_global[j]){
                     ++contador_direto;
                     break;
                 }
@@ -162,12 +173,12 @@ bool dento_do_ciclo(int *primeiro){
             return false;
         }
     }
-    if(ciclo >= 9){
-        int quantidade_para_sair = cartela.size();
+    if(global_ciclo_atual >= 9){
+        int quantidade_para_sair = cartela_ciclo_global.size();
         int contador_direto(0);
         for(int i(0); i<15; ++i){
             for(int j(0); j<quantidade_para_sair; ++j){
-                if(*(primeiro+i) == cartela[j]){
+                if(*(primeiro+i) == cartela_ciclo_global[j]){
                     ++contador_direto;
                     break;
                 }
@@ -190,84 +201,10 @@ bool dento_do_ciclo(int *primeiro){
  * @return false 
  */
 bool ciclo_segundo_quantidade(int *inicial){
-  
-    int jogo_analisando(0);    
-
-    // Inicialize o ciclo
-    int ciclo(0);
-        
-    // Criar números da cartela
-    std::vector <int> cartela;
-    for(int i(1); i<=25; ++i){
-        cartela.push_back(i);
-    }
-
-    std::vector <int> cartela_saiu;
-
-    std::vector <int> temp;
-
-    int ciclo_um(0);
-
-    bool validacao(false);
-
-    while(true){        
-
-        // Verificar que números da cartela saiu        
-        for(int i(0); i<15; ++i){
-            for(int j(0); j<15; ++j){
-                if(*(std::begin(numeros_sorteados)+(jogo_analisando*15)+i)==cartela[j]){
-                    cartela_saiu.push_back(cartela[j]);
-                    break;
-                }
-            }
-        }
-
-        // Atualize cartela com os números que não sairam        
-        for(auto i(cartela.begin()); i<cartela.end(); ++i){
-            bool flag_temp(true);
-            for(auto j(cartela_saiu.begin()); j<cartela_saiu.end(); ++j){
-                if(*i == *j){
-                    flag_temp=false;
-                    break;
-                }
-            }
-            if(flag_temp){
-                temp.push_back(*i);
-            }
-        }
-
-        if(temp.size()>0){
-            ++ciclo;
-            cartela.clear();
-            cartela_saiu.clear();
-            for(int i : temp){
-                cartela.push_back(i);
-            }            
-            ++jogo_analisando;
-            temp.clear();           
-        } else {
-            ciclo = 0;
-            cartela.clear();
-            cartela_saiu.clear();
-            for(int i(1); i<=25; ++i){
-                cartela.push_back(i);
-            }
-            ++jogo_analisando;
-            temp.clear();
-        }
-
-        if(((jogo_analisando*15)+std::begin(numeros_sorteados)) >= std::end(numeros_sorteados)){
-            if(ciclo == 1){
-                validacao = true;
-            }
-            break;
-        }
-    }
-
-    if(validacao){
+    if(global_ciclo_atual == 1){
         int cont(0);
         for(int i(0); i<15; ++i){
-            for(int j : cartela){
+            for(int j : cartela_ciclo_global){
                 if(*(inicial + i) == j){
                     cont++;
                     break;
@@ -280,7 +217,5 @@ bool ciclo_segundo_quantidade(int *inicial){
             return false;
         }
     }
-
     return true;
-
 }
