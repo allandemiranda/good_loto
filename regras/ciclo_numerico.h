@@ -86,20 +86,11 @@ void ciclo_atual_para_funcoes(){
         }
     }
 }
-// ciclo_atual_para_funcoes(); // execultada agora na função main()
-//  ### FIM da função global para retornar o ciclo atual
-
-/**
- * @brief Verifica se o numero pode ou não sair nos proximos 15 números
- * 
- * @param primeiro Aponta para o primeiro número do jogo que queremos analisar
- * @return true Para se toda a regra está valendo
- * @return false Para se a regra não está valendo
- */
-bool numero_pode_sair(int *primeiro){
-    for(int i(0); i<15; ++i){
+std::vector <int> numeros_podemsair_pelo_ciclo_global_vetor;
+void numeros_podemsair_pelo_ciclo(){
+    for(int i(1); i<=25; ++i){
         // Núemro escolhido para análise
-        int numero(*(primeiro+i));
+        int numero(i);
 
         // Vetor de analise
         std::vector <int> analise;
@@ -141,10 +132,26 @@ bool numero_pode_sair(int *primeiro){
             }
         }
         if(flag){
-            continue;
-        } else {
+            numeros_podemsair_pelo_ciclo_global_vetor.push_back(i);
+        } 
+    }
+}
+// ciclo_atual_para_funcoes(); // execultada agora na função main()
+// numeros_podemsair_pelo_ciclo(); // execultada agora na função main()
+//  ### FIM da função global para retornar o ciclo atual
+
+/**
+ * @brief Verifica se o numero pode ou não sair nos proximos 15 números
+ * 
+ * @param primeiro Aponta para o primeiro número do jogo que queremos analisar
+ * @return true Para se toda a regra está valendo
+ * @return false Para se a regra não está valendo
+ */
+bool numero_pode_sair(int *primeiro){
+    for(int i(0); i<15; ++i){
+        if(false == std::binary_search(numeros_podemsair_pelo_ciclo_global_vetor.begin(), numeros_podemsair_pelo_ciclo_global_vetor.end(), *(primeiro + i))){
             return false;
-        }
+        } 
     }
     return true;
 }
@@ -160,12 +167,9 @@ bool dento_do_ciclo(int *primeiro){
         int quantidade_para_sair = cartela_ciclo_global.size();
         int contador_direto(0);
         for(int i(0); i<15; ++i){
-            for(int j(0); j<quantidade_para_sair; ++j){
-                if(*(primeiro+i) == cartela_ciclo_global[j]){
-                    ++contador_direto;
-                    break;
-                }
-            }
+            if(std::binary_search(cartela_ciclo_global.begin(), cartela_ciclo_global.end(), *(primeiro + i))){
+                ++contador_direto;
+            } 
         }
         if(contador_direto < quantidade_para_sair){
             return true;
@@ -177,12 +181,9 @@ bool dento_do_ciclo(int *primeiro){
         int quantidade_para_sair = cartela_ciclo_global.size();
         int contador_direto(0);
         for(int i(0); i<15; ++i){
-            for(int j(0); j<quantidade_para_sair; ++j){
-                if(*(primeiro+i) == cartela_ciclo_global[j]){
-                    ++contador_direto;
-                    break;
-                }
-            }
+            if(std::binary_search(cartela_ciclo_global.begin(), cartela_ciclo_global.end(), *(primeiro + i))){
+                ++contador_direto;
+            } 
         }
         if(contador_direto == quantidade_para_sair){
             return true;
@@ -196,20 +197,17 @@ bool dento_do_ciclo(int *primeiro){
 /**
  * @brief Função para determinar quantos numeros são sempre sorteados entre o ciclo 1 e 2
  * 
- * @param inicial Aponta para posição inicial do jogo que pode sair
+ * @param primeiro Aponta para posição inicial do jogo que pode sair
  * @return true Se são sorteados de 2 a 7 números no ciclo para o ciclo 2
  * @return false 
  */
-bool ciclo_segundo_quantidade(int *inicial){
+bool ciclo_segundo_quantidade(int *primeiro){
     if(global_ciclo_atual == 1){
         int cont(0);
         for(int i(0); i<15; ++i){
-            for(int j : cartela_ciclo_global){
-                if(*(inicial + i) == j){
-                    cont++;
-                    break;
-                }
-            }
+            if(std::binary_search(cartela_ciclo_global.begin(), cartela_ciclo_global.end(), *(primeiro + i))){
+                cont++;
+            }            
         }
         if((cont >= 2) and (cont <= 7)){
             return true;

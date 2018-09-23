@@ -15,6 +15,7 @@ int main(int argc, char *argv[ ]){
 
     // economia de memória dos cilcos
     ciclo_atual_para_funcoes();
+    numeros_podemsair_pelo_ciclo();
 
     int jogo_a[] = {1,2,3,4,6,7,8,9,10,12,13,14,17,18,22};
     if(regras_gerais(&jogo_a[0])){ 
