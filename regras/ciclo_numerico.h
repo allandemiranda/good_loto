@@ -136,8 +136,86 @@ void numeros_podemsair_pelo_ciclo(){
         } 
     }
 }
+std::vector <int> numeros_podemsair_pelo_ciclo_razao_aurea;
+void calculo_ciclos_razao_aurea(){
+    for(int numero_analisar(1); numero_analisar<=25; ++numero_analisar){
+        // encontre a primeira ocorrência
+        int contador_primeira_ocorrencia(0);
+        for(int i : numeros_sorteados){
+            if(i == numero_analisar){
+                break;
+            }
+            contador_primeira_ocorrencia++;        
+        }
+
+        std::vector <int> analise;
+
+        // analise
+        int posicao_atual(contador_primeira_ocorrencia);
+        int contador_em_B(0);
+        int contador_em_C(0);
+        int status(1); // A = 1, B = 2
+
+        for(int i(posicao_atual+1); i<std::distance(std::begin(numeros_sorteados), std::end(numeros_sorteados)); ++i){
+            if(status == 1){
+                contador_em_B++;
+                if(numeros_sorteados[i] == numero_analisar){
+                    status = 2;
+                }
+                continue;
+            }
+            if(status == 2){
+                contador_em_C++;
+                if(numeros_sorteados[i] == numero_analisar){
+                    int resposta = (contador_em_B+contador_em_C)/contador_em_C;
+                    analise.push_back(resposta);
+
+                    posicao_atual = posicao_atual + contador_em_B;
+                    i = posicao_atual;
+                    status = 1;
+                    contador_em_B = 0;
+                    contador_em_C = 0;
+                }
+            }
+        }
+
+        std::sort(analise.begin(), analise.end());
+
+        contador_em_B = 0;
+        contador_em_C = 0;
+        status = 2;
+        for(int *i(std::end(numeros_sorteados)-1); i>=std::begin(numeros_sorteados); --i){
+            if(status == 2){
+                ++contador_em_C;
+                if(*i == numero_analisar){
+                    status = 1;
+                }
+                continue;
+            }
+            if(status == 1){
+                ++contador_em_B;
+                if(*i == numero_analisar){
+                    break;
+                }
+            }
+        }
+
+        bool saber_se_pode_sair(true);
+        for(int i(1); i<=15; ++i){
+            int resposta = (contador_em_B+contador_em_C+i)/(contador_em_C+i);
+            if(false == std::binary_search(analise.begin(), analise.end(), resposta)){
+                saber_se_pode_sair = false;
+                break;
+            }
+        }
+        if(saber_se_pode_sair){
+            numeros_podemsair_pelo_ciclo_razao_aurea.push_back(numero_analisar);
+        }
+    }
+}
 // ciclo_atual_para_funcoes(); // execultada agora na função main()
 // numeros_podemsair_pelo_ciclo(); // execultada agora na função main()
+// calculo_ciclos_razao_aurea(); // execultada agora na função main()
 //  ### FIM da função global para retornar o ciclo atual
 
 /**
@@ -214,6 +292,22 @@ bool ciclo_segundo_quantidade(int *primeiro){
         } else {
             return false;
         }
+    }
+    return true;
+}
+
+/**
+ * @brief 
+ * 
+ * @param primeiro 
+ * @return true 
+ * @return false 
+ */
+bool ciclo_razao_aurea(int *primeiro){
+    for(int i(0); i<15; ++i){
+        if(false == std::binary_search(numeros_podemsair_pelo_ciclo_razao_aurea.begin(), numeros_podemsair_pelo_ciclo_razao_aurea.end(), *(primeiro + i))){
+            return false;
+        } 
     }
     return true;
 }

@@ -1,3 +1,6 @@
+#include <ctime> // temporário so para medir tempo
+std::time_t result_um;
+std::time_t result_dois;
 /**
  * @brief Função que irá gerar os jogos possiveis
  * 
@@ -11,11 +14,15 @@
 #include "../analise/numeros_sorteados.h" // Para as regras funcionarem
 #include "../regras/regras.h"
 
-int main(int argc, char *argv[ ]){
 
-    // economia de memória dos cilcos
-    ciclo_atual_para_funcoes();
+
+int main(int argc, char *argv[ ]){
+    
+    // economia de memória dos cilcos    
+    
+    ciclo_atual_para_funcoes();  
     numeros_podemsair_pelo_ciclo();
+    calculo_ciclos_razao_aurea();
 
     int jogo_a[] = {1,2,3,4,6,7,8,9,10,12,13,14,17,18,22};
     if(regras_gerais(&jogo_a[0])){ 
@@ -28,7 +35,7 @@ int main(int argc, char *argv[ ]){
             return 0;
     }
     
-
+result_um = std::time(nullptr);
 
     //std::ofstream outFile ("jogos_certos.txt", std::ios::app);
 
@@ -110,7 +117,9 @@ int main(int argc, char *argv[ ]){
             }
         }
     }
-    
+    result_dois = std::time(nullptr);
+    std::cout << "time inicial para " << " " << std::asctime(std::localtime(&result_um)) << std::endl;
+    std::cout << "time final para " << " " << std::asctime(std::localtime(&result_dois)) << std::endl;
     std::cout << contar_jogos_possiveis << std::endl;
 
     return 0;

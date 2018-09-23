@@ -19,7 +19,9 @@ bool regras_gerais_ciclo(int *primeiro){
     if(numero_pode_sair(primeiro)){
         if(dento_do_ciclo(primeiro)){
             if(ciclo_segundo_quantidade(primeiro)){
-                return true;
+                if(ciclo_razao_aurea(primeiro)){
+                    return true;
+                }
             }
         }
     }
