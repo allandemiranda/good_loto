@@ -1,19 +1,21 @@
 /**
- * @brief Função de análise binaria para números da linha um
+ * @brief Função de análise binária para números da linha 4
  * 
- * @file linha_1_binario.cpp
+ * @file linha_4_binario.cpp
  * @author Allan de Miranda Silva
- * @date 24-09-2018
+ * @date 25-09-2018
  */
 
 // ### REGRA PARA BINÁRIOS ###
 // Para 2 jogos
-// {11, 101, 111, 1001, 1010, 1011, 1100, 1101, 1110, 1111, 10001, 10010, 10011, 10100, 10101, 10110, 10111, 11000, 11001, 11010, 11011, 11100, 11101, 11110, 11111}
+// {1, 11, 101, 110, 111, 1001, 1010, 1011, 1100, 1101, 1110, 1111, 10001, 10010, 10011, 10100, 10101, 10110, 10111, 11000, 11001, 11010, 11011, 11100, 11101, 11110, 11111}
 // Para 3 jogos
-// {111, 1011, 1101, 1110, 1111, 10011, 10101, 10110, 10111, 11001, 11010, 11011, 11100, 11101, 11110, 11111}
+// {111, 1011, 1101, 1110, 1111, 10011, 10100, 10101, 10110, 10111, 11000, 11001, 11010, 11011, 11100, 11101, 11110, 11111}
 // Para 5 jogos
-// {1111, 10111, 11011, 11101, 11110, 11111}
+// {1111, 10110, 10111, 11011, 11101, 11110, 11111}
 // Para 8 jogos
+// {10111, 11101, 11111}
+// Para 13 jogos
 // {11111}
 
 #include <iostream>
@@ -33,7 +35,7 @@
  */
 int main(int argc, char *argv[ ]){
     // Números a analisar na cartela
-    int numeros_para_analise[] = {1,2,3,4,5};
+    int numeros_para_analise[] = {16,17,18,19,20};
     int quantidade_de_numeros_analisar = std::distance(std::begin(numeros_para_analise), std::end(numeros_para_analise));
 
     // Teste de capacidade máxima
