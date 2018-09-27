@@ -174,6 +174,33 @@ bool nunca_saiu(int *primeiro){
 }
 
 /**
+ * @brief Função que verifica quantidade de ocorrencias com todos os jogos anteriores sorteados
+ * 
+ * @param primeiro 
+ * @return true 
+ * @return false 
+ */
+bool olhar_jogos_anteriores_ocorrencias(int *primeiro, std::vector <int> respostas){
+    int vetor_jogo[15];
+    for(int i(0); i<15; ++i){
+        vetor_jogo[i] = *(primeiro+i);
+    }
+    std::sort(std::begin(vetor_jogo), std::end(vetor_jogo));    
+    for(int *jogo_sorteado(std::begin(numeros_sorteados)); jogo_sorteado<std::end(numeros_sorteados); jogo_sorteado+=15){
+        int soma(0);
+        for(int i(0); i<15; ++i){
+            if(std::binary_search(std::begin(vetor_jogo), std::end(vetor_jogo), *(jogo_sorteado+i))){
+                ++soma;
+            }
+        }
+        if(false == std::binary_search(respostas.begin(), respostas.end(), soma)){
+            return false;
+        }
+    }
+    return true;
+}
+
+/**
  * @brief Função que verifica somente todas as regras fibonacci
  * 
  * @param primeiro Aponta para o primeiro número do jogo que queremos analisar
@@ -221,13 +248,18 @@ bool regras_gerais_proprio_jogo(int *primeiro){
             34, 35, 36, 37, 38, 39, 40, 41, 42
         }
     };
+    std::vector <int> respostas_olhar_jogos_anteriores = {
+        5, 6, 7, 8, 9, 10, 11, 12, 13, 14
+    };
 
     // Verificar regras
     if(nunca_saiu(primeiro)){
         if(proprio_jogo_analise_soma(primeiro, std::begin(tamanho_amostra_vetor_soma), std::distance(std::begin(tamanho_amostra_vetor_soma), std::end(tamanho_amostra_vetor_soma)), respostas_soma)){
             if(proprio_jogo_analise_anterior(primeiro, std::begin(tamanho_amostra_vetor_anterior), std::distance(std::begin(tamanho_amostra_vetor_anterior), std::end(tamanho_amostra_vetor_anterior)), respostas_anterior)){
                 if(proprio_jogo_analise_somaDividida(primeiro, std::begin(tamanho_amostra_vetor_somaDividida), std::distance(std::begin(tamanho_amostra_vetor_somaDividida), std::end(tamanho_amostra_vetor_somaDividida)), respostas_somaDividida)){
-                    return true;
+                    if(olhar_jogos_anteriores_ocorrencias(primeiro, respostas_olhar_jogos_anteriores)){
+                        return true;
+                    }
                 }
             }
         }

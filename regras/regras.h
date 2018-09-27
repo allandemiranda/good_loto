@@ -10,7 +10,7 @@
 #include "pares_impares_all.h" // Regras Pares e Impares
 #include "primos_all.h" // Regras Primos
 #include "multiplos_all.h" // Regras Multiplos
-#include "proprio_jogo.h" // Regras com o Próprio jogo
+#include "proprio_jogo_all.h" // Regras com o Próprio jogo
 #include "ciclo_all.h" // Regras de Ciclos
 #include "linha_all.h" // Regras das Linhas
 
