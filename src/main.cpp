@@ -11,6 +11,8 @@
 #include "../analise/numeros_sorteados.h" // Para as regras funcionarem
 #include "../regras/regras.h"
 
+#include <omp.h> // sistemas paralelos
+
 #include <ctime> // temporário so para medir tempo
 std::time_t result_um;
 std::time_t result_dois;
@@ -24,7 +26,7 @@ int main(int argc, char *argv[ ]){
     numeros_podemsair_pelo_ciclo();
     calculo_ciclos_razao_aurea();
 
-/////----
+////*----
     int jogo_a[] = {1,2,3,4,6,7,8,9,10,12,13,14,17,18,22};
     if(regras_gerais(&jogo_a[0])){ 
         std::cout << "OK" << std::endl;
@@ -35,7 +37,8 @@ int main(int argc, char *argv[ ]){
     if(atoi(argv[1]) == 1){
             return 0;
     }
-/////------
+/////------ 
+
     
     //std::ofstream outFile ("jogos_certos.txt", std::ios::app);
 
@@ -61,12 +64,13 @@ int main(int argc, char *argv[ ]){
         vetor_maior[posicao] = maior;
         vetor_menor[posicao] = menor;
     }
-
+    //std::cout << vetor_maior[0] << std::endl;
     result_um = std::time(nullptr);
     // Listar todas as possibilidades
     int jogo[15];
     int contar_jogos_possiveis(0);
-    for(int a = 0 + 1; (vetor_menor[0] <= a) and (vetor_maior[0] >= a); ++a){ // 1
+    #pragma omp parallel for reduction(+:contar_jogos_possiveis)
+    for(int a = 1; a<=6 ; ++a){ // 1
         jogo[0] = a;
         for(int b = a + 1; (vetor_menor[1] <= b) and (vetor_maior[1] >= b); ++b){ // 2
             jogo[1] = b;
@@ -101,7 +105,7 @@ int main(int argc, char *argv[ ]){
                                                                         //outFile << jogo[gravar] << " ";
                                                                     //}
                                                                     //outFile << jogo[14] << std::endl;
-                                                                    ++contar_jogos_possiveis;
+                                                                    contar_jogos_possiveis+=1;
                                                                 }
                                                             }
                                                         }
