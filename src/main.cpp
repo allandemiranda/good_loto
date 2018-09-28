@@ -1,6 +1,3 @@
-#include <ctime> // temporário so para medir tempo
-std::time_t result_um;
-std::time_t result_dois;
 /**
  * @brief Função que irá gerar os jogos possiveis
  * 
@@ -14,16 +11,20 @@ std::time_t result_dois;
 #include "../analise/numeros_sorteados.h" // Para as regras funcionarem
 #include "../regras/regras.h"
 
-
+#include <ctime> // temporário so para medir tempo
+std::time_t result_um;
+std::time_t result_dois;
 
 int main(int argc, char *argv[ ]){
-    
-    // economia de memória dos cilcos    
-    
+    // Marcar hora inicial
+    std::cout << "Iniciou às " << __TIME__ << std::endl;
+
+    // economia de memória dos cilcos 
     ciclo_atual_para_funcoes();  
     numeros_podemsair_pelo_ciclo();
     calculo_ciclos_razao_aurea();
 
+/////----
     int jogo_a[] = {1,2,3,4,6,7,8,9,10,12,13,14,17,18,22};
     if(regras_gerais(&jogo_a[0])){ 
         std::cout << "OK" << std::endl;
@@ -34,9 +35,8 @@ int main(int argc, char *argv[ ]){
     if(atoi(argv[1]) == 1){
             return 0;
     }
+/////------
     
-result_um = std::time(nullptr);
-
     //std::ofstream outFile ("jogos_certos.txt", std::ios::app);
 
     // Verificar menor e maiores números que saem em suas posições
@@ -62,6 +62,7 @@ result_um = std::time(nullptr);
         vetor_menor[posicao] = menor;
     }
 
+    result_um = std::time(nullptr);
     // Listar todas as possibilidades
     int jogo[15];
     int contar_jogos_possiveis(0);
