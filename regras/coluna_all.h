@@ -7,8 +7,8 @@
  */
 #include "coluna_1.h" // Regras da Linha 1
 #include "coluna_2.h" // Regras da Linha 2
-//#include "coluna_3.h" // Regras da Linha 3
-//#include "coluna_4.h" // Regras da Linha 4
+#include "coluna_3.h" // Regras da Linha 3
+#include "coluna_4.h" // Regras da Linha 4
 //#include "coluna_5.h" // Regras da Linha 5
 //#include "colunas.h" // Regras das Linhas
 
@@ -22,13 +22,15 @@
 bool regras_gerais_colunas(int *primeiro){ 
     if(coluna_1_analise(primeiro)){
         if(coluna_2_analise(primeiro)){
-            //if(coluna_3_analise(primeiro)){
-                //if(coluna_5_analise(primeiro)){
-                    //if(colunas_analise(primeiro)){
-                        return true;
+            if(coluna_3_analise(primeiro)){
+                if(coluna_4_analise(primeiro)){
+                    //if(coluna_5_analise(primeiro)){
+                        //if(colunas_analise(primeiro)){
+                            return true;
+                        //}
                     //}
-                //}
-            //}
+                }
+            }
         }
     }
                         

@@ -23,9 +23,11 @@ bool regras_gerais_linhas(int *primeiro){
     if(linha_1_analise(primeiro)){
         if(linha_2_analise(primeiro)){
             if(linha_3_analise(primeiro)){
-                if(linha_5_analise(primeiro)){
-                    if(linhas_analise(primeiro)){
-                        return true;
+                if(linha_4_analise(primeiro)){
+                    if(linha_5_analise(primeiro)){
+                        if(linhas_analise(primeiro)){
+                            return true;
+                        }
                     }
                 }
             }
