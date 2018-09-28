@@ -1,23 +1,24 @@
 /**
- * @brief Regras geradas pela analise dos númros multilos de 5
+ * @brief Regras geradas pela analise dos númros da Coluna 5
  * 
- * @file multiplos_5.h
+ * @file coluna_5.h
  * @author Allan de Miranda Silva
- * @date 10-09-2018
+ * @date 28-09-2018
  */
+
 #include <iterator>
 #include <vector>
 #include <algorithm>
 #include <cmath>
 
 /**
- * @brief Função que verifica somente todas as regras multiplos de 5
+ * @brief Função que verifica somente todas as regras coluna 4
  * 
  * @param primeiro Aponta para o primeiro número do jogo que queremos analisar
  * @return true Para se todas as regras estão valendo
  * @return false Para se pelomenos uma regra não está valendo
  */
-bool multiplos_5_analise(int *primeiro){
+bool coluna_5_analise(int *primeiro){
     // Números a analisar
     int numeros_para_analise[] = {5,10,15,20,25};
 

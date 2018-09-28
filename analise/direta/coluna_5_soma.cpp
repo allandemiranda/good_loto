@@ -1,22 +1,18 @@
 /**
- * @brief Programa para gerar analise em cima dos núemros Multiplos de 5 - Ocorências
+ * @brief Programa para gerar analise em cima dos núemros Coluna 5 - Soma
  * 
- * @file multiplos_5_ocorrencias.cpp
+ * @file coluna_5_soma.cpp
  * @author Allan de Miranda Silva
- * @date 10-09-2018   
+ * @date 28-09-2018
  */
 
-// ### REGRA PARA OCORRÊNCIAS ### Ocorrência dos resultados que podem sair
+// ### REGRA PARA SOMA ### Soma dos resultados que podem sair
 // Para 1 jogo
-// {1, 2, 3, 4, 5}
+// {0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75}
 // Para 2 jogos
-// {3, 4, 5, 6, 7, 8, 9}
+// {20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150}
 // Para 3 jogos
-// {4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}
-// Para 5 jogos
-// {9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21}
-// Para 8 jogos
-// {16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31}
+// {40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150, 155, 160, 165, 170, 175, 180, 185, 190, 195, 200, 205, 210, 215}
 
 #include <iostream>
 #include <iterator>
@@ -46,7 +42,7 @@ int main(int argc, char *argv[ ]){
         for(auto i : numeros_para_analise){
             for(auto j(0); j<tamanho_amostra; ++j){
                 if(i == *(jogo - j)){
-                    soma++;
+                    soma += i;
                 }
             }
         }
@@ -85,20 +81,20 @@ int main(int argc, char *argv[ ]){
             maior_contador = i;
         }
     }
-    
+
     // Imprimir como uma lista
     auto tamanho_resposta = respostas_valor.size();
     for(auto i = respostas_valor[0]; i <= respostas_valor[tamanho_resposta-1]; ++i){
         bool flag(true);
         for(auto j(0); j<tamanho_resposta; ++j){
             if(i == respostas_valor[j]){
-                std::cout << "Quantidade " << i << " saiu " << respostas_contador[j] << " vezes. " << "( " << (float) ((respostas_contador[j]*100)/maior_contador) << "% )"<< std::endl;
+                std::cout << "Soma " << i << " saiu " << respostas_contador[j] << " vezes. " << "( " << (float) ((respostas_contador[j]*100)/maior_contador) << "% )"<< std::endl;
                 flag = false;
                 break;
             }
         }
         if(flag){
-            std::cout << "Quantidade " << i << " saiu " << 0 << " vezes." << std::endl;
+            std::cout << "Soma " << i << " saiu " << 0 << " vezes." << std::endl;
         }
     }
 

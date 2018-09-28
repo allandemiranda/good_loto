@@ -1,9 +1,9 @@
 /**
- * @brief Programa para gerar analise em cima dos núemros Multiplos de 5 - Ocorências
+ * @brief Programa para gerar analise em cima dos núemros de Coluna 5 - Ocorrências
  * 
- * @file multiplos_5_ocorrencias.cpp
+ * @file coluna_5_ocorrenccias.cpp
  * @author Allan de Miranda Silva
- * @date 10-09-2018   
+ * @date 28-09-2018
  */
 
 // ### REGRA PARA OCORRÊNCIAS ### Ocorrência dos resultados que podem sair
