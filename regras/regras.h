@@ -13,6 +13,7 @@
 #include "proprio_jogo_all.h" // Regras com o Próprio jogo
 #include "ciclo_all.h" // Regras de Ciclos
 #include "linha_all.h" // Regras das Linhas
+#include "coluna_all.h" // Regras das Colunas
 
 /**
  * @brief Função que verifica todas as regras
@@ -29,7 +30,9 @@ bool regras_gerais(int *primeiro){
                     if(regras_gerais_proprio_jogo(primeiro)){
                         if(regras_gerais_ciclo(primeiro)){
                             if(regras_gerais_linhas(primeiro)){
-                                return true;
+                                if(regras_gerais_colunas(primeiro)){
+                                    return true;
+                                }
                             }
                         }
                     }                    
