@@ -10,7 +10,7 @@
 #include "coluna_3.h" // Regras da Linha 3
 #include "coluna_4.h" // Regras da Linha 4
 #include "coluna_5.h" // Regras da Linha 5
-//#include "colunas.h" // Regras das Linhas
+#include "colunas.h" // Regras das Linhas
 
 /**
  * @brief Função que verifica somente todas as regras das linhas
@@ -25,9 +25,9 @@ bool regras_gerais_colunas(int *primeiro){
             if(coluna_3_analise(primeiro)){
                 if(coluna_4_analise(primeiro)){
                     //if(coluna_5_analise(primeiro)){ -> *** desativado pois corresponde a multiplos de 5 ***
-                        //if(colunas_analise(primeiro)){
+                        if(colunas_analise(primeiro)){
                             return true;
-                        //}
+                        }
                     //}
                 }
             }
