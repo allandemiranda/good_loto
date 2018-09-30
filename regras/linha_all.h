@@ -20,19 +20,59 @@
  * @return false Para se pelomenos uma regra não está valendo
  */
 bool regras_gerais_linhas(int *primeiro){ 
-    if(linha_1_analise(primeiro)){
-        if(linha_2_analise(primeiro)){
-            if(linha_3_analise(primeiro)){
-                if(linha_4_analise(primeiro)){
-                    if(linha_5_analise(primeiro)){
-                        if(linhas_analise(primeiro)){
-                            return true;
-                        }
-                    }
+    bool flag_linhas_return(false);
+    #pragma omp parallel
+    { 
+        #pragma omp sections
+        { 
+            #pragma omp section
+            {
+                if(false == linha_1_analise(primeiro)){
+                    flag_linhas_return = true;
+                    #pragma omp cancel sections
                 }
             }
-        }
+            #pragma omp section
+            {
+                if(false == linha_2_analise(primeiro)){
+                    flag_linhas_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+            #pragma omp section
+            {
+                if(false == linha_3_analise(primeiro)){
+                    flag_linhas_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+            #pragma omp section
+            {
+                if(false == linha_4_analise(primeiro)){
+                    flag_linhas_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+            #pragma omp section
+            {
+                if(false == linha_5_analise(primeiro)){
+                    flag_linhas_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+            #pragma omp section
+            {
+                if(false == linhas_analise(primeiro)){
+                    flag_linhas_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+        }    
+        
     }
-                        
-    return false;
+    if(flag_linhas_return){
+        return false;
+    } else {
+        return true;
+    }
 }

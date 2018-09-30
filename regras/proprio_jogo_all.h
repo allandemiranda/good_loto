@@ -253,17 +253,51 @@ bool regras_gerais_proprio_jogo(int *primeiro){
     };
 
     // Verificar regras
-    if(nunca_saiu(primeiro)){
-        if(proprio_jogo_analise_soma(primeiro, std::begin(tamanho_amostra_vetor_soma), std::distance(std::begin(tamanho_amostra_vetor_soma), std::end(tamanho_amostra_vetor_soma)), respostas_soma)){
-            if(proprio_jogo_analise_anterior(primeiro, std::begin(tamanho_amostra_vetor_anterior), std::distance(std::begin(tamanho_amostra_vetor_anterior), std::end(tamanho_amostra_vetor_anterior)), respostas_anterior)){
-                if(proprio_jogo_analise_somaDividida(primeiro, std::begin(tamanho_amostra_vetor_somaDividida), std::distance(std::begin(tamanho_amostra_vetor_somaDividida), std::end(tamanho_amostra_vetor_somaDividida)), respostas_somaDividida)){
-                    if(olhar_jogos_anteriores_ocorrencias(primeiro, respostas_olhar_jogos_anteriores)){
-                        return true;
-                    }
+    bool flag_proprio_jogo_return(false);
+    #pragma omp parallel
+    { 
+        #pragma omp sections
+        { 
+            #pragma omp section
+            {
+                if(false == nunca_saiu(primeiro)){
+                    flag_proprio_jogo_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+            #pragma omp section
+            {
+                if(false == proprio_jogo_analise_soma(primeiro, std::begin(tamanho_amostra_vetor_soma), std::distance(std::begin(tamanho_amostra_vetor_soma), std::end(tamanho_amostra_vetor_soma)), respostas_soma)){
+                    flag_proprio_jogo_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+            #pragma omp section
+            {
+                if(false == proprio_jogo_analise_anterior(primeiro, std::begin(tamanho_amostra_vetor_anterior), std::distance(std::begin(tamanho_amostra_vetor_anterior), std::end(tamanho_amostra_vetor_anterior)), respostas_anterior)){
+                    flag_proprio_jogo_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+            #pragma omp section
+            {
+                if(false == proprio_jogo_analise_somaDividida(primeiro, std::begin(tamanho_amostra_vetor_somaDividida), std::distance(std::begin(tamanho_amostra_vetor_somaDividida), std::end(tamanho_amostra_vetor_somaDividida)), respostas_somaDividida)){
+                    flag_proprio_jogo_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+            #pragma omp section
+            {
+                if(false == olhar_jogos_anteriores_ocorrencias(primeiro, respostas_olhar_jogos_anteriores)){
+                    flag_proprio_jogo_return = true;
+                    #pragma omp cancel sections
                 }
             }
         }
     }
-
-    return false;
+    if(flag_proprio_jogo_return){
+        return false;
+    } else {
+        return true;
+    }
 }

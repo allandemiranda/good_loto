@@ -24,27 +24,86 @@
  * @return false Para se pelomenos uma regra não está valendo
  */
 bool regras_gerais_multiplos(int *primeiro){ 
-    if(multiplos_12_analise(primeiro)){
-        if(multiplos_11_analise(primeiro)){
-            if(multiplos_10_analise(primeiro)){
-                if(multiplos_9_analise(primeiro)){
-                    if(multiplos_8_analise(primeiro)){
-                        if(multiplos_7_analise(primeiro)){
-                            if(multiplos_6_analise(primeiro)){
-                                if(multiplos_5_analise(primeiro)){
-                                    if(multiplos_4_analise(primeiro)){
-                                        if(multiplos_3_analise(primeiro)){
-                                            return true;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+    bool flag_multiplos_return(false);
+    #pragma omp parallel
+    { 
+        #pragma omp sections
+        { 
+            #pragma omp section
+            {
+                if(false == multiplos_12_analise(primeiro)){
+                    flag_multiplos_return = true; 
+                    #pragma omp cancel sections                   
+                }
+            }
+            #pragma omp section
+            {
+                if(false == multiplos_11_analise(primeiro)){
+                    flag_multiplos_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+            #pragma omp section
+            {
+                if(false == multiplos_10_analise(primeiro)){
+                    flag_multiplos_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+            #pragma omp section
+            {
+                if(false == multiplos_9_analise(primeiro)){
+                    flag_multiplos_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+            #pragma omp section
+            {
+                if(false == multiplos_8_analise(primeiro)){
+                    flag_multiplos_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+            #pragma omp section
+            {
+                if(false == multiplos_7_analise(primeiro)){
+                    flag_multiplos_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+            #pragma omp section
+            {
+                if(false == multiplos_6_analise(primeiro)){
+                    flag_multiplos_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+            #pragma omp section
+            {
+                if(false == multiplos_5_analise(primeiro)){
+                    flag_multiplos_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+            #pragma omp section
+            {
+                if(false == multiplos_4_analise(primeiro)){
+                    flag_multiplos_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+            #pragma omp section
+            {
+                if(false == multiplos_3_analise(primeiro)){
+                    flag_multiplos_return = true;
+                    #pragma omp cancel sections
                 }
             }
         }
     }
-                        
-    return false;
+    if(flag_multiplos_return){
+        return false;
+    } else {
+        return true;
+    }
 }

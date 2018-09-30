@@ -16,14 +16,44 @@
  * @return false Para se pelomenos uma regra não está valendo
  */
 bool regras_gerais_ciclo(int *primeiro){
-    if(numero_pode_sair(primeiro)){
-        if(dento_do_ciclo(primeiro)){
-            if(ciclo_segundo_quantidade(primeiro)){
-                if(ciclo_razao_aurea(primeiro)){
-                    return true;
+    bool flag_ciclo_return(false);
+    #pragma omp parallel
+    {        
+        #pragma omp sections
+        {            
+            #pragma omp section
+            {
+                if(false == numero_pode_sair(primeiro)){
+                    flag_ciclo_return = true;
+                    #pragma omp cancel sections
                 }
             }
-        }
+            #pragma omp section
+            {
+                if(false == dento_do_ciclo(primeiro)){
+                    flag_ciclo_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+            #pragma omp section
+            {
+                if(false == ciclo_segundo_quantidade(primeiro)){
+                    flag_ciclo_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+            #pragma omp section
+            {
+                if(false == ciclo_razao_aurea(primeiro)){
+                    flag_ciclo_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+        }        
     }
-    return false;
+    if(flag_ciclo_return){
+        return false;
+    } else {
+        return true;
+    }
 }

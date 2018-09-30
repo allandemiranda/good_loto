@@ -20,19 +20,60 @@
  * @return false Para se pelomenos uma regra não está valendo
  */
 bool regras_gerais_colunas(int *primeiro){ 
-    if(coluna_1_analise(primeiro)){
-        if(coluna_2_analise(primeiro)){
-            if(coluna_3_analise(primeiro)){
-                if(coluna_4_analise(primeiro)){
-                    //if(coluna_5_analise(primeiro)){ -> *** desativado pois corresponde a multiplos de 5 ***
-                        if(colunas_analise(primeiro)){
-                            return true;
-                        }
-                    //}
+    bool flag_colunas_return(false);
+    #pragma omp parallel
+    { 
+        #pragma omp sections
+        { 
+            #pragma omp section
+            {
+                if(false == coluna_1_analise(primeiro)){
+                    flag_colunas_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+            #pragma omp section
+            {
+                if(false == coluna_2_analise(primeiro)){
+                    flag_colunas_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+            #pragma omp section
+            {
+                if(false == coluna_3_analise(primeiro)){
+                    flag_colunas_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+            #pragma omp section
+            {
+                if(false == coluna_4_analise(primeiro)){
+                    flag_colunas_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+            /*
+            #pragma omp section
+            {
+                if(false ==coluna_5_analise(primeiro)){
+                    flag_colunas_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+            */
+            #pragma omp section
+            {
+                if(false == colunas_analise(primeiro)){
+                    flag_colunas_return = true;
+                    #pragma omp cancel sections
                 }
             }
         }
     }
-                        
-    return false;
+    if(flag_colunas_return){
+        return false;
+    } else {
+        return true;
+    }
 }

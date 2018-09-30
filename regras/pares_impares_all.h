@@ -16,10 +16,30 @@
  * @return false Para se pelomenos uma regra não está valendo
  */
 bool regras_gerais_pares_impares(int *primeiro){
-    if(regras_gerais_impares(primeiro)){
-        if(regras_gerais_pares(primeiro)){
-            return true;
+    bool flag_impares_return(false);
+    #pragma omp parallel
+    { 
+        #pragma omp sections
+        { 
+            #pragma omp section
+            {
+                if(false == regras_gerais_impares(primeiro)){
+                    flag_impares_return = true;
+                    #pragma omp cancel sections
+                }
+            }
+            #pragma omp section
+            {
+                if(false == regras_gerais_pares(primeiro)){
+                    flag_impares_return = true;
+                    #pragma omp cancel sections
+                }
+            }
         }
     }
-    return false;
+    if(flag_impares_return){
+        return false;
+    } else {
+        return true;
+    }
 }

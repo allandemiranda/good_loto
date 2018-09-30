@@ -32,7 +32,7 @@ int main(int argc, char *argv[ ]){
 
 /*
 ////----
-    int jogo_a[] = {8,21,15,14,9,3,22,10,24,23,4,5,1,11,7};
+    int jogo_a[] = {1,2,3,4,5,6,7,8,9,10,18,12,13,15,21};
     std::sort(std::begin(jogo_a),std::end(jogo_a));
     if(regras_gerais(&jogo_a[0])){ 
         std::cout << "OK" << std::endl;
@@ -45,8 +45,6 @@ int main(int argc, char *argv[ ]){
     }
 /////------ 
 */
-    
-    //std::ofstream outFile ("jogos_certos.txt", std::ios::app);
 
     // Verificar menor e maiores números que saem em suas posições
     std::cout << "Calculando menores e maiores posições para cada espaço" << std::endl;
@@ -71,15 +69,16 @@ int main(int argc, char *argv[ ]){
         vetor_maior[posicao] = maior;
         vetor_menor[posicao] = menor;
     }
-    std::cout << "Verificar se menor número está compatível com: " << vetor_maior[0] << std::endl;
+    //std::cout << "Verificar se menor número está compatível com: " << vetor_maior[0] << std::endl;
     result_um = std::time(nullptr);
     // Listar todas as possibilidades
     bool respostas[3268756];    
     int jogo[15];
     int contar_jogos_possiveis(0);
     long long numero_do_jogo(0);
-    #pragma omp parallel for reduction(+:numero_do_jogo)
-    for(int a = 1; a<=6 ; ++a){ // 1
+    //#pragma omp parallel for reduction(+:numero_do_jogo)
+    for(int a = 1; (vetor_menor[0] <= a) and (vetor_maior[0] >= a) ; ++a){ // 1
+        std::cout << "Analisando em: " << (100-(((vetor_maior[0]-a)*100)/(vetor_maior[0]-vetor_menor[0]))) << "%" << std::endl;
         jogo[0] = a;
         for(int b = a + 1; (vetor_menor[1] <= b) and (vetor_maior[1] >= b); ++b){ // 2
             jogo[1] = b;
@@ -110,7 +109,8 @@ int main(int argc, char *argv[ ]){
                                                             for(int o = n + 1; (vetor_menor[14] <= o) and (vetor_maior[14] >= o); ++o){ // 15
                                                                 jogo[14] = o; 
                                                                 if(regras_gerais(&jogo[0])){ 
-                                                                    respostas[numero_do_jogo] = true;                                                                    
+                                                                    respostas[numero_do_jogo] = true;
+                                                                    contar_jogos_possiveis+=1;                                                                    
                                                                 } else {
                                                                     respostas[numero_do_jogo] = false;
                                                                 }
@@ -134,11 +134,13 @@ int main(int argc, char *argv[ ]){
 
     std::cout << "time inicial para " << "analise: " << std::asctime(std::localtime(&result_um)) << std::endl;
     std::cout << "time final para " << "analise: " << std::asctime(std::localtime(&result_dois)) << std::endl;
-    
+    std::cout << "Serão registrados: " << contar_jogos_possiveis << std::endl;
+
     std::cout << "Iniciando registro em arquivo" << std::endl;
     long long numero_do_jogo_gravar(0);
     std::ofstream outFile ("jogos_certos.txt", std::ios::app);
     for(int a = 1; (vetor_menor[0] <= a) and (vetor_maior[0] >= a) ; ++a){ // 1
+        std::cout << "Gravando em: " << (100-(((vetor_maior[0]-a)*100)/(vetor_maior[0]-vetor_menor[0]))) << "%" << std::endl;
         jogo[0] = a;
         for(int b = a + 1; (vetor_menor[1] <= b) and (vetor_maior[1] >= b); ++b){ // 2
             jogo[1] = b;
@@ -172,8 +174,7 @@ int main(int argc, char *argv[ ]){
                                                                     for(int gravar(0); gravar < 14; ++gravar){
                                                                         outFile << jogo[gravar] << " ";
                                                                     }
-                                                                    outFile << jogo[14] << std::endl;
-                                                                    contar_jogos_possiveis+=1;
+                                                                    outFile << jogo[14] << std::endl;                                                                    
                                                                 }
                                                             }
                                                         }
@@ -191,8 +192,7 @@ int main(int argc, char *argv[ ]){
         }
     }    
     outFile.close();
-    std::cout << "Finalizou registro em arquivo" << std::endl;
-    std::cout << "Serão registrados: " << contar_jogos_possiveis << std::endl;
+    std::cout << "Finalizou registro em arquivo" << std::endl;    
 
     return 0;
 }

@@ -22,10 +22,11 @@ int main(int argc, char const *argv[])
 
     std::cout << "Analisando vetor com jogos" << std::endl;
     std::vector <int> analise;
-    for(int i(0); i<jogos_possiveis.size(); i+=15){
+    for(int i=0; i<jogos_possiveis.size(); i+=15){
         int pontos(0);
-        #pragma omp parallel for reduction(+:pontos)
-        for(int j(0); j<15; ++j){
+        int j;
+        //#pragma omp parallel for reduction(+:pontos) private(i,j)
+        for(j=0; j<15; ++j){
             if(std::binary_search(std::begin(jogo), std::end(jogo), jogos_possiveis[i+j])){
                 ++pontos;
             }
@@ -39,7 +40,7 @@ int main(int argc, char const *argv[])
     std::cout << "Contando ocoorencias" << std::endl;
     for(int i(0); i<=15; ++i){
         int contador(0);
-        #pragma omp parallel for reduction(+:contador)
+        //#pragma omp parallel for reduction(+:contador)
         for(int j : analise){
             if(i == j){
                 ++contador;
