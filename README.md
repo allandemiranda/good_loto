@@ -38,4 +38,4 @@ Demais informações descritas em cada arquivo de regra.
 
 - Com o sistema
 
-15 acertos –> 1 em 500.000
+15 acertos –> 1 em 1.755.172 -> 53,69% de redução
