@@ -39,3 +39,6 @@ Demais informações descritas em cada arquivo de regra.
 - Com o sistema
 
 15 acertos –> 1 em 1.755.172 -> 53,69% de redução
+
+-> Programa acertou o jogo:
+	- Concurso 1718 (01/10/18) 02 03 05 06 07 08 10 11 12 17 18 20 21 22 24
