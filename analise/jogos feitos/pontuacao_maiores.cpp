@@ -8,7 +8,7 @@
 int main(int argc, char const *argv[])
 {
     std::vector <int> jogos_possiveis;
-	std::ifstream ifs("../../src/jogos_certos.txt");
+	std::ifstream ifs("../../jogos_certos.txt");
 	int val;
     std::cout << "Criando vetor com jogos" << std::endl;
 	while (ifs >> val) {
@@ -17,7 +17,7 @@ int main(int argc, char const *argv[])
 	ifs.close();
     std::cout << "Vetor com jogos criado" << std::endl;
 
-    int jogo[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+    int jogo[] = {17,8,3,5,24,6,21,12,20,22,2,11,10,18,7};
     std::sort(std::begin(jogo), std::end(jogo));
 
     std::cout << "Analisando vetor com jogos" << std::endl;
@@ -34,7 +34,7 @@ int main(int argc, char const *argv[])
             {            
                 #pragma omp section
                 {
-                    for(int j(0); j<(15/4); ++j){
+                    for(int j(0); j<(3); ++j){
                         if(std::binary_search(std::begin(jogo), std::end(jogo), jogos_possiveis[i+j])){
                             ++pontos_1;
                         }
@@ -42,7 +42,7 @@ int main(int argc, char const *argv[])
                 }
                 #pragma omp section
                 {
-                    for(int j(15/4); j<(15/3); ++j){
+                    for(int j(3); j<(6); ++j){
                         if(std::binary_search(std::begin(jogo), std::end(jogo), jogos_possiveis[i+j])){
                             ++pontos_2;
                         }
@@ -50,7 +50,7 @@ int main(int argc, char const *argv[])
                 }
                 #pragma omp section
                 {
-                    for(int j(15/3); j<(15/2); ++j){
+                    for(int j(6); j<(12); ++j){
                         if(std::binary_search(std::begin(jogo), std::end(jogo), jogos_possiveis[i+j])){
                             ++pontos_3;
                         }
@@ -58,7 +58,7 @@ int main(int argc, char const *argv[])
                 }
                 #pragma omp section
                 {
-                    for(int j(15/2); j<(15); ++j){
+                    for(int j(12); j<(15); ++j){
                         if(std::binary_search(std::begin(jogo), std::end(jogo), jogos_possiveis[i+j])){
                             ++pontos_4;
                         }

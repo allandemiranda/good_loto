@@ -9,7 +9,7 @@ int main(int argc, char const *argv[])
 {
     //Pegar valores do vetor
     std::vector <int> jogos_certos;
-    std::ifstream ifs("../../src/jogos_certos.txt");
+    std::ifstream ifs("../../jogos_certos.txt");
 	int val;
     std::cout << "Criando vetor com jogos" << std::endl;
 	while (ifs >> val) {
@@ -20,66 +20,83 @@ int main(int argc, char const *argv[])
     
     //Procurar aiores vetores
     int maior_pontuacao(0);
+    int menor_pontuacao_pontos = 13; // Registro da menor pontuação
     std::vector <int> maiores_jogos;
-    int porcentage(1);
-    for(int i(0); i<jogos_certos.size(); i+=15){
-        if(porcentage == 10){
-            std::cout << "Aguarde: " << (((i+1)*10000)/jogos_certos.size()) << "%" << std::endl;
-            porcentage = 1;
-        } else {
-            ++porcentage;
-        }
+    
+    for(int i(0); i<jogos_certos.size(); i+=15){        
 
         int pontuacao_atual(0);
-        for(int j(0); j<jogos_certos.size(); j+=15){             
-            int pontos(0);
-            int pontos_1(0);
-            int pontos_2(0);
-            int pontos_3(0);
-            int pontos_4(0); 
-            #pragma omp parallel
-            {
-                #pragma omp sections
-                {            
-                    #pragma omp section
-                    {
-                        for(int k(0); k<4; ++k){
+        int pontuacao_atual_1(0);
+        int pontuacao_atual_2(0);
+        int pontuacao_atual_3(0);
+        int pontuacao_atual_4(0);
+        #pragma omp parallel
+        {
+            #pragma omp sections
+            {            
+                #pragma omp section
+                {
+                    for(int j(0*(jogos_certos.size()/4)); j<(1*(jogos_certos.size()/4)); j+=15){             
+                        int pontos(0);  
+                        for(int k(0); k<15; ++k){
                             if(std::binary_search(&jogos_certos[i], &jogos_certos[i+15], jogos_certos[j+k])){
-                                ++pontos_1;
-                            }
-                        }
+                                ++pontos;
+                                if(pontos >= menor_pontuacao_pontos){
+                                    ++pontuacao_atual_1;
+                                    break;
+                                }
+                            }                            
+                        } 
                     }
-                    #pragma omp section
-                    {
-                        for(int k(4); k<8; ++k){
+                }  
+                #pragma omp section
+                {
+                    for(int j(1*(jogos_certos.size()/4)); j<(2*(jogos_certos.size()/4)); j+=15){             
+                        int pontos(0);  
+                        for(int k(0); k<15; ++k){
                             if(std::binary_search(&jogos_certos[i], &jogos_certos[i+15], jogos_certos[j+k])){
-                                ++pontos_2;
-                            }
-                        }
+                                ++pontos;
+                                if(pontos >= menor_pontuacao_pontos){
+                                    ++pontuacao_atual_2;
+                                    break;
+                                }
+                            }                            
+                        } 
                     }
-                    #pragma omp section
-                    {
-                        for(int k(8); k<11; ++k){
+                } 
+                #pragma omp section
+                {
+                    for(int j(2*(jogos_certos.size()/4)); j<(3*(jogos_certos.size()/4)); j+=15){             
+                        int pontos(0);  
+                        for(int k(0); k<15; ++k){
                             if(std::binary_search(&jogos_certos[i], &jogos_certos[i+15], jogos_certos[j+k])){
-                                ++pontos_3;
-                            }
-                        }
+                                ++pontos;
+                                if(pontos >= menor_pontuacao_pontos){
+                                    ++pontuacao_atual_3;
+                                    break;
+                                }
+                            }                            
+                        } 
                     }
-                    #pragma omp section
-                    {
-                        for(int k(11); k<15; ++k){
+                }     
+                #pragma omp section
+                {
+                    for(int j(3*(jogos_certos.size()/4)); j<(4*(jogos_certos.size()/4)); j+=15){             
+                        int pontos(0);  
+                        for(int k(0); k<15; ++k){
                             if(std::binary_search(&jogos_certos[i], &jogos_certos[i+15], jogos_certos[j+k])){
-                                ++pontos_4;
-                            }
-                        }
+                                ++pontos;
+                                if(pontos >= menor_pontuacao_pontos){
+                                    ++pontuacao_atual_4;
+                                    break;
+                                }
+                            }                            
+                        } 
                     }
-                }
-            }
-            pontos =  pontos_1 + pontos_2 + pontos_3 + pontos_4;
-            if(pontos>=13){
-                ++pontuacao_atual;
-            }            
+                }           
+            }        
         }
+        pontuacao_atual = pontuacao_atual_1 + pontuacao_atual_2 + pontuacao_atual_3 + pontuacao_atual_4;
         if(pontuacao_atual >= maior_pontuacao){
             if(pontuacao_atual > maior_pontuacao){
                 maiores_jogos.clear();
