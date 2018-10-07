@@ -1,0 +1,14 @@
+Iniciou às 13:16:46
+Calculado funções ciclo
+Calculando menores e maiores posições para cada espaço
+Analisando em: 0%
+Analisando em: 20%
+Analisando em: 40%
+Analisando em: 60%
+Analisando em: 80%
+Analisando em: 100%
+time inicial para analise: Sun Oct  7 13:17:20 2018
+
+time final para analise: Sun Oct  7 16:52:34 2018
+
+Foi registrado: 2085316 jogos
