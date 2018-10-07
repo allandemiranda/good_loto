@@ -37,21 +37,37 @@ int main(int argc, char const *argv[])
 
     int quantidade_de_jogos_total = (jogos_certos.size()/15);
 
+    // calculos harmonico
+    int calculo_harmonico[10];
+    int calculo_inicial = 0;
+    for(int i=0; i<10; ++i){
+        int intervalo = quantidade_de_jogos_total/10;
+        calculo_harmonico[i] = intervalo + calculo_inicial;
+        calculo_inicial = calculo_harmonico[i];
+    } 
+
+    // invertifo fibonacci
+    int fibonacci_numeros_inver[10] = {55,89,110,123,131,136,139,141,142,143}; 
+    int calculo_fibonacci_inver[10];
+    for(int i=0; i<10; ++i){
+        int intervalo = ((fibonacci_numeros_inver[i]*quantidade_de_jogos_total)/143);
+        calculo_fibonacci_inver[i] = intervalo;
+    } 
+
+    // fibonacci normal 
+    int fibonacci_numeros[10] = {1,2,4,7,12,20,33,54,88,143}; 
+    int calculo_fibonacci[10];
+    for(int i=0; i<10; ++i){
+        int intervalo = ((fibonacci_numeros[i]*quantidade_de_jogos_total)/143);
+        calculo_fibonacci[i] = intervalo;
+    } 
+
     #pragma omp parallel
     { 
         #pragma omp sections
         { 
             #pragma omp section
-            {   
-                // calculos harmonico
-                int calculo_harmonico[10];
-                int calculo_inicial = 0;
-                for(int i=0; i<10; ++i){
-                    int intervalo = quantidade_de_jogos_total/10;
-                    calculo_harmonico[i] = intervalo + calculo_inicial;
-                    calculo_inicial = calculo_harmonico[i];
-                }                
-
+            {    
                 // gerar respostas
                 while(true){
                     std::srand(std::time(nullptr));
@@ -86,18 +102,7 @@ int main(int argc, char const *argv[])
                 
             }
             #pragma omp section
-            {
-                // invertifo fibonacci
-
-                int fibonacci_numeros_inver[10] = {55,89,110,123,131,136,139,141,142,143}; 
-                int calculo_fibonacci_inver[10];
-
-                // calculos fibonacci
-                for(int i=0; i<10; ++i){
-                    int intervalo = ((fibonacci_numeros_inver[i]*quantidade_de_jogos_total)/143);
-                    calculo_fibonacci_inver[i] = intervalo;
-                }                
-
+            {      
                 // gerar respostas
                 while(true){
                     std::srand(std::time(nullptr));
@@ -131,18 +136,7 @@ int main(int argc, char const *argv[])
                 }
             }
             #pragma omp section
-            {
-                // fibonacci normal 
-
-                int fibonacci_numeros[10] = {1,2,4,7,12,20,33,54,88,143}; 
-                int calculo_fibonacci[10];
-
-                // calculos fibonacci
-                for(int i=0; i<10; ++i){
-                    int intervalo = ((fibonacci_numeros[i]*quantidade_de_jogos_total)/143);
-                    calculo_fibonacci[i] = intervalo;
-                }               
-
+            {          
                 // gerar respostas
                 while(true){
                     std::srand(std::time(nullptr));
