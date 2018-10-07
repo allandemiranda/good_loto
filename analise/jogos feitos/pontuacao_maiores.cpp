@@ -8,7 +8,7 @@
 int main(int argc, char const *argv[])
 {
     std::vector <int> jogos_possiveis;
-	std::ifstream ifs("../../jogos_certos.txt");
+	std::ifstream ifs("../../src/jogos_certos.txt");
 	int val;
     std::cout << "Criando vetor com jogos" << std::endl;
 	while (ifs >> val) {
@@ -17,7 +17,7 @@ int main(int argc, char const *argv[])
 	ifs.close();
     std::cout << "Vetor com jogos criado" << std::endl;
 
-    int jogo[] = {17,8,3,5,24,6,21,12,20,22,2,11,10,18,7};
+    int jogo[] = {2,3,4,6,10,11,13,15,17,18,20,21,23,24,25};
     std::sort(std::begin(jogo), std::end(jogo));
 
     std::cout << "Analisando vetor com jogos" << std::endl;
