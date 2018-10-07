@@ -42,8 +42,7 @@ int main(int argc, char const *argv[])
         #pragma omp sections
         { 
             #pragma omp section
-            {               
-
+            {   
                 // calculos harmonico
                 int calculo_harmonico[10];
                 int calculo_inicial = 0;
@@ -51,12 +50,11 @@ int main(int argc, char const *argv[])
                     int intervalo = quantidade_de_jogos_total/10;
                     calculo_harmonico[i] = intervalo + calculo_inicial;
                     calculo_inicial = calculo_harmonico[i];
-                }
-
-                std::srand(std::time(nullptr));
+                }                
 
                 // gerar respostas
                 while(true){
+                    std::srand(std::time(nullptr));
                     int jogo_analisado = 0;
                     for(int i(0); i<10; ++i){
                         std::time_t result_um = std::time(nullptr);
@@ -98,12 +96,11 @@ int main(int argc, char const *argv[])
                 for(int i=0; i<10; ++i){
                     int intervalo = ((fibonacci_numeros_inver[i]*quantidade_de_jogos_total)/143);
                     calculo_fibonacci_inver[i] = intervalo;
-                }
-
-                std::srand(std::time(nullptr));
+                }                
 
                 // gerar respostas
                 while(true){
+                    std::srand(std::time(nullptr));
                     int jogo_analisado = 0;
                     for(int i(0); i<10; ++i){
                         std::time_t result_um = std::time(nullptr);
@@ -144,12 +141,11 @@ int main(int argc, char const *argv[])
                 for(int i=0; i<10; ++i){
                     int intervalo = ((fibonacci_numeros[i]*quantidade_de_jogos_total)/143);
                     calculo_fibonacci[i] = intervalo;
-                }
-
-                std::srand(std::time(nullptr));
+                }               
 
                 // gerar respostas
                 while(true){
+                    std::srand(std::time(nullptr));
                     int jogo_analisado = 0;
                     for(int i(0); i<10; ++i){
                         std::time_t result_um = std::time(nullptr);
