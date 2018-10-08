@@ -14,7 +14,7 @@
 #include <iterator>
 #include <fstream>
 #include <vector>
-#include <omp.h> // sistemas paralelos
+//#include <omp.h> // sistemas paralelos
 #include <cstdlib>
 #include <ctime>
 
@@ -22,7 +22,7 @@ int main(int argc, char const *argv[])
 {
     //Pegar valores do vetor
     std::vector <int> jogos_certos;
-    std::ifstream ifs("../../jogos_certos_1717.txt");
+    std::ifstream ifs("../../src/jogos_certos.txt");
 	int val;
     std::cout << "Criando vetor com jogos" << std::endl;
 	while (ifs >> val) {

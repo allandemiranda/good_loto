@@ -62,6 +62,8 @@ int main(int argc, char const *argv[])
         calculo_fibonacci[i] = intervalo;
     } 
 
+    int pontuacao_do_contador = 13;
+
     #pragma omp parallel
     { 
         #pragma omp sections
@@ -72,20 +74,24 @@ int main(int argc, char const *argv[])
                 while(true){
                     std::srand(std::time(nullptr));
                     int jogo_analisado = 0;
+                    bool flag = true;
                     for(int i(0); i<10; ++i){
                         std::time_t result_um = std::time(nullptr);
                         int x = jogo_analisado + std::rand()/((RAND_MAX + 1u)/(calculo_harmonico[i]-1));
                         while(false == ((x>=jogo_analisado) and (x<calculo_harmonico[i]))){
                             x = jogo_analisado + std::rand()/((RAND_MAX + 1u)/(calculo_harmonico[i]-1));
-                        }
-                        bool flag = false;
+                        }                        
+                        int cont(0);
                         for(int j(0); j<15; ++j){
-                            if((jogos_certos[(x*15)+j])!=jogo_correto[j]){
-                                flag = true;
-                                break;
+                            if(std::binary_search(std::begin(jogo_correto), std::end(jogo_correto),(jogos_certos[(x*15)+j]))){
+                                ++cont;
                             }
                         }
-                        if(flag){
+                        flag = true;
+                        if(cont>=pontuacao_do_contador){
+                            flag = false;
+                        }
+                        if(flag){                            
                             jogo_analisado = calculo_harmonico[i];
                             continue;
                         } else {
@@ -95,11 +101,14 @@ int main(int argc, char const *argv[])
                                 std::cout << (jogos_certos[(x*15)+j]) << " ";
                             }
                             std::cout << std::endl;
-                            #pragma omp cancel sections
+                            break;
                         }                    
                     }
+                    if(!flag){
+                        break;
+                    }
                 }
-                
+                #pragma omp cancel sections                
             }
             #pragma omp section
             {      
@@ -107,18 +116,22 @@ int main(int argc, char const *argv[])
                 while(true){
                     std::srand(std::time(nullptr));
                     int jogo_analisado = 0;
+                    bool flag = true;
                     for(int i(0); i<10; ++i){
                         std::time_t result_um = std::time(nullptr);
                         int x = jogo_analisado + std::rand()/((RAND_MAX + 1u)/(calculo_fibonacci_inver[i]-1));
                         while(false == ((x>=jogo_analisado) and (x<calculo_fibonacci_inver[i]))){
                             x = jogo_analisado + std::rand()/((RAND_MAX + 1u)/(calculo_fibonacci_inver[i]-1));
                         }
-                        bool flag = false;
+                        int cont(0);
                         for(int j(0); j<15; ++j){
-                            if((jogos_certos[(x*15)+j])!=jogo_correto[j]){
-                                flag = true;
-                                break;
+                            if(std::binary_search(std::begin(jogo_correto), std::end(jogo_correto),(jogos_certos[(x*15)+j]))){
+                                ++cont;
                             }
+                        }
+                        flag = true;
+                        if(cont>=pontuacao_do_contador){
+                            flag = false;
                         }
                         if(flag){
                             jogo_analisado = calculo_fibonacci_inver[i];
@@ -130,10 +143,14 @@ int main(int argc, char const *argv[])
                                 std::cout << (jogos_certos[(x*15)+j]) << " ";
                             }
                             std::cout << std::endl;
-                            #pragma omp cancel sections
-                        }
+                            break;
+                        }                    
+                    }
+                    if(!flag){
+                        break;
                     }
                 }
+                #pragma omp cancel sections                
             }
             #pragma omp section
             {          
@@ -141,18 +158,22 @@ int main(int argc, char const *argv[])
                 while(true){
                     std::srand(std::time(nullptr));
                     int jogo_analisado = 0;
+                    bool flag = true;
                     for(int i(0); i<10; ++i){
                         std::time_t result_um = std::time(nullptr);
                         int x = jogo_analisado + std::rand()/((RAND_MAX + 1u)/(calculo_fibonacci[i]-1));
                         while(false == ((x>=jogo_analisado) and (x<calculo_fibonacci[i]))){
                             x = jogo_analisado + std::rand()/((RAND_MAX + 1u)/(calculo_fibonacci[i]-1));
                         }
-                        bool flag = false;
+                        int cont(0);
                         for(int j(0); j<15; ++j){
-                            if((jogos_certos[(x*15)+j])!=jogo_correto[j]){
-                                flag = true;
-                                break;
+                            if(std::binary_search(std::begin(jogo_correto), std::end(jogo_correto),(jogos_certos[(x*15)+j]))){
+                                ++cont;
                             }
+                        }
+                        flag = true;
+                        if(cont>=pontuacao_do_contador){
+                            flag = false;
                         }
                         if(flag){
                             jogo_analisado = calculo_fibonacci[i];
@@ -164,10 +185,14 @@ int main(int argc, char const *argv[])
                                 std::cout << (jogos_certos[(x*15)+j]) << " ";
                             }
                             std::cout << std::endl;
-                            #pragma omp cancel sections
-                        }
+                            break;
+                        }                    
+                    }
+                    if(!flag){
+                        break;
                     }
                 }
+                #pragma omp cancel sections                
             }
         }
     }
