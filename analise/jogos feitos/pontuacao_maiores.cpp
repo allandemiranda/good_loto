@@ -3,12 +3,13 @@
 #include <iterator>
 #include <fstream>
 #include <vector>
-#include <omp.h> // sistemas paralelos
+#include <omp.h> // sistemas paralelos -fopenmp
 
 int main(int argc, char const *argv[])
 {
     std::vector <int> jogos_possiveis;
-	std::ifstream ifs("../../src/jogos_certos.txt");
+	//std::ifstream ifs("../../src/jogos_certos.txt");
+    std::ifstream ifs("jogos_certos_1718.txt");
 	int val;
     std::cout << "Criando vetor com jogos" << std::endl;
 	while (ifs >> val) {
@@ -17,7 +18,8 @@ int main(int argc, char const *argv[])
 	ifs.close();
     std::cout << "Vetor com jogos criado" << std::endl;
 
-    int jogo[] = {2,3,4,6,10,11,13,15,17,18,20,21,23,24,25};
+    int jogo[] = {2, 6, 7, 8, 10, 11, 12, 14, 15, 17, 19, 20, 21, 22, 23};
+    
     std::sort(std::begin(jogo), std::end(jogo));
 
     std::cout << "Analisando vetor com jogos" << std::endl;

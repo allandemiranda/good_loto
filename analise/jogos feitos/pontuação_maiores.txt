@@ -1,0 +1,24 @@
+Criando vetor com jogos
+Vetor com jogos criado
+Analisando vetor com jogos
+Vetor com jogos analisado
+Ordenando vetor com jogos
+Vetor com jogos ordenado
+Contando ocoorencias
+Para  0 pontos ->      0 ocorrências
+Para  1 pontos ->      0 ocorrências
+Para  2 pontos ->      0 ocorrências
+Para  3 pontos ->      0 ocorrências
+Para  4 pontos ->      0 ocorrências
+Para  5 pontos ->   1718 ocorrências
+Para  6 pontos ->  29064 ocorrências
+Para  7 pontos -> 170568 ocorrências
+Para  8 pontos -> 466258 ocorrências
+Para  9 pontos -> 660854 ocorrências
+Para 10 pontos -> 504596 ocorrências
+Para 11 pontos -> 205565 ocorrências
+Para 12 pontos ->  42533 ocorrências
+Para 13 pontos ->   4018 ocorrências
+Para 14 pontos ->    141 ocorrências
+Para 15 pontos ->      1 ocorrências
+Ocoorencias contadas

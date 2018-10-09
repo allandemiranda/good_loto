@@ -11,7 +11,7 @@
 #include "../analise/numeros_sorteados.h" // Para as regras funcionarem
 #include "../regras/regras.h"
 
-#include <omp.h> // sistemas paralelos
+#include <omp.h> // sistemas paralelos -fopenmp
 
 #include <ctime> // temporário so para medir tempo
 std::time_t result_um;
