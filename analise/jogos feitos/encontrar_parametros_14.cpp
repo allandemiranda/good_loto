@@ -1,3 +1,14 @@
+/**
+ * @file encontrar_parametros_14.cpp
+ * @author Allan de Miranda Silva
+ * @brief   Função para encontrar numeros que estão dentro da regra dos 14 números sorteados 
+ *          sobre todos os jogos possiveis
+ * @version 0.1
+ * @date 12-10-2018
+ * 
+ * @copyright Copyright (c) 2018
+ * 
+ */
 #include <iostream>
 #include <algorithm>
 #include <iterator>

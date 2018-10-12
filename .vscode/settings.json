@@ -46,7 +46,8 @@
         "iterator": "cpp",
         "cstdarg": "cpp",
         "functional": "cpp",
-        "numeric": "cpp"
+        "numeric": "cpp",
+        "iomanip": "cpp"
     },
     "doxdocgen.generic.authorTag": "@author Allan de Miranda Silva",
     "doxdocgen.generic.dateFormat": "DD-MM-YYYY"
