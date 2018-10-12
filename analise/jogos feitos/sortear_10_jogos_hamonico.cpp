@@ -1,7 +1,7 @@
 /**
  * @file sortear_10_jogos.cpp
  * @author Allan de Miranda Silva
- * @brief Programa para sortear 10 jogos na série de fibonacci dentro dos possiveis a sortear
+ * @brief Programa para sortear 10 jogos Harmonicamente
  * @version 0.1
  * @date 06-10-2018
  * 
