@@ -149,8 +149,8 @@ int main(int argc, char const *argv[])
         
         if(1 == atoi(argv[2])){
             // checar se jogos pdoem sair
-            //bool bandeira_checar = true;
-            #pragma omp parallel for
+            bool bandeira_checar = true;
+            //#pragma omp parallel for
             for(int i=0; i<jogos_para_jogar.size(); i+=15){
                 int novo_vetor_temp[15];
                 for(int j=0; j<15; ++j){
