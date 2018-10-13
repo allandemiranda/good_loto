@@ -170,6 +170,7 @@ int main(int argc, char const *argv[])
                     }
                 }
                 if(!bandeira_checar){
+                    bandeira_checar = false;
                     #pragma omp cancel for
                 }
             }
