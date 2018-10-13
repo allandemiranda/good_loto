@@ -170,7 +170,10 @@ int main(int argc, char const *argv[])
                     }
                 }
                 if(!bandeira_checar){
-                    bandeira_checar = false;
+                    #pragma omp critical
+                    {
+                        bandeira_checar = false;
+                    }
                     #pragma omp cancel for
                 }
             }
@@ -206,10 +209,7 @@ int main(int argc, char const *argv[])
                     }
                 }
                 if(pontos_14<100){
-                    #pragma omp critical
-                    {
-                        bandeira_dos_14 = true;
-                    }
+                    bandeira_dos_14 = true;
                     #pragma omp cancel for
                 }
             }
