@@ -149,42 +149,35 @@ int main(int argc, char const *argv[])
         
         if(1 == atoi(argv[2])){
             // checar se jogos pdoem sair
-            bool bandeira_checar = true;
-            #pragma omp parallel
-            {
-                #pragma omp for
-                for(int i=0; i<jogos_para_jogar.size(); i+=15){
-                    int novo_vetor_temp[15];
-                    for(int j=0; j<15; ++j){
-                        novo_vetor_temp[j]=jogos_para_jogar[i+j];
-                    }
-                    std::sort(std::begin(novo_vetor_temp), std::end(novo_vetor_temp));
-                    for(int j=0; j<jogos_que_vao_sair.size(); j+=15){                
-                        bandeira_checar = true;                
-                        for(int k=0; k<15; ++k){
-                            if(novo_vetor_temp[k]!=jogos_que_vao_sair[j+k]){                         
-                                bandeira_checar = false;
-                                break;                         
-                            }
-                        }
-                        if(bandeira_checar){
-                            break;
-                        }
-                    }
-                    if(!bandeira_checar){
-                        #pragma omp critical
-                        {
+            //bool bandeira_checar = true;
+            #pragma omp parallel for
+            for(int i=0; i<jogos_para_jogar.size(); i+=15){
+                int novo_vetor_temp[15];
+                for(int j=0; j<15; ++j){
+                    novo_vetor_temp[j]=jogos_para_jogar[i+j];
+                }
+                std::sort(std::begin(novo_vetor_temp), std::end(novo_vetor_temp));
+                for(int j=0; j<jogos_que_vao_sair.size(); j+=15){                
+                    bandeira_checar = true;                
+                    for(int k=0; k<15; ++k){
+                        if(novo_vetor_temp[k]!=jogos_que_vao_sair[j+k]){                         
                             bandeira_checar = false;
+                            break;                         
                         }
-                        #pragma omp cancel parallel
+                    }
+                    if(bandeira_checar){
+                        break;
                     }
                 }
-                #pragma omp cancellation point parallel
-                if(!bandeira_checar){
-                    --n_jogos;
-                    continue;
-                } 
+                if(!bandeira_checar){                    
+                    bandeira_checar = false;
+                    //#pragma omp cancel for
+                }
             }
+            if(!bandeira_checar){
+                --n_jogos;
+                continue;
+            } 
         }
 
         if(1 == atoi(argv[3])){
