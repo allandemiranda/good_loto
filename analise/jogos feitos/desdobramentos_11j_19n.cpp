@@ -206,7 +206,10 @@ int main(int argc, char const *argv[])
                     }
                 }
                 if(pontos_14<100){
-                    bandeira_dos_14 = true;
+                    #pragma omp critical
+                    {
+                        bandeira_dos_14 = true;
+                    }
                     #pragma omp cancel for
                 }
             }
@@ -234,7 +237,7 @@ int main(int argc, char const *argv[])
             std::sort(std::begin(novo_jogo), std::end(novo_jogo));
             int pontos(0);            
             for(int k=0; k<15; ++k){
-                std::cout << novo_jogo[k] << " ";
+                std::cout << novo_jogo[k] << ", ";
                 if(std::binary_search(std::begin(novo_jogo), std::end(novo_jogo), jogo_que_saiu[k])){
                     ++pontos;
                 }
