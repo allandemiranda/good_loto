@@ -204,7 +204,7 @@ int main(int argc, char const *argv[])
                         ++pontos_14;
                     }
                 }
-                if(pontos_14>100){
+                if(pontos_14<100){
                     bandeira_dos_14 = true;
                     #pragma omp cancel for
                 }
