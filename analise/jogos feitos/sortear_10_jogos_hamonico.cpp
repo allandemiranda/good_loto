@@ -14,49 +14,54 @@
 #include <iterator>
 #include <fstream>
 #include <vector>
-//#include <omp.h> // sistemas paralelos
+#include <omp.h> // sistemas paralelos
 #include <cstdlib>
 #include <ctime>
 
+bool lista_jogos_possiveis(std::string local, std::vector <int> &jogos_possiveis){
+    std::ifstream ifs(local);
+	int val;
+    if(!ifs.good()){
+        return false;
+    }
+	while (ifs >> val) {
+		jogos_possiveis.push_back(val);
+	}
+	ifs.close();
+    return true;
+}
+
 bool analise_14_pontos(std::vector <int> &jogos, int numero_do_jogo){
     int temp_jogo[15];
-    for(int i(0); i<15; ++i){
+    for(int i=0; i<15; ++i){
         temp_jogo[i] = jogos[(numero_do_jogo*15)+i];
     }
-    int pontos_maiores(0);
-    for(int i(0); i<(jogos.size()/15); ++i){
-        int pontos_atual(0);
-        for(int j(0); j<15; ++j){
+    int pontos_maiores=0;
+    #pragma omp parallel for reduction(+ : pontos_maiores)
+    for(int i=0; i<(jogos.size()/15); ++i){
+        int pontos_atual=0;        
+        for(int j=0; j<15; ++j){
             if(std::binary_search(std::begin(temp_jogo), std::end(temp_jogo), jogos[(i*15)+j])){
                 ++pontos_atual;
             } else {
-                if((j>=1) and (pontos_atual>=j)){
+                if((j>=1) and (pontos_atual<j)){
                     break;
                 }
             }
         }
         if(pontos_atual>=14){
-            ++pontos_maiores;
-            if(pontos_maiores>100){
-                return true;
-            }
+            ++pontos_maiores;            
         }
     }
-    return false;
+    return (pontos_maiores>100);
 }
 
 int main(int argc, char const *argv[])
 {
     //Pegar valores do vetor
     std::vector <int> jogos_certos;
-    std::ifstream ifs("../../src/jogos_certos.txt");
-	int val;
-    std::cout << "Criando vetor com jogos" << std::endl;
-	while (ifs >> val) {
-		jogos_certos.push_back(val);
-	}
-	ifs.close();
-    std::cout << "Vetor com jogos criado" << std::endl;
+    std::string local = "jogos_certos_1718.txt";
+    lista_jogos_possiveis(local, jogos_certos);
 
     int quantidade_de_jogos_total = (jogos_certos.size()/15);
 
@@ -85,7 +90,7 @@ int main(int argc, char const *argv[])
             while(false == ((x>=jogo_analisado) and (x<calculo_harmonico[i]))){
                 x = jogo_analisado + std::rand()/((RAND_MAX + 1u)/(calculo_harmonico[i]-1));
             }
-        }        
+        }       
         //std::cout << x << " - ";
         std::cout << "{";
         for(int j(0); j<15; ++j){
