@@ -38,7 +38,7 @@ int analise_11_pontos(std::vector <int> &jogos, int numero_do_jogo){
                     break;
                 }
             } else {
-                if((j>=4) and (pontos_atual>=(j-3))){
+                if((j>=4) and (pontos_atual<(j-3))){
                     break;
                 }
             }
@@ -57,7 +57,7 @@ int main(int argc, char const *argv[])
     lista_jogos_possiveis(local, jogos_certos);
 
     int maior_pontuacao = 0;
-    std::vector jogos_maiores;
+    std::vector <int> jogos_maiores;
     for(int i(0); i<jogos_certos.size(); ++i){
         int temp = analise_11_pontos(jogos_certos,i);
         if(temp>maior_pontuacao){

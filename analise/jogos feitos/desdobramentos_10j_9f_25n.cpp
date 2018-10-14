@@ -3,8 +3,8 @@
  * @author Allan de Miranda Silva
  * @brief   Está função irá apresentar 10 desdobramentos 
  * 
- *          11 jogos
- *          19 números
+ *          10 jogos
+ *          21 números
  *  
  * @version 0.1
  * @date 12-10-2018
@@ -37,11 +37,11 @@ void sorteio_vetor(int quantidade_de_nuemros, std::vector <int> &numeros){
         while(flag){            
             auto novo_numero_sorteado = sorteio_numero(1,25);
             flag = false;
-            #pragma omp parallel for
+            //#pragma omp parallel for
             for(int j=0; j<numeros.size(); ++j){
                 if(numeros[j]==novo_numero_sorteado){
                     flag = true;
-                    #pragma omp cancel for
+                    //#pragma omp cancel for
                 }
             } 
             if(!flag){
@@ -49,6 +49,7 @@ void sorteio_vetor(int quantidade_de_nuemros, std::vector <int> &numeros){
             }          
         }         
     }
+    
 }
 
 bool lista_jogos_possiveis(std::string local, std::vector <int> &jogos_possiveis){
@@ -70,6 +71,59 @@ void adicinar_grupo(std::vector <int> &vetor_manipular, std::vector<int>::iterat
     }
 }
 
+bool analise_14_pontos_desdobramento(std::vector <int> &jogos, std::vector<int>::iterator beg_num){
+    int temp_jogo[15];
+    for(int i=0; i<15; ++i){
+        temp_jogo[i] = *(beg_num+i);
+    }    
+    std::sort(std::begin(temp_jogo),std::end(temp_jogo));
+    int pontos_maiores=0;
+    #pragma omp parallel for reduction(+ : pontos_maiores)
+    for(int i=0; i<(jogos.size()/15); ++i){
+        int pontos_atual=0;        
+        for(int j=0; j<15; ++j){
+            if(std::binary_search(std::begin(temp_jogo), std::end(temp_jogo), jogos[(i*15)+j])){
+                ++pontos_atual;
+            } else {
+                if((j>=1) and (pontos_atual<j)){
+                    break;
+                }
+            }
+        }
+        if(pontos_atual>=14){
+            ++pontos_maiores;            
+        }
+    }
+    return (pontos_maiores>100);
+}
+
+bool analise_15_pontos_desdobramento(std::vector <int> &jogos, std::vector<int>::iterator beg_num){
+    int temp_jogo[15];
+    for(int i=0; i<15; ++i){
+        temp_jogo[i] = *(beg_num+i);
+    }
+    std::sort(std::begin(temp_jogo),std::end(temp_jogo));
+    bool pontos_maiores = false;    
+    #pragma omp parallel for reduction(+ : pontos_maiores)
+    for(int i=0; i<(jogos.size()/15); ++i){
+        int pontos_atual=0;        
+        for(int j=0; j<15; ++j){
+            if(std::binary_search(std::begin(temp_jogo), std::end(temp_jogo), jogos[(i*15)+j])){
+                ++pontos_atual;
+            } else {
+                if(pontos_atual<(j+1)){
+                    break;
+                }
+            }
+        }
+        if(pontos_atual==15){                
+            pontos_maiores = true;                
+            #pragma omp cancel for           
+        }
+    }    
+    return pontos_maiores;
+}
+
 int main(int argc, char const *argv[])
 {
     std::vector <int> jogos_que_vao_sair;
@@ -83,42 +137,42 @@ int main(int argc, char const *argv[])
         }
     }
 
-    // jogos para jogar
-    std::vector <int> jogos_para_jogar;
+    // jogos para jogar    
     int q_n_jogos = atoi(argv[1]); // <-------------- QUANTIDADE A ANALISAR
     std::vector <float> analise;
     int num_fixos = 9;
-   
+
+    std::vector <std::vector <int>> posicoes_grupos = {
+        {1,3},
+        {3,5},
+        {5,7},
+        {7,9},
+        {9,11},
+        {11,13},
+        {13,15},
+        {15,17}
+    };
+    std::vector <std::vector <int>> seguencias_grupos = 
+    {
+        {1,3,4},
+        {1,2,6},
+        {1,4,7},
+        {1,7,8},
+        {2,3,8},
+        {2,5,6},
+        {3,5,7},
+        {3,5,8},
+        {4,5,6},
+        {4,7,8}
+    };
+
     int n_jogos(0);
     for(n_jogos = 0; n_jogos<q_n_jogos; ++n_jogos){
         // Sorteio
         std::vector <int> numeros_sorteados;
+        std::vector <int> jogos_para_jogar;
         sorteio_vetor(25, numeros_sorteados);
         
-        std::vector <std::vector <int>> posicoes_grupos = {
-            {1,3},
-            {3,5},
-            {5,7},
-            {7,9},
-            {9,11},
-            {11,13},
-            {13,15},
-            {15,17}
-        };
-        std::vector <std::vector <int>> seguencias_grupos = 
-        {
-            {1,3,4},
-            {1,2,6},
-            {1,4,7},
-            {1,7,8},
-            {2,3,8},
-            {2,5,6},
-            {3,5,7},
-            {3,5,8},
-            {4,5,6},
-            {4,7,8}
-        };
-
         for(int i(0); i<seguencias_grupos.size(); ++i){   
             adicinar_grupo(jogos_para_jogar, numeros_sorteados.begin(), numeros_sorteados.begin()+num_fixos);         
             for(int j(0); j<seguencias_grupos[i].size(); ++j){
@@ -128,106 +182,65 @@ int main(int argc, char const *argv[])
         
         if(1 == atoi(argv[2])){
             // checar se jogos podem sair
-            bool bandeira_checar_new = true;
-            int falsas_bandeiras = 0;
-            for(int i=0; i<jogos_para_jogar.size(); i+=15){
-                int novo_vetor_temp[15];
-                for(int j=0; j<15; ++j){
-                    novo_vetor_temp[j]=jogos_para_jogar[i+j];
-                }
-                std::sort(std::begin(novo_vetor_temp), std::end(novo_vetor_temp)); 
-                bool bandeira_checar = true;               
-                for(int j=0; j<jogos_que_vao_sair.size(); j+=15){                
-                    bandeira_checar = true;               
-                    for(int k=0; k<15; ++k){
-                        if(novo_vetor_temp[k]!=jogos_que_vao_sair[j+k]){                         
-                            bandeira_checar = false;
-                            break;                         
-                        }
-                    }
-                    if(bandeira_checar){
-                        break;
-                    }
-                }
-                if(!bandeira_checar){                 
-                    bandeira_checar_new = false;
-                    ++falsas_bandeiras;                                        
+            bool flag_op2 = false;
+            for(int i=0; i<(jogos_para_jogar.size()/15); ++i){
+                if(false == analise_15_pontos_desdobramento(jogos_que_vao_sair,(jogos_para_jogar.begin()+(i*15)))){
+                    flag_op2 = true; 
+                    break;
                 }
             }
-            if(!bandeira_checar_new){
-                if(falsas_bandeiras>=0){
-                    --n_jogos;
-                    continue;
-                }
+            if(flag_op2){
+                --n_jogos;                
+                continue;
             } 
         }
 
         if(1 == atoi(argv[3])){
             //checagem dos 14 pontos maiores que 100
-            bool bandeira_dos_14 = false;
-            for(int i=0; i<jogos_para_jogar.size(); i+=15){
-                int novo_vetor_temp[15];
-                for(int j=0; j<15; ++j){
-                    novo_vetor_temp[j]=jogos_para_jogar[i+j];
-                }
-                std::sort(std::begin(novo_vetor_temp), std::end(novo_vetor_temp));
-                int pontos_14(0);
-                for(int j=0; j<jogos_que_vao_sair.size(); j+=15){ 
-                    int pontos_temp(0);  
-                    for(int k=0; k<15; ++k){
-                        if(std::binary_search(std::begin(novo_vetor_temp), std::end(novo_vetor_temp),jogos_que_vao_sair[j+k])){
-                            ++pontos_temp;
-                        }
-                        if((k>=1) and (pontos_temp < k)){
-                            break;
-                        }
-                    }
-                    if(pontos_temp>=14){
-                        ++pontos_14;
-                    }
-                }
-                if(pontos_14<100){
-                    bandeira_dos_14 = true;
+            bool flag_op3 = false;
+            for(int i=0; i<(jogos_para_jogar.size()/15); ++i){
+                if(false == analise_14_pontos_desdobramento(jogos_que_vao_sair,(jogos_para_jogar.begin()+(i*15)))){
+                    flag_op3 = true;
                     break;
                 }
             }
-            if(bandeira_dos_14){
+            if(flag_op3){
                 --n_jogos;
                 continue;
             }
         }
-    }
 
-    int jogo_que_saiu[15] = {2, 3, 5, 6, 7, 8, 10, 11, 12, 17, 18, 20, 21, 22, 24};
-    float valores[15] = {0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,4.00, 8.00, 20.00, 1129.23, 269379.40};       
+        int jogo_que_saiu[15] = {0,1,6,11,22,7,2,4,17,14,13,19,21,18,12};
+        std::sort(std::begin(jogo_que_saiu), std::end(jogo_que_saiu));
+        float valores[15] = {0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,4.00, 8.00, 20.00, 1129.23, 269379.40};       
 
-    for(int i(0); i<n_jogos; ++i){
-        std::cout << "JOGADA: " << (i+1) << std::endl;
-        std::cout << std::endl;
+        //std::cout << "JOGADA: " << (n_jogos+1) << std::endl;
+        //std::cout << std::endl;
         auto money(0);
         for(int j(0); j<10; ++j){
             money = money - 2;
             int novo_jogo[15];
-            #pragma omp parallel for
             for(int k=0; k<15; ++k){
-                novo_jogo[k] = jogos_para_jogar[(i*10*15)+(j*15)+k];
+                novo_jogo[k] = jogos_para_jogar[(j*15)+k];
             }
             std::sort(std::begin(novo_jogo), std::end(novo_jogo));
-            int pontos(0);            
+            int pontos(0);  
+            //std::cout << "{";          
             for(int k=0; k<15; ++k){
-                std::cout << novo_jogo[k] << " ";
+                //std::cout << novo_jogo[k] << " ";
                 if(std::binary_search(std::begin(novo_jogo), std::end(novo_jogo), jogo_que_saiu[k])){
                     ++pontos;
                 }
             }
-            std::cout << " - Pontos " << pontos << " - R$" << valores[pontos-1] << " (R$" << (valores[pontos-1]-2.00) << ")" << std::endl;
+            //std::cout << "}," << std::endl; 
+            //std::cout << " - Pontos " << pontos << " - R$" << valores[pontos-1] << " (R$" << (valores[pontos-1]-2.00) << ")" << std::endl;
             money = valores[pontos-1] + money;
         }
-        std::cout << std::endl;
-        std::cout << "GANHOS NESSA JOGADA: R$" << money << std::endl;
-        std::cout << "---------------------------------------------------------------" << std::endl;         
+        //std::cout << std::endl;
+        //std::cout << "GANHOS NESSA JOGADA: R$" << money << std::endl;
+        //std::cout << "---------------------------------------------------------------" << std::endl;         
         analise.push_back(money);
-    }    
+    }
 
     std::sort(analise.begin(), analise.end());
 
