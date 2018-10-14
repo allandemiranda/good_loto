@@ -29,59 +29,67 @@ int main(int argc, char const *argv[])
 	ifs.close();
     std::cout << "Vetor com jogos criado" << std::endl;
 
-    int jogo[] = {1, 4, 5, 6, 7, 8, 9, 10, 15, 16, 17, 18, 19, 21, 25};
-std::vector <std::vector <int>> auxi = {
-{1, 3, 4, 6, 8, 9, 11, 12, 13, 14, 15, 19, 20, 23, 25},
-{1, 2, 3, 4, 7, 8, 9, 11, 13, 14, 15, 19, 20, 23, 25 },
-{1, 3, 4, 5, 8, 9, 10, 11, 13, 14, 15, 19, 20, 23, 25},
-{2, 3, 4, 5, 6, 7, 8, 10, 12, 13, 14, 19, 20, 23, 25 },
-{1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 19, 25},
-{2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 19, 25} ,
-{1, 2, 4, 5, 6, 7, 9, 10, 11, 12, 14, 15, 19, 20, 23},
-{1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 20, 23 },
-{1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 19, 20, 23},
-{1, 2, 3, 5, 6, 7, 9, 10, 11, 12, 13, 15, 20, 23, 25},
-{1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 15, 20, 23, 25}
-};
-for(int fff(0); fff<11; fff++){
-for(int kkk(0); kkk<15; ++kkk){
-jogo[kkk]=auxi[fff][kkk];
-}
+    
+    std::vector <std::vector <int>> auxi = {
+        {1, 2, 3, 4, 7, 8, 10, 11, 13, 14, 16, 18, 22, 23, 24 },
+        {1, 2, 3, 6, 7, 10, 12, 14, 17, 18, 19, 21, 22, 23, 24 },
+        {1, 2, 4, 5, 6, 7, 9, 12, 13, 14, 16, 17, 18, 21, 24 },
+        {1, 2, 5, 7, 12, 13, 14, 15, 16, 17, 19, 20, 22, 23, 25 },
+        {1, 3, 4, 6, 7, 10, 11, 12, 13, 16, 17, 18, 20, 23, 24 },
+        {1, 3, 5, 9, 10, 11, 12, 13, 14, 17, 18, 20, 21, 23, 25 },
+        {1, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 19, 20, 24 },
+        {2, 3, 5, 8, 9, 11, 13, 14, 17, 18, 19, 21, 22, 23, 24 },
+        {3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 15, 19, 20, 21, 22 },
+        {4, 5, 6, 7, 8, 9, 12, 13, 14, 17, 20, 21, 22, 24, 25 }
+    };
 
-    std::sort(std::begin(jogo), std::end(jogo));
+    for(int jogo_a(0); jogo_a<auxi.size(); jogo_a++){
+        
+        int jogo[15];
+        for(int jogo_b(0); jogo_b<auxi[jogo_a].size(); ++jogo_b){
+            jogo[jogo_b]=auxi[jogo_a][jogo_b];
+        }
 
-    std::cout << "Analisando vetor com jogos" << std::endl;
-    std::vector <int> analise;
-    for(int i=0; i<jogos_possiveis.size(); i+=15){
-        int pontos(0);     
-        
-        for(int j(0); j<(15); ++j){
-            if(std::binary_search(std::begin(jogo), std::end(jogo), jogos_possiveis[i+j])){
-                ++pontos;
-            }
-        }               
-        
-        analise.push_back(pontos);
-    }
-    std::cout << "Vetor com jogos analisado" << std::endl;
-    std::cout << "Ordenando vetor com jogos" << std::endl;
-    std::sort(analise.begin(), analise.end());
-    std::cout << "Vetor com jogos ordenado" << std::endl;
-    std::cout << "Contando ocoorencias" << std::endl;
-    for(int i(0); i<=15; ++i){
-        int contador(0);
-        for(int j : analise){
-            if(i == j){
-                ++contador;
-            } else {
-                if(i < j){
-                    break;
+        std::sort(std::begin(jogo), std::end(jogo));
+
+        std::cout << "Analisando jogo: " << std::endl;
+        for(int i : jogo){
+            std::cout << i << " ";
+        }
+        std::cout << std::endl;
+
+        std::cout << "Analisando vetor com jogo" << std::endl;
+        std::vector <int> analise;
+        for(int i=0; i<jogos_possiveis.size(); i+=15){
+            int pontos=0;     
+            #pragma omp parallel for reduction(+ : pontos)
+            for(int j=0; j<(15); ++j){
+                if(std::binary_search(std::begin(jogo), std::end(jogo), jogos_possiveis[i+j])){
+                    ++pontos;
+                }
+            } 
+            analise.push_back(pontos);
+        }
+        std::cout << "Vetor com jogo analisado" << std::endl;
+        std::cout << "Ordenando vetor com jogo" << std::endl;
+        std::sort(analise.begin(), analise.end());
+        std::cout << "Vetor com jogos ordenado" << std::endl;
+        std::cout << "Contando ocoorências" << std::endl;
+        for(int i(0); i<=15; ++i){
+            int contador(0);
+            for(int j : analise){
+                if(i == j){
+                    ++contador;
+                } else {
+                    if(i < j){
+                        break;
+                    }
                 }
             }
+            std::cout << "Para " << i << " pontos -> " << contador << " ocorrências" << std::endl;
         }
-        std::cout << "Para " << i << " pontos -> " << contador << " ocorrências" << std::endl;
+        std::cout << "Ocoorências contadas" << std::endl;
+        std::cout << "---------------------------------------------" << std::endl;
     }
-    std::cout << "Ocoorencias contadas" << std::endl;
-}
     return 0;
 }

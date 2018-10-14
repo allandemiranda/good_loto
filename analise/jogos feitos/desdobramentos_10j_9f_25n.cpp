@@ -127,17 +127,18 @@ int main(int argc, char const *argv[])
         }
         
         if(1 == atoi(argv[2])){
-            // checar se jogos pdoem sair
-            bool bandeira_checar = true;
-            #pragma omp parallel for
+            // checar se jogos podem sair
+            bool bandeira_checar_new = true;
+            int falsas_bandeiras = 0;
             for(int i=0; i<jogos_para_jogar.size(); i+=15){
                 int novo_vetor_temp[15];
                 for(int j=0; j<15; ++j){
                     novo_vetor_temp[j]=jogos_para_jogar[i+j];
                 }
-                std::sort(std::begin(novo_vetor_temp), std::end(novo_vetor_temp));
+                std::sort(std::begin(novo_vetor_temp), std::end(novo_vetor_temp)); 
+                bool bandeira_checar = true;               
                 for(int j=0; j<jogos_que_vao_sair.size(); j+=15){                
-                    bandeira_checar = true;                
+                    bandeira_checar = true;               
                     for(int k=0; k<15; ++k){
                         if(novo_vetor_temp[k]!=jogos_que_vao_sair[j+k]){                         
                             bandeira_checar = false;
@@ -148,21 +149,22 @@ int main(int argc, char const *argv[])
                         break;
                     }
                 }
-                if(!bandeira_checar){
-                    bandeira_checar = false;
-                    #pragma omp cancel for
+                if(!bandeira_checar){                 
+                    bandeira_checar_new = false;
+                    ++falsas_bandeiras;                                        
                 }
             }
-            if(!bandeira_checar){
-                --n_jogos;
-                continue;
+            if(!bandeira_checar_new){
+                if(falsas_bandeiras>=0){
+                    --n_jogos;
+                    continue;
+                }
             } 
         }
 
         if(1 == atoi(argv[3])){
             //checagem dos 14 pontos maiores que 100
             bool bandeira_dos_14 = false;
-            #pragma omp parallel for
             for(int i=0; i<jogos_para_jogar.size(); i+=15){
                 int novo_vetor_temp[15];
                 for(int j=0; j<15; ++j){
@@ -186,7 +188,7 @@ int main(int argc, char const *argv[])
                 }
                 if(pontos_14<100){
                     bandeira_dos_14 = true;
-                    #pragma omp cancel for
+                    break;
                 }
             }
             if(bandeira_dos_14){
