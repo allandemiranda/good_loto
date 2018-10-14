@@ -57,14 +57,23 @@ int main(int argc, char const *argv[])
     lista_jogos_possiveis(local, jogos_certos);
 
     int maior_pontuacao = 0;
+    std::vector jogos_maiores;
     for(int i(0); i<jogos_certos.size(); ++i){
         int temp = analise_11_pontos(jogos_certos,i);
         if(temp>maior_pontuacao){
             maior_pontuacao = temp;
+            jogos_maiores.clear();
             for(int j(0); j<15; ++j){
+                jogos_maiores.push_back(jogos_certos[(15*i)+j]);
                 std::cout << jogos_certos[(15*i)+j] << " ";
             }
             std::cout << " - " << temp << " pontos 11 ou mais" << std::endl;
+        } else {
+            if(temp==maior_pontuacao){
+                for(int j(0); j<15; ++j){
+                    jogos_maiores.push_back(jogos_certos[(15*i)+j]);
+                }
+            }
         }
     }
     return 0;
