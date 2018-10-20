@@ -127,7 +127,7 @@ bool analise_15_pontos_desdobramento(std::vector <int> &jogos, std::vector<int>:
 int main(int argc, char const *argv[])
 {
     std::vector <int> jogos_que_vao_sair;
-    std::string local_do_arquivo = "jogos_certos_1718.txt";
+    std::string local_do_arquivo = "../../src/jogos_certos.txt";
     if((1 == atoi(argv[2])) or (1 == atoi(argv[3]))){
         if(!lista_jogos_possiveis(local_do_arquivo, jogos_que_vao_sair)){
             std::cout << "erro ao ler arquivo " << std::endl;
@@ -214,8 +214,8 @@ int main(int argc, char const *argv[])
         std::sort(std::begin(jogo_que_saiu), std::end(jogo_que_saiu));
         float valores[15] = {0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,4.00, 8.00, 20.00, 1129.23, 269379.40};       
 
-        //std::cout << "JOGADA: " << (n_jogos+1) << std::endl;
-        //std::cout << std::endl;
+        std::cout << "JOGADA: " << (n_jogos+1) << std::endl;
+        std::cout << std::endl;
         auto money(0);
         for(int j(0); j<10; ++j){
             money = money - 2;
@@ -227,18 +227,18 @@ int main(int argc, char const *argv[])
             int pontos(0);  
             //std::cout << "{";          
             for(int k=0; k<15; ++k){
-                //std::cout << novo_jogo[k] << " ";
+                std::cout << novo_jogo[k] << " ";
                 if(std::binary_search(std::begin(novo_jogo), std::end(novo_jogo), jogo_que_saiu[k])){
                     ++pontos;
                 }
             }
             //std::cout << "}," << std::endl; 
-            //std::cout << " - Pontos " << pontos << " - R$" << valores[pontos-1] << " (R$" << (valores[pontos-1]-2.00) << ")" << std::endl;
+            std::cout << " - Pontos " << pontos << " - R$" << valores[pontos-1] << " (R$" << (valores[pontos-1]-2.00) << ")" << std::endl;
             money = valores[pontos-1] + money;
         }
-        //std::cout << std::endl;
-        //std::cout << "GANHOS NESSA JOGADA: R$" << money << std::endl;
-        //std::cout << "---------------------------------------------------------------" << std::endl;         
+        std::cout << std::endl;
+        std::cout << "GANHOS NESSA JOGADA: R$" << money << std::endl;
+        std::cout << "---------------------------------------------------------------" << std::endl;         
         analise.push_back(money);
     }
 

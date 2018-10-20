@@ -231,12 +231,12 @@ int main(int argc, char const *argv[])
             }
         }
         
-        int jogo_que_saiu[15] = {0,1,6,11,22,7,2,4,17,14,13,19,21,18,12};
+        int jogo_que_saiu[15] = {10,1,6,11,22,7,2,4,17,14,13,19,21,18,12};
         std::sort(std::begin(jogo_que_saiu), std::end(jogo_que_saiu));
         float valores[15] = {0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,4.00, 8.00, 20.00, 1129.23, 269379.40};       
 
-        //std::cout << "JOGADA: " << (n_jogos+1) << std::endl;
-        //std::cout << std::endl;
+        std::cout << "JOGADA: " << (n_jogos+1) << std::endl;
+        std::cout << std::endl;
         auto money(0);
         for(int j(0); j<11; ++j){
             money = money - 2;
@@ -248,18 +248,18 @@ int main(int argc, char const *argv[])
             int pontos(0);  
             //std::cout << "{";          
             for(int k=0; k<15; ++k){
-                //std::cout << novo_jogo[k] << " ";
+                std::cout << novo_jogo[k] << " ";
                 if(std::binary_search(std::begin(novo_jogo), std::end(novo_jogo), jogo_que_saiu[k])){
                     ++pontos;
                 }
             }
             //std::cout << "}," << std::endl; 
-            //std::cout << " - Pontos " << pontos << " - R$" << valores[pontos-1] << " (R$" << (valores[pontos-1]-2.00) << ")" << std::endl;
+            std::cout << " - Pontos " << pontos << " - R$" << valores[pontos-1] << " (R$" << (valores[pontos-1]-2.00) << ")" << std::endl;
             money = valores[pontos-1] + money;
         }
-        //std::cout << std::endl;
-        //std::cout << "GANHOS NESSA JOGADA: R$" << money << std::endl;
-        //std::cout << "---------------------------------------------------------------" << std::endl;         
+        std::cout << std::endl;
+        std::cout << "GANHOS NESSA JOGADA: R$" << money << std::endl;
+        std::cout << "---------------------------------------------------------------" << std::endl;         
         analise.push_back(money);
     }
 

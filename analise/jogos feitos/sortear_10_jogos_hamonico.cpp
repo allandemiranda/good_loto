@@ -60,7 +60,7 @@ int main(int argc, char const *argv[])
 {
     //Pegar valores do vetor
     std::vector <int> jogos_certos;
-    std::string local = "jogos_certos_1718.txt";
+    std::string local = "../../src/jogos_certos.txt";
     lista_jogos_possiveis(local, jogos_certos);
 
     int quantidade_de_jogos_total = (jogos_certos.size()/15);
@@ -91,12 +91,11 @@ int main(int argc, char const *argv[])
                 x = jogo_analisado + std::rand()/((RAND_MAX + 1u)/(calculo_harmonico[i]-1));
             }
         }       
-        //std::cout << x << " - ";
-        std::cout << "{";
+        std::cout << x << " - ";
         for(int j(0); j<15; ++j){
-            std::cout << (jogos_certos[(x*15)+j]) << ", ";
+            std::cout << (jogos_certos[(x*15)+j]) << " ";
         }
-        std::cout << "}," << std::endl;
+        std::cout << std::endl;
         jogo_analisado = calculo_harmonico[i];
         
     }
