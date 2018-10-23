@@ -1,0 +1,4 @@
+Iniciou às 18:51:34
+Calculado funções ciclo
+Calculando menores e maiores posições para cada espaço
+Analisando em: 0%
