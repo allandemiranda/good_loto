@@ -41,20 +41,20 @@ int main(int argc, char const *argv[])
                                 }
                             }
                             analise.push_back(contador);
-                        }
-                        std::sort(analise.begin(), analise.end());                            
+                        }                            
                         for(int i = 0; i<=std::distance(std::begin(numeros_para_analise), std::end(numeros_para_analise)); ++i){
                             int contador_novo = 0;
-                            for( int j : analise){
+                            #pragma omp parallel for reduction(+ : contador_novo)
+                            for( int j = 0; j<analise.size(); ++j){
                                 if(i == j){
                                     ++contador_novo;
-                                } else {
-                                    if(j>i){
-                                        break;
-                                    }
                                 }
                             }
                             std::cout << contador_novo << " ";
+                        }
+                        std::cout << "* ";
+                        for(int i : numeros_para_analise){
+                            std::cout << i << " ";
                         }
                         std::cout << std::endl;                        
                     }
