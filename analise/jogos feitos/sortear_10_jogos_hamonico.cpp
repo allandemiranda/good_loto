@@ -14,7 +14,7 @@
 #include <iterator>
 #include <fstream>
 #include <vector>
-#include <omp.h> // sistemas paralelos
+//#include <omp.h> // sistemas paralelos
 #include <cstdlib>
 #include <ctime>
 
@@ -86,11 +86,11 @@ int main(int argc, char const *argv[])
         while(false == ((x>=jogo_analisado) and (x<calculo_harmonico[i]))){
             x = jogo_analisado + std::rand()/((RAND_MAX + 1u)/(calculo_harmonico[i]-1));
         }
-        while(false == analise_14_pontos(jogos_certos,x)){
-            while(false == ((x>=jogo_analisado) and (x<calculo_harmonico[i]))){
-                x = jogo_analisado + std::rand()/((RAND_MAX + 1u)/(calculo_harmonico[i]-1));
-            }
-        }       
+        //while(false == analise_14_pontos(jogos_certos,x)){
+            //while(false == ((x>=jogo_analisado) and (x<calculo_harmonico[i]))){
+               // x = jogo_analisado + std::rand()/((RAND_MAX + 1u)/(calculo_harmonico[i]-1));
+            //}
+        //}       
         std::cout << x << " - ";
         for(int j(0); j<15; ++j){
             std::cout << (jogos_certos[(x*15)+j]) << " ";

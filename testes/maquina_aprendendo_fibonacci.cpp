@@ -23,53 +23,48 @@ int main(int argc, char const *argv[])
     std::vector <int> resultados;
     for(int a = 1; a<=25; ++a){
         numeros_para_analise[0] = a;
-        for(int b = a; b<=25; ++b){
+        for(int b = a + 1; b<=25; ++b){
             numeros_para_analise[1] = b;
-            for(int c = b; c<=25; ++c){
+            for(int c = b + 1; c<=25; ++c){
                 numeros_para_analise[2] = c;
-                for(int d = c; d<=25; ++d){
+                for(int d = c + 1; d<=25; ++d){
                     numeros_para_analise[3] = d;
-                    for(int e = d; e<=25; ++e){
+                    for(int e = d + 1; e<=25; ++e){
                         numeros_para_analise[4] = e;
-                        for(int f = e; f<=25; ++f){
-                            numeros_para_analise[5] = f;
-                            for(int g = f; g<=25; ++g){
-                                numeros_para_analise[6] = g;
-                                std::vector <int> analise;
-                                for(int *i = std::begin(numeros_sorteados); i<std::end(numeros_sorteados); i+=15){
-                                    int contador = 0;
-                                    #pragma omp parallel for reduction(+ : contador)
-                                    for(int j=0; j<std::distance(std::begin(numeros_para_analise), std::end(numeros_para_analise)); ++j){
-                                        if(std::binary_search(i,(i+15),numeros_para_analise[j])){
-                                            ++contador;
-                                        }
+                        for(int f = e + 1; f<=25; ++f){
+                            numeros_para_analise[5] = f;                            
+                            std::vector <int> analise;
+                            for(int *i = std::begin(numeros_sorteados); i<std::end(numeros_sorteados); i+=15){
+                                int contador = 0;
+                                #pragma omp parallel for reduction(+ : contador)
+                                for(int j=0; j<std::distance(std::begin(numeros_para_analise), std::end(numeros_para_analise)); ++j){
+                                    if(std::binary_search(i,(i+15),numeros_para_analise[j])){
+                                        ++contador;
                                     }
-                                    analise.push_back(contador);
                                 }
-                                std::sort(analise.begin(), analise.end());
-                                for(int i=0; i<=std::distance(std::begin(numeros_para_analise),std::end(numeros_para_analise)); ++i){
-                                    int contador = 0;
-                                    for(int j : analise){
-                                        if(j == i){
-                                            ++contador;
-                                        }
-                                    }
-                                    resultados.push_back(contador);
-                                }
+                                analise.push_back(contador);
                             }
+                            std::sort(analise.begin(), analise.end());                            
+                            for(int i = 0; i<=std::distance(std::begin(numeros_para_analise), std::end(numeros_para_analise)); ++i){
+                                int contador_novo = 0;
+                                for( int j : analise){
+                                    if(i == j){
+                                        ++contador_novo;
+                                    } else {
+                                        if(j>i){
+                                            break;
+                                        }
+                                    }
+                                }
+                                std::cout << contador_novo << " ";
+                            }
+                            std::cout << std::endl;
                         }
                     }
                 }
             }
         }
-    }    
-    
-    for(int j=0; j<std::distance(std::begin(numeros_para_analise),std::end(numeros_para_analise)); ++j){
-        for(int i = 0; i<resultados.size(); i+=std::distance(std::begin(numeros_para_analise),std::end(numeros_para_analise))){
-            std::cout << resultados[i+j] << " ";
-        }
-        std::cout << std::endl;
-    }
+    } 
     
     return 0;
 }
