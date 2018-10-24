@@ -46,16 +46,12 @@ int main(int argc, char const *argv[])
                             int contador_novo = 0;
                             #pragma omp parallel for reduction(+ : contador_novo)
                             for( int j = 0; j<analise.size(); ++j){
-                                if(i == j){
+                                if(i == analise[j]){
                                     ++contador_novo;
                                 }
                             }
                             std::cout << contador_novo << " ";
-                        }
-                        std::cout << "* ";
-                        for(int i : numeros_para_analise){
-                            std::cout << i << " ";
-                        }
+                        }                        
                         std::cout << std::endl;                        
                     }
                 }
