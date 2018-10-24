@@ -51,7 +51,11 @@ int main(int argc, char const *argv[])
                                 }
                             }
                             std::cout << contador_novo << " ";
-                        }                        
+                        } 
+                        std::cout << " & ";
+                        for(int i : numeros_para_analise){
+                            std::cout << i << " ";
+                        }                  
                         std::cout << std::endl;                        
                     }
                 }
