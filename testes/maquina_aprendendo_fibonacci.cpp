@@ -20,7 +20,7 @@
 
 int main(int argc, char const *argv[])
 {
-    int numeros_para_analise[11]; /// verificar sempre a quantidade aqui
+    int numeros_para_analise[12]; /// verificar sempre a quantidade aqui
     std::vector <int> resultados;
     for(int a = 1; a<=25; ++a){
         numeros_para_analise[0] = a;
@@ -44,6 +44,8 @@ int main(int argc, char const *argv[])
                                             numeros_para_analise[9] = l;
                                             for(int m = l + 1; m<=25; ++m){
                                                 numeros_para_analise[10] = m;
+                                                for(int n = m + 1; n<=25; ++n){
+                                                    numeros_para_analise[11] = n;
 ///  *** 
 std::vector <int> analise;
 for(int *i = std::begin(numeros_sorteados); i<std::end(numeros_sorteados); i+=15){
@@ -68,6 +70,7 @@ std::cout << contador_novo << " ";
 }                
 std::cout << std::endl;
 /// ***
+                                                }
                                             }
                                         }
                                     }
