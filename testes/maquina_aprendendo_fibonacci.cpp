@@ -66,6 +66,7 @@ std::cout << contador_novo << " ";
 }                
 std::cout << std::endl;
 /// ***
+                                        }
                                     }
                                 }
                             }
