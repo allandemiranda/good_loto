@@ -3,12 +3,12 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "/usr/lib/gcc/x86_64-unknown-linux-gnu/8.2.0/include"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang",
             "cStandard": "c11",
-            "cppStandard": "c++17",
             "intelliSenseMode": "clang-x64"
         }
     ],

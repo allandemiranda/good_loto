@@ -1,5 +1,5 @@
 {
-    "C_Cpp.errorSquiggles": "Disabled",
+    "C_Cpp.errorSquiggles": "Enabled",
     "files.associations": {
         "*.tcc": "cpp",
         "cctype": "cpp",
@@ -50,5 +50,6 @@
         "iomanip": "cpp"
     },
     "doxdocgen.generic.authorTag": "@author Allan de Miranda Silva",
-    "doxdocgen.generic.dateFormat": "DD-MM-YYYY"
+    "doxdocgen.generic.dateFormat": "DD-MM-YYYY",
+    "C_Cpp.intelliSenseEngineFallback": "Enabled"
 }
