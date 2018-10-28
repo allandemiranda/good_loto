@@ -4,52 +4,128 @@
 #include "../analise/numeros_sorteados.h" // Para as regras funcionarem
 
 int main(void){
-    int jjj = 1727;
-    for(int *busca_um = std::end(numeros_sorteados)-15; busca_um>=std::begin(numeros_sorteados)+15; busca_um-=15){
-        std::cout << jjj << std::endl;
-        int vetor[9];
-        for(int * _a = busca_um; _a<=busca_um+15; ++_a){
-            vetor[0] = *_a;
-            for(int * _b = _a+1; _b<=busca_um+15; ++_b){
-                vetor[1] = *_b;
-                for(int * _c = _b+1; _c<=busca_um+15; ++_c){
-                    vetor[2] = *_c;
-                    for(int * _d = _c+1; _d<=busca_um+15; ++_d){
-                        vetor[3] = *_d;
-                        for(int * _e = _d+1; _e<=busca_um+15; ++_e){
-                            vetor[4] = *_e;
-                            for(int * _f = _e+1; _f<=busca_um+15; ++_f){
-                                vetor[5] = *_f;
-                                for(int * _g = _f+1; _g<=busca_um+15; ++_g){
-                                    vetor[6] = *_g;
-                                    for(int * _h = _g+1; _h<=busca_um+15; ++_h){
-                                        vetor[7] = *_h;
-                                        for(int * _i = _h+1; _i<=busca_um+15; ++_i){
-                                            vetor[8] = *_i;
-                                            
-                                                for(int * busca_dois = std::begin(numeros_sorteados); busca_dois<busca_um; busca_dois+=15){
-                                                    int contador = 0;
-                                                    #pragma omp parallel for reduction(+ : contador)
-                                                    for(int busca_tres=0; busca_tres<std::distance(std::begin(vetor),std::end(vetor)); ++busca_tres){
-                                                        if(std::binary_search(busca_dois, busca_dois+15, vetor[busca_tres])){
-                                                            ++contador;
+    int quantidade_de_jogos = (std::distance(std::begin(numeros_sorteados),std::end(numeros_sorteados))/15);
+    for(int i=1; i<quantidade_de_jogos; ++i){
+        int jogo[15];
+        #pragma omp parallel for
+        for(int j=0; j<15; ++j){
+            jogo[j] = numeros_sorteados[(i*15)+j];
+        }
+        std::sort(std::begin(jogo), std::end(jogo));
+        int jogo_analise[15];
+        bool flag = false;
+        for(int a=0; a<15; ++a){
+            jogo_analise[0] = jogo[a];
+            for(int b=a+1; b<15; ++b){
+                jogo_analise[1] = jogo[b];
+                for(int c=b+1; c<15; ++c){
+                    jogo_analise[2] = jogo[c];
+                    for(int d=c+1; d<15; ++d){
+                        jogo_analise[3] = jogo[d];
+                        for(int e=d+1; e<15; ++e){
+                            jogo_analise[4] = jogo[e];
+                            for(int f=e+1; f<15; ++f){
+                                jogo_analise[5] = jogo[f];
+                                for(int g=f+1; g<15; ++g){
+                                    jogo_analise[6] = jogo[g];
+                                    for(int h=g+1; h<15; ++h){
+                                        jogo_analise[7] = jogo[h];
+                                        for(int j=h+1; j<15; ++j){
+                                            jogo_analise[8] = jogo[j];
+                                            for(int k=j+1; k<15; ++k){
+                                                jogo_analise[9] = jogo[k];
+                                                for(int l=k+1; l<15; ++l){
+                                                    jogo_analise[10] = jogo[l];
+                                                    for(int m=l+1; m<15; ++m){
+                                                        jogo_analise[11] = jogo[m];
+                                                        for(int n=m+1; n<15; ++n){
+                                                            jogo_analise[12] = jogo[n];
+                                                            for(int o=n+1; o<15; ++o){
+                                                                jogo_analise[13] = jogo[o];
+                                                                for(int p=o+1; p<15; ++p){
+                                                                    jogo_analise[14] = jogo[p];
+                                                                    for(int ii=0; ii<i; ++ii){
+                                                                        int contador = 0;
+                                                                        int temp[15];
+                                                                        #pragma omp parallel for
+                                                                        for(int kk=0; kk<15; ++kk){
+                                                                            temp[kk]=numeros_sorteados[(ii*15)+kk];
+                                                                        }
+                                                                        std::sort(std::begin(temp),std::end(temp));
+                                                                        #pragma omp parallel for reduction(+ : contador)
+                                                                        for(int jj=0; jj<std::distance(std::begin(jogo_analise),std::end(jogo_analise)); ++jj){                                                        
+                                                                            if(std::binary_search(std::begin(temp),std::end(temp),jogo_analise[jj])){
+                                                                                ++contador;
+                                                                            }
+                                                                        }
+                                                                        if(contador == std::distance(std::begin(jogo_analise),std::end(jogo_analise))){
+                                                                            std::cout << "Jogo " << i+1 << " tem " << std::distance(std::begin(jogo_analise),std::end(jogo_analise)) << " números que já saiu" << std::endl;
+                                                                            flag = true;
+                                                                            break;
+                                                                        }
+                                                                    }
+                                                                    if(flag){
+                                                                        break;
+                                                                    }
+                                                                }
+                                                                if(flag){
+                                                                    break;
+                                                                }
+                                                            }
+                                                            if(flag){
+                                                                break;
+                                                            }
+                                                        }
+                                                        if(flag){
+                                                            break;
                                                         }
                                                     }
-                                                    if(contador == std::distance(std::begin(vetor),std::end(vetor))){
-                                                        std::cout << "No " << jjj << " Existe " << contador << " numros que foi sorteado e saiu antes" << std::endl;
+                                                    if(flag){
                                                         break;
                                                     }
-                                                }                                              
-                                            
+                                                }
+                                                if(flag){
+                                                    break;
+                                                }
+                                            }
+                                            if(flag){
+                                                break;
+                                            }
+                                        }
+                                        if(flag){
+                                            break;
                                         }
                                     }
+                                    if(flag){
+                                        break;
+                                    }
+                                }
+                                if(flag){
+                                    break;
                                 }
                             }
+                            if(flag){
+                                break;
+                            }
+                        }
+                        if(flag){
+                            break;
                         }
                     }
+                    if(flag){
+                        break;
+                    }
+                }
+                if(flag){
+                    break;
                 }
             }
+            if(flag){
+                break;
+            }
         }
-        jjj--;
+        if(!flag){
+            std::cout << "Jogo " << i+1 << " OK" << std::endl;
+        }
     }
 }
