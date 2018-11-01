@@ -92,3 +92,11 @@ combinacoes::combinacoes(std::vector <unsigned short int> volante, unsigned long
         }        
     }
 }
+
+unsigned long int combinacoes::quantidade(void){
+    return todas_combinacoes.size();
+}
+
+std::vector <unsigned short int> combinacoes::combinacao(unsigned short int posicao){
+    return todas_combinacoes[posicao];
+}
