@@ -19,11 +19,10 @@ class combinacoes
     private:
         std::vector <unsigned short int> volante;
         unsigned short int tamanho_do_jogo = 0;
-
-        //std::vector <std::vector <unsigned short int>> todas_combinacoes;
+        
+        std::vector <std::vector <unsigned short int>> todas_combinacoes;
     public:
-    std::vector <std::vector <unsigned short int>> todas_combinacoes;
-        combinacoes(std::vector <unsigned short int>, unsigned long int);
+        combinacoes(std::vector <unsigned short int>, unsigned short int);
         unsigned long int quantidade(void);
         std::vector <unsigned short int> combinacao(unsigned short int);
 };
