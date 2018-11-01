@@ -30,7 +30,9 @@ private:
     std::vector <unsigned short int> fibonacci; // Quantidade de números de Fibonacci
     std::vector <unsigned short int> dezenas_repetidas; // Quantidade de dezenas repetidas do concurso anterior
     bool adicionar_regras(std::vector <unsigned short int>, loteria);
-    std::vector <unsigned short int> gerador_de_regras(void);
+    std::vector <unsigned short int> gerador_de_regras(loteria);
+    
+    void analise_da_soma(float, loteria);
 public:
     regras(loteria, std::string);
     bool adiconar_nova_soma(unsigned short int, loteria);
