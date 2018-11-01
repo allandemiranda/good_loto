@@ -14,9 +14,9 @@
 #include <fstream>
 #include <stdexcept>
 
-#include "../include/loteria.h"
+#include "../include/loteria.h" // < ------ retirar isso depois
 
-#include "../include/combinacoes.h"
+#include "../include/combinacoes.h" // < ------ retirar isso depois
 
 loteria::loteria(std::string file_name){
     std::vector <float> vetor;
@@ -76,13 +76,14 @@ bool loteria::gerar_modalidade(std::vector <float> vetor_modalidade, std::string
         }
     }
 
+    // adicionar o vetor de combinações possíveis
+
     combinacoes nova_combinacao(numeros_do_volante, quantidade_numeros_jogados);
     for(auto i(1); i<=nova_combinacao.quantidade(); ++i){
         adicionar_jogo_possivel_ao_volante(nova_combinacao.combinacao(i));
     }
 
-
-// adicionar o vetor com jogos sorteados
+    // adicionar o vetor com jogos sorteados
 
     std::vector <unsigned short int> vetor;
     std::string route = "../data/jogos_sorteados_"; 

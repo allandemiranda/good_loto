@@ -12,7 +12,7 @@
 #include <stdexcept>
 #include <vector>
 
-#include "../include/combinacoes.h"
+#include "../include/combinacoes.h" // < ------ retirar isso depois
 
 combinacoes::combinacoes(std::vector <unsigned short int> volante, unsigned long int tamanho_do_jogo){
     if((volante.size() == 0) or (tamanho_do_jogo == 0) or (tamanho_do_jogo > volante.size())){
