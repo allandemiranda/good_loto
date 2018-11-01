@@ -16,6 +16,8 @@
 
 #include "../include/loteria.h"
 
+#include "../include/combinacoes.h"
+
 loteria::loteria(std::string file_name){
     std::vector <float> vetor;
     std::string route = "../data/modalidade_"; 
@@ -68,17 +70,49 @@ bool loteria::gerar_modalidade(std::vector <float> vetor_modalidade, std::string
             }
         }
         if(!indicador){
-            return false;;
+            return false;
         } else {
             ++numero_da_regra;
         }
     }
 
-// adicionar os jogos possiveis
+    combinacoes nova_combinacao(numeros_do_volante, quantidade_numeros_jogados);
+    for(auto i(1); i<=nova_combinacao.quantidade(); ++i){
+        adicionar_jogo_possivel_ao_volante(nova_combinacao.combinacao(i));
+    }
+
 
 // adicionar o vetor com jogos sorteados
 
-// ----> agora termianr o gerador de regras
+    std::vector <unsigned short int> vetor;
+    std::string route = "../data/jogos_sorteados_"; 
+        route = route + file_name; 
+        route = route + ".txt"; 
+    route = route + file_name; 
+    std::ifstream teste(route);
+    unsigned short int valuer_test;
+    if(!teste.good()){
+        throw std::runtime_error( "Erro ao ler arquivo de jogos sorteados" );
+    }
+    while( teste >> valuer_test ){
+        if(valuer_test < 0){
+            throw std::runtime_error( "Erro ao ler arquivo de jogos sorteados" );
+        }
+    }
+    teste.close();
+    std::ifstream ifs(route);
+    unsigned short int valuer;
+    while( ifs >> valuer ){
+        vetor.push_back(valuer);
+    }
+    ifs.close();
+    for(auto i(0); i<(vetor.size()/quantidade_numeros_sorteados); ++i){
+        std::vector <unsigned short int> temp_sorteado_now;
+        for(auto j(0); j<quantidade_numeros_sorteados; ++j){
+            temp_sorteado_now.push_back(vetor[(i*quantidade_numeros_sorteados)+j]);
+        }
+        jogos_sorteados.push_back(temp_sorteado_now);
+    }
 
     return true;
 }

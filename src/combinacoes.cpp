@@ -98,5 +98,10 @@ unsigned long int combinacoes::quantidade(void){
 }
 
 std::vector <unsigned short int> combinacoes::combinacao(unsigned short int posicao){
-    return todas_combinacoes[posicao];
+    if(posicao<1){
+        throw std::runtime_error( "Erro ao acessar combinações" );
+    } else {
+        --posicao;
+        return todas_combinacoes[posicao];
+    }
 }
