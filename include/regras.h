@@ -33,6 +33,11 @@ private:
     std::vector <unsigned short int> gerador_de_regras(loteria);
     
     void analise_da_soma(float, loteria);
+    void analise_do_pares_impares(float, loteria);
+    void analise_da_sequencia(float, loteria);
+    void analise_do_multiplo_3(float, loteria);
+    void analise_do_fibonacci(float, loteria);
+    void analise_da_dezena_repetida(float, loteria);
 public:
     regras(loteria, std::string);
     bool adiconar_nova_soma(unsigned short int, loteria);
