@@ -1,0 +1,21 @@
+{
+    "files.associations": {
+        "vector": "cpp",
+        "stdexcept": "cpp"
+    },
+    "files.encoding": "utf8",
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true
+    },
+    "doxdocgen.file.versionTag": "@version 1.0",
+    "doxdocgen.generic.authorEmail": "allandemrianda@gmail.com",
+    "doxdocgen.generic.authorName": "Allan de Miranda Silva",
+    "doxdocgen.generic.dateFormat": "DD-MM-YYYY",
+    "clang.cxxflags": ["-fopenmp"],
+    "C_Cpp.default.includePath": ["./include/*.h"],
+    "C_Cpp.default.cppStandard": "c++17"
+}
