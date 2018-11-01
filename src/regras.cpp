@@ -58,17 +58,22 @@ std::vector <unsigned short int> regras::gerador_de_regras(loteria modalidade){
     analise_da_soma(delimitador, modalidade);
 
     // regra pares e impares
+    analise_do_pares_impares(delimitador, modalidade);
 
     // regra sequencia
+    analise_da_sequencia(delimitador, modalidade);
 
     // regra primo
+    analise_do_primo(delimitador, modalidade);
 
     // regra múltiplo 3
+    analise_do_multiplo_3(delimitador, modalidade);
 
     // regra fibonacci
+    analise_do_fibonacci(delimitador, modalidade);
 
     // regra dezena repetida  
-
+    analise_da_dezena_repetida(delimitador, modalidade);
 
 }
 
