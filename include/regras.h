@@ -46,22 +46,31 @@ public:
 };
 
 regras::regras(loteria volante, std::string file_name = NULL){
-    if(file_name.size() == 0){
+    if(file_name.size() != NULL){
         /// escrever aqui o gerador de regras altomático
     } else {
         std::vector <unsigned short int> vetor;
-        std::string route = "../data/"; 
+        std::string route = "../data/regras_"; 
         route = route + file_name; 
-        std::ifstream ifs(route); 
-        if(!ifs.good()){
+        route = route + ".txt";
+        std::ifstream teste(route);
+        long long valuer_test;
+        if(!teste.good()){
             throw std::runtime_error( "Erro ao ler arquivo de regras" );
         }
+        while( teste >> valuer_test ){
+            if(valuer_test < 0){
+                throw std::runtime_error( "Erro ao ler arquivo de regras" );
+            }
+        }
+        teste.close();
+        std::ifstream ifs(route);
         unsigned long int valuer;
         while( ifs >> valuer ){
             vetor.push_back(valuer);
         }
         ifs.close();
-        if(!regras::adicionar_regras(vetor, volante)){
+        if(!adicionar_regras(vetor, volante)){
             throw std::runtime_error( "Erro ao adicionar regras" );
         }
     }
@@ -72,35 +81,41 @@ bool regras::adicionar_regras(std::vector <unsigned short int> lista_regras, lot
         return false;
     }
     auto quantidade_num(lista_regras[0]);
-    auto numero_da_regra(1);
+    unsigned short int numero_da_regra(1);
     for(auto i(1); i<lista_regras.size(); ++i){
         if(quantidade_num!=0){
-            bool indicador = false;
+            bool indicador(false);
             if(numero_da_regra == 1){
                 indicador = adiconar_nova_soma(lista_regras[i], volante);                
-            }
-            if(numero_da_regra == 2){
-                if((i+1) == lista_regras.size()){
-                    return false;
+            } else {
+                if(numero_da_regra == 2){
+                    if((i+1) == lista_regras.size()){
+                        return false;
+                    }
+                    indicador = adiconar_novo_pares_impares(lista_regras[i], lista_regras[i+1], volante);
+                    --quantidade_num;
+                    ++i;                
+                } else {
+                    if(numero_da_regra == 3){
+                        indicador = adiconar_nova_sequencia(lista_regras[i], volante);                
+                    } else {
+                        if(numero_da_regra == 4){
+                            indicador = adiconar_novo_primo(lista_regras[i], volante);                
+                        } else {
+                            if(numero_da_regra == 5){
+                                indicador = adiconar_novo_multiplo_3(lista_regras[i], volante);                
+                            } else {
+                                if(numero_da_regra == 6){
+                                    indicador = adiconar_novo_fibonacci(lista_regras[i], volante);                
+                                } else {
+                                    if(numero_da_regra == 7){
+                                        indicador = adiconar_nova_dezena_repetida(lista_regras[i], volante);                
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-                indicador = adiconar_novo_pares_impares(lista_regras[i], lista_regras[i+1], volante);
-                --quantidade_num;
-                ++i;                
-            }
-            if(numero_da_regra == 3){
-                indicador = adiconar_nova_sequencia(lista_regras[i], volante);                
-            }
-            if(numero_da_regra == 4){
-                indicador = adiconar_novo_primo(lista_regras[i], volante);                
-            }
-            if(numero_da_regra == 5){
-                indicador = adiconar_novo_multiplo_3(lista_regras[i], volante);                
-            }
-            if(numero_da_regra == 6){
-                indicador = adiconar_novo_fibonacci(lista_regras[i], volante);                
-            }
-            if(numero_da_regra == 7){
-                indicador = adiconar_nova_dezena_repetida(lista_regras[i], volante);                
             }
             if(!indicador){
                 return false;;

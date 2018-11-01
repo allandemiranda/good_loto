@@ -10,38 +10,137 @@
  */
 
 #include <vector>
+#include <string>
+#include <fstream>
 #include <stdexcept>
 
 #include "../include/loteria.h"
 
-unsigned long long int loteria::criar_volante(unsigned short int numero_inicial, unsigned short int numero_final){
-    // pegar numero inicial e adicionar ele ao volante até chegar o número final inclusive
-    numeros_do_volante.clear();
-    unsigned long long int contador(0);
-    for(unsigned short int numero = numero_inicial; numero_inicial<=numero_final; ++numero){
-        numeros_do_volante.push_back(numero);
-        ++contador;
+loteria::loteria(std::string file_name){
+    std::vector <float> vetor;
+    std::string route = "../data/modalidade_"; 
+        route = route + file_name; 
+        route = route + ".txt"; 
+    route = route + file_name; 
+    std::ifstream teste(route);
+    float valuer_test;
+    if(!teste.good()){
+        throw std::runtime_error( "Erro ao ler arquivo de modalidade" );
     }
-    return contador; // retornar quantidade de números adicionados ao volante
-}
-
-void loteria::editar_quantidade_numeros_jogados(unsigned short int quantidade){
-    quantidade_numeros_jogados = quantidade;
-    if(quantidade_numeros_sorteados == 0){
-        editar_quantidade_numeros_sorteados(quantidade);
+    while( teste >> valuer_test ){
+        if(valuer_test < 0){
+            throw std::runtime_error( "Erro ao ler arquivo de modalidade" );
+        }
+    }
+    teste.close();
+    std::ifstream ifs(route);
+    float valuer;
+    while( ifs >> valuer ){
+        vetor.push_back(valuer);
+    }
+    ifs.close();
+    if(!gerar_modalidade(vetor, file_name)){
+        throw std::runtime_error( "Erro ao adicionar modalidade" );
     }
 }
 
-void loteria::editar_quantidade_numeros_sorteados(unsigned short int quantidade){
-    quantidade_numeros_sorteados = quantidade;
+bool loteria::gerar_modalidade(std::vector <float> vetor_modalidade, std::string file_name){
+    if(vetor_modalidade.size() != 5){
+        return false;
+    }
+    unsigned short int numero_da_regra(1);
+    for(auto i(0); i<vetor_modalidade.size(); ++i){
+        bool indicador(false);
+        if(numero_da_regra == 1){
+            indicador = criar_volante((unsigned short int)vetor_modalidade[i], (unsigned short int)vetor_modalidade[i+1]);
+            ++i;
+        } else {
+            if(numero_da_regra == 2){
+                indicador = editar_quantidade_numeros_jogados((unsigned short int)vetor_modalidade[i]);
+            } else {
+                if(numero_da_regra == 3){
+                    indicador = editar_quantidade_numeros_sorteados((unsigned short int)vetor_modalidade[i]);
+                } else {
+                    if(numero_da_regra == 4){
+                        indicador = editar_valor_da_aposta((unsigned short int)vetor_modalidade[i]);
+                    }
+                }
+            }
+        }
+        if(!indicador){
+            return false;;
+        } else {
+            ++numero_da_regra;
+        }
+    }
+
+// adicionar os jogos possiveis
+
+// adicionar o vetor com jogos sorteados
+
+// ----> agora termianr o gerador de regras
+
+    return true;
 }
 
-void loteria::editar_valor_da_aposta(float money){
-    valor_da_aposta = money;
+bool loteria::criar_volante(unsigned short int numero_inicial, unsigned short int numero_final){
+    if(numero_final <= numero_inicial){
+        return false;
+    } else {
+        numeros_do_volante.clear();
+        for(unsigned short int numero = numero_inicial; numero_inicial<=numero_final; ++numero){
+            numeros_do_volante.push_back(numero);
+        }
+        return true;
+    }
+}
+
+bool loteria::editar_quantidade_numeros_jogados(unsigned short int quantidade){
+    if(quantidade == 0){
+        return false;
+    } else {
+        if(numeros_do_volante.size() == 0){
+            throw std::runtime_error( "Necessário configurar o volante antes" );
+        } else {
+            if(quantidade > numeros_do_volante.size()){
+                return false;
+            } else {
+                quantidade_numeros_jogados = quantidade;
+                if(quantidade_numeros_sorteados == 0){
+                    editar_quantidade_numeros_sorteados(quantidade);
+                    return true;
+                } else {
+                    return true;
+                }
+            }
+        }
+    }
+}
+
+bool loteria::editar_quantidade_numeros_sorteados(unsigned short int quantidade){ 
+    if(quantidade == 0){
+        return false;
+    } else {
+        quantidade_numeros_sorteados = quantidade;
+        return true;
+    }
+}
+
+bool loteria::editar_valor_da_aposta(float money){
+    if(money < 0){
+        return false;
+    } else {
+        valor_da_aposta = money;
+        return true;
+    }
 }
 
 void loteria::adicionar_jogo_possivel_ao_volante(std::vector <unsigned short int> novo_jogo){
-    jogos_totais_do_volante.push_back(novo_jogo);
+    if(novo_jogo.size() != quantidade_numeros_jogados){
+        throw std::runtime_error( "Erro ao adicionar novo jogo possivel" );
+    } else {
+        jogos_totais_do_volante.push_back(novo_jogo);
+    }
 }
 
 unsigned short int loteria::verificar_quantidade_numeros_sorteados(void){

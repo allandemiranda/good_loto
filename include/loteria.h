@@ -12,6 +12,7 @@
 #define _LOTERIA_H_
 
 #include <vector>
+#include <string>
 
 /**
  * @brief Aqui ficarão dados necessarios para as loterias
@@ -26,12 +27,14 @@ private:
     float valor_da_aposta = 0; // Valor por uma aposta simples
     std::vector <std::vector <unsigned short int>> jogos_totais_do_volante; // Todos os jogos possiveis de sair no volante
     std::vector <std::vector <unsigned short int>> jogos_sorteados; // Todos os jogos já sorteados
+    bool gerar_modalidade(std::vector <float>, std::string);
 
 public:
-    unsigned long long int criar_volante(unsigned short int,unsigned short int); // Criar novo volante
-    void editar_quantidade_numeros_jogados(unsigned short int); // Adicionar quantidade de números que podem ser marcados no volante
-    void editar_quantidade_numeros_sorteados(unsigned short int); // Adicionar quantidade de números do volante que é sorteado
-    void editar_valor_da_aposta(float); // Valor em Reias de cada aposta simples
+    loteria(std::string);
+    bool criar_volante(unsigned short int,unsigned short int); // Criar novo volante
+    bool editar_quantidade_numeros_jogados(unsigned short int); // Adicionar quantidade de números que podem ser marcados no volante
+    bool editar_quantidade_numeros_sorteados(unsigned short int); // Adicionar quantidade de números do volante que é sorteado
+    bool editar_valor_da_aposta(float); // Valor em Reias de cada aposta simples
     void adicionar_jogo_possivel_ao_volante(std::vector <unsigned short int>); // Para adicionar novo jogo a lista de jogos possiveis de sair
     unsigned short int verificar_quantidade_numeros_sorteados(void);
     unsigned short int verificar_quantidade_numeros_jogados(void);
