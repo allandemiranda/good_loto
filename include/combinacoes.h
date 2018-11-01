@@ -16,10 +16,7 @@
 
 class combinacoes
 {
-    private:
-        std::vector <unsigned short int> volante;
-        unsigned short int tamanho_do_jogo = 0;
-        
+    private:       
         std::vector <std::vector <unsigned short int>> todas_combinacoes;
     public:
         combinacoes(std::vector <unsigned short int>, unsigned short int);
