@@ -16,6 +16,8 @@
 #include <array>
 #include <string>
 
+#include "../include/loteria.h"
+
 class regras
 {
 private:

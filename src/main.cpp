@@ -15,8 +15,8 @@
 
 //#include <omp.h> // sistemas paralelos -fopenmp
 
-#include "../include/loteria.h"
 #include "../include/combinacoes.h"
+#include "../include/loteria.h"
 #include "../include/regras.h"
 #include "../include/verificador.h"
 
@@ -33,13 +33,14 @@ int main(int argc, char const *argv[])
 
     // desenvolvimento das funções 
     loteria modalidade(nome_da_modalidade);
-    regras novas_regras(modalidade);
+    regras novas_regras(modalidade,"");
     verificador novo_verificador(modalidade, novas_regras);
 
     std::cout << "Criando arquivo com os jogos possiveis" << std::endl;
     std::ofstream outFile ("../data/jogos_certos_"+nome_da_modalidade, std::ios::app);
-    for(auto i(0); i<novo_verificador.retornar_jogos_certos().size(); ++i){
-        for(auto j : novo_verificador.retornar_jogos_certos()[i]){
+    std::vector<std::vector <unsigned short int>> jogo_final = novo_verificador.retornar_jogos_certos();
+    for(auto i(0); i<jogo_final.size(); ++i){
+        for(auto j : jogo_final[i]){
             outFile << j << " ";
         }
         outFile << std::endl;

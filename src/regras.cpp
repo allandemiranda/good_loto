@@ -18,6 +18,7 @@
 #include <iostream>
 #include <omp.h>
 
+#include "../include/loteria.h"
 #include "../include/regras.h"
 
 regras::regras(loteria volante, std::string file_name = ""){
@@ -291,13 +292,13 @@ void regras::analise_do_multiplo_3(float delimitador, loteria modalidade){
 
 void regras::analise_do_primo(float delimitador, loteria modalidade){
     std::vector <unsigned short int> numeros_primos;
-    for(auto i : modalidade.veriticar_numeros_do_volante){
+    for(auto i : modalidade.veriticar_numeros_do_volante()){
         if(i == 1){
             continue;
         }
         bool existe_divisor = false;
         #pragma omp parallel for
-        for(auto j(2); j<i; ++j){
+        for(auto j=2; j<i; ++j){
             if((i%j)==0){
                 existe_divisor = true;
                 #pragma omp cancel for 
@@ -380,17 +381,17 @@ void regras::analise_da_sequencia(float delimitador, loteria modalidade){
         for(auto j(1); j<modalidade.verificar_quantidade_numeros_sorteados(); ++j){
             if(!esta_na_sequencia){
                 std::vector <unsigned short int> temp = modalidade.veriticar_numeros_do_volante();
-                auto posicao_um(0);                
+                auto posicao_um = 0;                
                 #pragma omp parallel for
-                for(auto k(0); k<modalidade.veriticar_numeros_do_volante().size(); ++k){
+                for(auto k=0; k<modalidade.veriticar_numeros_do_volante().size(); ++k){
                     if(modalidade.veriticar_jogo_sorteado(i)[j-1] == temp[k]){
                         posicao_um = k;                        
                         #pragma omp cancel for 
                     }                    
                 }
-                auto posicao_dois(0);
+                auto posicao_dois = 0;
                 #pragma omp parallel for
-                for(auto k(0); k<modalidade.veriticar_numeros_do_volante().size(); ++k){
+                for(auto k = 0; k<modalidade.veriticar_numeros_do_volante().size(); ++k){
                     if(modalidade.veriticar_jogo_sorteado(i)[j-1] == temp[k]){
                         posicao_dois = k;                        
                         #pragma omp cancel for 
@@ -405,17 +406,17 @@ void regras::analise_da_sequencia(float delimitador, loteria modalidade){
                 }
             } else {
                 std::vector <unsigned short int> temp = modalidade.veriticar_numeros_do_volante();
-                auto posicao_um(0);                
+                auto posicao_um = 0;                
                 #pragma omp parallel for
-                for(auto k(0); k<modalidade.veriticar_numeros_do_volante().size(); ++k){
+                for(auto k = 0; k<modalidade.veriticar_numeros_do_volante().size(); ++k){
                     if(modalidade.veriticar_jogo_sorteado(i)[j-1] == temp[k]){
                         posicao_um = k;                        
                         #pragma omp cancel for 
                     }                    
                 }
-                auto posicao_dois(0);
+                auto posicao_dois = 0;
                 #pragma omp parallel for
-                for(auto k(0); k<modalidade.veriticar_numeros_do_volante().size(); ++k){
+                for(auto k = 0; k<modalidade.veriticar_numeros_do_volante().size(); ++k){
                     if(modalidade.veriticar_jogo_sorteado(i)[j-1] == temp[k]){
                         posicao_dois = k;                        
                         #pragma omp cancel for 

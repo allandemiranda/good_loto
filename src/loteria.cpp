@@ -15,6 +15,7 @@
 #include <stdexcept>
 
 #include "../include/loteria.h"
+#include "../include/combinacoes.h"
 
 loteria::loteria(std::string file_name){
     std::vector <float> vetor;
