@@ -16,10 +16,9 @@
 #include <fstream>
 #include <stdexcept>
 #include <iostream>
-
 #include <omp.h>
 
-#include "../include/regras.h" // < ------ retirar isso depois
+#include "../include/regras.h"
 
 regras::regras(loteria volante, std::string file_name = ""){
     if(file_name.size() == 0){
@@ -761,4 +760,32 @@ bool regras::adiconar_nova_dezena_repetida(unsigned short int quantidade, loteri
     dezenas_repetidas.push_back(quantidade);
     std::sort(dezenas_repetidas.begin(), dezenas_repetidas.end());
     return true;
+}
+
+std::vector <unsigned long int> regras::v_analisar_soma(void){
+    return soma;
+}
+
+std::vector <std::array<unsigned short int, 2>> regras::v_analisar_pares_impares(void){
+    return pares_impares;
+}
+
+std::vector <unsigned short int> regras::v_analisar_sequencia(void){
+    return sequencia;
+}
+
+std::vector <unsigned short int> regras::v_analisar_primos(void){
+    return primos;
+}
+
+std::vector <unsigned short int> regras::v_analisar_multiplos_3(void){
+    return multiplos_3;
+}
+
+std::vector <unsigned short int> regras::v_analisar_fibonacci(void){
+    return fibonacci;
+}
+
+std::vector <unsigned short int> regras::v_analisar_dezenas_repetidas(void){
+    return dezenas_repetidas;
 }

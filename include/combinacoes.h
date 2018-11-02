@@ -19,7 +19,7 @@ class combinacoes
     private:       
         std::vector <std::vector <unsigned short int>> todas_combinacoes;
     public:
-        combinacoes(std::vector <unsigned short int>, unsigned short int);
+        combinacoes(std::vector <unsigned short int>, unsigned long int);
         unsigned long int quantidade(void);
         std::vector <unsigned short int> combinacao(unsigned short int);
 };

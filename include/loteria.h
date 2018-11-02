@@ -45,6 +45,7 @@ public:
     unsigned long long int verificar_quantidade_jogos_totais_sorteados(void);
     std::vector <unsigned short int> veriticar_jogo_sorteado(unsigned long long int); // Lembrar que inicia em 1 (não em zero)
     void adicionar_jogo_sorteado(std::vector <unsigned short int>);
+    std::vector <std::vector <unsigned short int>> verificar_o_jogos_totais_do_volante(void); // retorna tudo 
 };
 
 #endif

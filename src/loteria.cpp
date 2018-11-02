@@ -14,9 +14,7 @@
 #include <fstream>
 #include <stdexcept>
 
-#include "../include/loteria.h" // < ------ retirar isso depois
-
-#include "../include/combinacoes.h" // < ------ retirar isso depois
+#include "../include/loteria.h"
 
 loteria::loteria(std::string file_name){
     std::vector <float> vetor;
@@ -221,4 +219,8 @@ void loteria::adicionar_jogo_sorteado(std::vector <unsigned short int> jogo_sort
     } else {
         jogos_sorteados.push_back(jogo_sorteado);
     }
+}
+
+std::vector <std::vector <unsigned short int>> loteria::verificar_o_jogos_totais_do_volante(void){
+    return jogos_totais_do_volante;
 }

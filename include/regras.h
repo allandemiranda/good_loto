@@ -16,8 +16,6 @@
 #include <array>
 #include <string>
 
-#include "loteria.h" // <------ retirar isso depois
-
 class regras
 {
 private:
@@ -46,7 +44,15 @@ public:
     bool adiconar_novo_primo(unsigned short int, loteria);
     bool adiconar_novo_multiplo_3(unsigned short int, loteria);
     bool adiconar_novo_fibonacci(unsigned short int, loteria);
-    bool adiconar_nova_dezena_repetida(unsigned short int, loteria);    
+    bool adiconar_nova_dezena_repetida(unsigned short int, loteria);
+
+    std::vector <unsigned long int> v_analisar_soma(void); // Soma dos números sorteados
+    std::vector <std::array<unsigned short int, 2>> v_analisar_pares_impares(void); // Pares e impares sorteados [2]
+    std::vector <unsigned short int> v_analisar_sequencia(void); // Quantidade de números em sequencia
+    std::vector <unsigned short int> v_analisar_primos(void); // Quantidade de números primos
+    std::vector <unsigned short int> v_analisar_multiplos_3(void); // Quantidade de números múltiplos de 3
+    std::vector <unsigned short int> v_analisar_fibonacci(void); // Quantidade de números de Fibonacci
+    std::vector <unsigned short int> v_analisar_dezenas_repetidas(void); // Quantidade de dezenas repetidas do concurso anterior  
 };
 
 #endif

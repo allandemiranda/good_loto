@@ -10,6 +10,15 @@
  */
 
 #include <iostream>
+#include <string>
+#include <fstream>
+
+//#include <omp.h> // sistemas paralelos -fopenmp
+
+#include "../include/loteria.h"
+#include "../include/combinacoes.h"
+#include "../include/regras.h"
+#include "../include/verificador.h"
 
 int main(int argc, char const *argv[])
 {
@@ -17,11 +26,30 @@ int main(int argc, char const *argv[])
     std::cout << "Bem vindo ao gerador de jogos possíveis de sair" << std::endl;
     std::cout << "Selecione a modalidade:" << std::endl;
         /// Parte do menu para selecionar ainda não desenvolvida
+        std::string nome_da_modalidade = "lotofacil";
     std::cout << "Você celecionou a modalidade Lotofácil" << std::endl; // única configurada
     std::cout << "-------------------------------------------------------"  << std::endl;
     // FIM DO MENU
 
-    
+    // desenvolvimento das funções 
+    loteria modalidade(nome_da_modalidade);
+    regras novas_regras(modalidade);
+    verificador novo_verificador(modalidade, novas_regras);
+
+    std::cout << "Criando arquivo com os jogos possiveis" << std::endl;
+    std::ofstream outFile ("../data/jogos_certos_"+nome_da_modalidade, std::ios::app);
+    for(auto i(0); i<novo_verificador.retornar_jogos_certos().size(); ++i){
+        for(auto j : novo_verificador.retornar_jogos_certos()[i]){
+            outFile << j << " ";
+        }
+        outFile << std::endl;
+    }
+    outFile.close();
+    std::cout << "-----------------------------------" << std::endl;
+    std::cout << std::endl;
+    std::cout << "Boa sorte" << std::endl;
+
+
 
     return EXIT_SUCCESS;
 }
