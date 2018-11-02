@@ -13,6 +13,15 @@
 
 int main(int argc, char const *argv[])
 {
-    /* code */
+    // Menu
+    std::cout << "Bem vindo ao gerador de jogos possíveis de sair" << std::endl;
+    std::cout << "Selecione a modalidade:" << std::endl;
+        /// Parte do menu para selecionar ainda não desenvolvida
+    std::cout << "Você celecionou a modalidade Lotofácil" << std::endl; // única configurada
+    std::cout << "-------------------------------------------------------"  << std::endl;
+    // FIM DO MENU
+
+    
+
     return EXIT_SUCCESS;
 }

@@ -15,6 +15,7 @@
 #include <string>
 #include <fstream>
 #include <stdexcept>
+#include <iostream>
 
 #include <omp.h>
 
@@ -126,13 +127,20 @@ void regras::analise_da_dezena_repetida(float delimitador, loteria modalidade){
     for(auto i(0); i<distancia; ++i){
         nova_analise[i].porcentagem = (((nova_analise[i].quantidade)*100)/maior_quantidade);
     }
+    std::cout << "Criando regra das Dezenas Repetidas" << std::endl;
+    std::cout << "Valor   -    Quantidade    -    Incluido" << std::endl;
     for(auto i(0); i<distancia; ++i){
+        std::cout << nova_analise[i].valor << "  ->  " << nova_analise[i].quantidade << "  ->  ";
         if(nova_analise[i].porcentagem > delimitador){
+            std::cout << "SIM" << std::endl;
             if(!adiconar_nova_dezena_repetida(nova_analise[i].valor, modalidade)){
-                throw std::runtime_error( "Erro ao adicionar regra das dezenas repetidas" );
+                throw std::runtime_error( "Erro ao adicionar regra das dezenas repetidas" );                
             }
+        } else {
+            std::cout << "NÃO" << std::endl;
         }
     }
+    std::cout << "-------------------------------------------------------"  << std::endl;
 }
 
 void regras::analise_do_fibonacci(float delimitador, loteria modalidade){
@@ -194,14 +202,21 @@ void regras::analise_do_fibonacci(float delimitador, loteria modalidade){
     }
     for(auto i(0); i<distancia; ++i){
         nova_analise[i].porcentagem = (((nova_analise[i].quantidade)*100)/maior_quantidade);
-    }
+    }    
+    std::cout << "Criando regra dos Fibonacci" << std::endl;
+    std::cout << "Valor   -    Quantidade    -    Incluido" << std::endl;
     for(auto i(0); i<distancia; ++i){
+        std::cout << nova_analise[i].valor << "  ->  " << nova_analise[i].quantidade << "  ->  ";
         if(nova_analise[i].porcentagem > delimitador){
+            std::cout << "SIM" << std::endl;
             if(!adiconar_novo_fibonacci(nova_analise[i].valor, modalidade)){
                 throw std::runtime_error( "Erro ao adicionar regra dos números Fibonacci" );
             }
+        } else {
+            std::cout << "NÃO" << std::endl;
         }
     }
+    std::cout << "-------------------------------------------------------"  << std::endl;
 }
 
 void regras::analise_do_multiplo_3(float delimitador, loteria modalidade){
@@ -258,14 +273,21 @@ void regras::analise_do_multiplo_3(float delimitador, loteria modalidade){
     }
     for(auto i(0); i<distancia; ++i){
         nova_analise[i].porcentagem = (((nova_analise[i].quantidade)*100)/maior_quantidade);
-    }
+    }    
+    std::cout << "Criando regra dos Múltiplos de 3" << std::endl;
+    std::cout << "Valor   -    Quantidade    -    Incluido" << std::endl;
     for(auto i(0); i<distancia; ++i){
+        std::cout << nova_analise[i].valor << "  ->  " << nova_analise[i].quantidade << "  ->  ";
         if(nova_analise[i].porcentagem > delimitador){
-            if(!adiconar_novo_primo(nova_analise[i].valor, modalidade)){
-                throw std::runtime_error( "Erro ao adicionar regra dos números primos" );
+            std::cout << "SIM" << std::endl;
+            if(!adiconar_novo_multiplo_3(nova_analise[i].valor, modalidade)){
+                throw std::runtime_error( "Erro ao adicionar regra dos números múltiplos de 3" );
             }
+        } else {
+            std::cout << "NÃO" << std::endl;
         }
     }
+    std::cout << "-------------------------------------------------------"  << std::endl;
 }
 
 void regras::analise_do_primo(float delimitador, loteria modalidade){
@@ -333,14 +355,21 @@ void regras::analise_do_primo(float delimitador, loteria modalidade){
     }
     for(auto i(0); i<distancia; ++i){
         nova_analise[i].porcentagem = (((nova_analise[i].quantidade)*100)/maior_quantidade);
-    }
+    }    
+    std::cout << "Criando regra dos Números Primos" << std::endl;
+    std::cout << "Valor   -    Quantidade    -    Incluido" << std::endl;
     for(auto i(0); i<distancia; ++i){
+        std::cout << nova_analise[i].valor << "  ->  " << nova_analise[i].quantidade << "  ->  ";
         if(nova_analise[i].porcentagem > delimitador){
+            std::cout << "SIM" << std::endl;
             if(!adiconar_novo_primo(nova_analise[i].valor, modalidade)){
                 throw std::runtime_error( "Erro ao adicionar regra dos números primos" );
             }
+        } else {
+            std::cout << "NÃO" << std::endl;
         }
     }
+    std::cout << "-------------------------------------------------------"  << std::endl;
 }
 
 void regras::analise_da_sequencia(float delimitador, loteria modalidade){
@@ -445,14 +474,21 @@ void regras::analise_da_sequencia(float delimitador, loteria modalidade){
     }
     for(auto i(0); i<distancia; ++i){
         nova_analise[i].porcentagem = (((nova_analise[i].quantidade)*100)/maior_quantidade);
-    }
+    }    
+    std::cout << "Criando regra dos Números em Sequência" << std::endl;
+    std::cout << "Valor   -    Quantidade    -    Incluido" << std::endl;
     for(auto i(0); i<distancia; ++i){
+        std::cout << nova_analise[i].valor << "  ->  " << nova_analise[i].quantidade << "  ->  ";
         if(nova_analise[i].porcentagem > delimitador){
+            std::cout << "SIM" << std::endl;
             if(!adiconar_nova_sequencia(nova_analise[i].valor, modalidade)){
                 throw std::runtime_error( "Erro ao adicionar regra da números em sequência" );
             }
+        } else {
+            std::cout << "NÃO" << std::endl;
         }
     }
+    std::cout << "-------------------------------------------------------"  << std::endl;
 }
 
 void regras::analise_do_pares_impares(float delimitador, loteria modalidade){
@@ -504,14 +540,21 @@ void regras::analise_do_pares_impares(float delimitador, loteria modalidade){
     }
     for(auto i(0); i<distancia; ++i){
         nova_analise[i].porcentagem = (((nova_analise[i].quantidade)*100)/maior_quantidade);
-    }
+    }    
+    std::cout << "Criando regra dos Números Pares e Impares" << std::endl;
+    std::cout << "Valor Par - Valor Impar    -    Quantidade    -    Incluido" << std::endl;
     for(auto i(0); i<distancia; ++i){
+        std::cout << nova_analise[i].valor << "  ->  " << nova_analise[i].valor_impar << "  ->  " << nova_analise[i].quantidade << "  ->  ";
         if(nova_analise[i].porcentagem > delimitador){
+            std::cout << "SIM" << std::endl;
             if(!adiconar_novo_pares_impares(nova_analise[i].valor, nova_analise[i].valor_impar, modalidade)){
                 throw std::runtime_error( "Erro ao adicionar regra da pares e impares" );
             }
+        } else {
+            std::cout << "NÃO" << std::endl;
         }
     }
+    std::cout << "-------------------------------------------------------"  << std::endl;
 }
 
 void regras::analise_da_soma(float delimitador, loteria modalidade){
@@ -559,14 +602,21 @@ void regras::analise_da_soma(float delimitador, loteria modalidade){
     }
     for(auto i(0); i<distancia; ++i){
         nova_analise[i].porcentagem = (((nova_analise[i].quantidade)*100)/maior_quantidade);
-    }
+    }    
+    std::cout << "Criando regra da Soma" << std::endl;
+    std::cout << "Valor   -    Quantidade    -    Incluido" << std::endl;
     for(auto i(0); i<distancia; ++i){
+        std::cout << nova_analise[i].valor << "  ->  " << nova_analise[i].quantidade << "  ->  ";
         if(nova_analise[i].porcentagem > delimitador){
+            std::cout << "SIM" << std::endl;
             if(!adiconar_nova_soma(nova_analise[i].valor, modalidade)){
                 throw std::runtime_error( "Erro ao adicionar regra da soma" );
             }
+        } else {
+            std::cout << "NÃO" << std::endl;
         }
     }
+    std::cout << "-------------------------------------------------------"  << std::endl;
 }
 
 bool regras::adicionar_regras(std::vector <unsigned short int> lista_regras, loteria volante){
