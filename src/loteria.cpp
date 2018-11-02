@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2018
  * 
  */
-
+#include <iostream>
 #include <vector>
 #include <string>
 #include <fstream>
@@ -20,10 +20,10 @@
 loteria::loteria(std::string file_name){
     std::vector <float> vetor;
     std::string route = "../data/modalidade_"; 
-        route = route + file_name; 
-        route = route + ".txt"; 
     route = route + file_name; 
-    std::ifstream teste(route);
+    route = route + ".txt";  
+    std::ifstream teste;
+    teste.open(route);
     float valuer_test;
     if(!teste.good()){
         throw std::runtime_error( "Erro ao ler arquivo de modalidade" );
@@ -40,6 +40,7 @@ loteria::loteria(std::string file_name){
         vetor.push_back(valuer);
     }
     ifs.close();
+    std::cout << "Gerando modalidade" << std::endl;
     if(!gerar_modalidade(vetor, file_name)){
         throw std::runtime_error( "Erro ao adicionar modalidade" );
     }
@@ -76,19 +77,18 @@ bool loteria::gerar_modalidade(std::vector <float> vetor_modalidade, std::string
     }
 
     // adicionar o vetor de combinações possíveis
-
+    std::cout << "Gerando combinações" << std::endl;
     combinacoes nova_combinacao(numeros_do_volante, quantidade_numeros_jogados);
     for(auto i(1); i<=nova_combinacao.quantidade(); ++i){
         adicionar_jogo_possivel_ao_volante(nova_combinacao.combinacao(i));
     }
 
     // adicionar o vetor com jogos sorteados
-
+    std::cout << "Adicionando jogos sorteados" << std::endl;
     std::vector <unsigned short int> vetor;
     std::string route = "../data/jogos_sorteados_"; 
-        route = route + file_name; 
-        route = route + ".txt"; 
     route = route + file_name; 
+    route = route + ".txt";  
     std::ifstream teste(route);
     unsigned short int valuer_test;
     if(!teste.good()){
