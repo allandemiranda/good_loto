@@ -21,7 +21,7 @@ class combinacoes
     public:
         combinacoes(std::vector <unsigned short int>, unsigned long int);
         unsigned long int quantidade(void);
-        std::vector <unsigned short int> combinacao(unsigned short int);
+        std::vector <unsigned short int> combinacao(unsigned long int);
 };
 
 #endif

@@ -13,6 +13,7 @@
 #include <string>
 #include <fstream>
 #include <stdexcept>
+#include <algorithm>
 
 #include "../include/loteria.h"
 #include "../include/combinacoes.h"
@@ -54,17 +55,17 @@ bool loteria::gerar_modalidade(std::vector <float> vetor_modalidade, std::string
     for(auto i(0); i<vetor_modalidade.size(); ++i){
         bool indicador(false);
         if(numero_da_regra == 1){
-            indicador = criar_volante((unsigned short int)vetor_modalidade[i], (unsigned short int)vetor_modalidade[i+1]);
-            ++i;
+            indicador = criar_volante(vetor_modalidade[i], vetor_modalidade[i+1]);
+            ++i;            
         } else {
             if(numero_da_regra == 2){
-                indicador = editar_quantidade_numeros_jogados((unsigned short int)vetor_modalidade[i]);
+                indicador = editar_quantidade_numeros_jogados(vetor_modalidade[i]);
             } else {
                 if(numero_da_regra == 3){
-                    indicador = editar_quantidade_numeros_sorteados((unsigned short int)vetor_modalidade[i]);
+                    indicador = editar_quantidade_numeros_sorteados(vetor_modalidade[i]);
                 } else {
                     if(numero_da_regra == 4){
-                        indicador = editar_valor_da_aposta((unsigned short int)vetor_modalidade[i]);
+                        indicador = editar_valor_da_aposta(vetor_modalidade[i]);
                     }
                 }
             }
@@ -79,7 +80,7 @@ bool loteria::gerar_modalidade(std::vector <float> vetor_modalidade, std::string
     // adicionar o vetor de combinações possíveis
     std::cout << "Gerando combinações" << std::endl;
     combinacoes nova_combinacao(numeros_do_volante, quantidade_numeros_jogados);
-    for(auto i(1); i<=nova_combinacao.quantidade(); ++i){
+    for(auto i(1); i<=nova_combinacao.quantidade(); ++i){        
         adicionar_jogo_possivel_ao_volante(nova_combinacao.combinacao(i));
     }
 
@@ -111,6 +112,7 @@ bool loteria::gerar_modalidade(std::vector <float> vetor_modalidade, std::string
         for(auto j(0); j<quantidade_numeros_sorteados; ++j){
             temp_sorteado_now.push_back(vetor[(i*quantidade_numeros_sorteados)+j]);
         }
+        std::sort(temp_sorteado_now.begin(),temp_sorteado_now.end());
         jogos_sorteados.push_back(temp_sorteado_now);
     }
 
@@ -122,7 +124,7 @@ bool loteria::criar_volante(unsigned short int numero_inicial, unsigned short in
         return false;
     } else {
         numeros_do_volante.clear();
-        for(unsigned short int numero = numero_inicial; numero_inicial<=numero_final; ++numero){
+        for(auto numero = numero_inicial; numero<=numero_final; ++numero){
             numeros_do_volante.push_back(numero);
         }
         return true;

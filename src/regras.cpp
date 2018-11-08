@@ -83,8 +83,9 @@ void regras::analise_da_dezena_repetida(float delimitador, loteria modalidade){
     // como compara com o anterior, se inicia no segundo jogo
     for(auto i=2; i<=modalidade.verificar_quantidade_jogos_totais_sorteados(); ++i){
         unsigned long int num_repetida = 0;
-        #pragma omp parallel for reduction(+ : num_repetida)
+        //#pragma omp parallel for reduction(+ : num_repetida)
         for(auto j=0; j<modalidade.verificar_quantidade_numeros_sorteados(); ++j){
+            std::cout << modalidade.veriticar_jogo_sorteado(i)[j] << " ";
             if(std::binary_search(modalidade.veriticar_jogo_sorteado(i-1).begin(),modalidade.veriticar_jogo_sorteado(i-1).end(),modalidade.veriticar_jogo_sorteado(i)[j])){
                 #pragma omp critical
                 {   
@@ -566,7 +567,7 @@ void regras::analise_da_soma(float delimitador, loteria modalidade){
             #pragma omp critical
             {
                 soma += modalidade.veriticar_jogo_sorteado(i)[j];
-            }
+            }            
         }
         vetor_analise.push_back(soma);
     }
@@ -576,8 +577,8 @@ void regras::analise_da_soma(float delimitador, loteria modalidade){
         unsigned long int quantidade;
         float porcentagem;
     };    
-    auto menor_valor(vetor_analise.front());
-    auto maior_valor(vetor_analise.back());
+    auto menor_valor(vetor_analise.front()); std::cout << menor_valor << " ";
+    auto maior_valor(vetor_analise.back()); std::cout << maior_valor << std::endl;
     auto distancia = maior_valor - menor_valor;
     analise nova_analise[distancia];
     for(unsigned long int i = menor_valor, posicao = 0; i<=maior_valor; ++i, ++posicao){

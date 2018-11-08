@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2018
  * 
  */
-
+#include <iostream>
 #include <stdexcept>
 #include <vector>
 
@@ -19,7 +19,7 @@ combinacoes::combinacoes(std::vector <unsigned short int> volante, unsigned long
         throw std::runtime_error( "Erro ao tentar gerar combinações" );
     }  else {
         if(tamanho_do_jogo == volante.size()){
-            todas_combinacoes.push_back(volante);
+            todas_combinacoes.push_back(volante);            
         } else {
             std::vector <unsigned short int> temp;
 
@@ -97,7 +97,7 @@ unsigned long int combinacoes::quantidade(void){
     return todas_combinacoes.size();
 }
 
-std::vector <unsigned short int> combinacoes::combinacao(unsigned short int posicao){
+std::vector <unsigned short int> combinacoes::combinacao(unsigned long int posicao){
     if(posicao<1){
         throw std::runtime_error( "Erro ao acessar combinações" );
     } else {
