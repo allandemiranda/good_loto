@@ -9,6 +9,7 @@
  *
  */
 
+#include "Fibonacci.h"
 #include "Listadejogos.h"
 #include "ParesEimpares.h"
 
@@ -16,10 +17,22 @@
 
 int main(void) {
   Listadejogos novaLista("data/listadejogos.txt");
+
+  std::cout << "REGRA Quantidade de Pares" << std::endl;
   ParesEimpares regraUm(novaLista.jogos);
   for (int i = 0; i <= 6; ++i) {
-    std::cout << "Resultado para " << i << ": " << regraUm.getResultado(i) << " "
-              << regraUm.getResultadoPorcentagem(i) << "%" << std::endl;
+    std::cout << "Resultado para " << i << ": " << regraUm.getResultado(i)
+              << " " << regraUm.getResultadoPorcentagem(i) << "%" << std::endl;
+  }
+
+  std::cout << std::endl;
+
+  std::cout << "REGRA Quantidade de Fibonacci" << std::endl;
+  Fibonacci regraDois(novaLista.jogos);
+  for (int i = 0; i < 6; ++i) {
+    std::cout << "Resultado para " << i << ": " << regraDois.getResultado(i)
+              << " " << regraDois.getResultadoPorcentagem(i) << "%"
+              << std::endl;
   }
   return 0;
 }

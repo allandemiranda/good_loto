@@ -1,7 +1,7 @@
 /**
- * @file ParesEimpares.h
+ * @file Fibonacci.h
  * @author Allan de Miranda Silva (allandemiranda@gmail.com)
- * @brief Classe para controlar números pares e impares
+ * @brief
  * @version 0.1
  * @date 07-09-2019
  *
@@ -9,22 +9,23 @@
  *
  */
 
-#ifndef PARESEIMPARES_H_
-#define PARESEIMPARES_H_
+#ifndef FIBONACCI_H_
+#define FIBONACCI_H_
 
 #include <vector>
 
-class ParesEimpares {
+class Fibonacci {
  private:
   unsigned long quantidadeDeJogos;
-  bool sePar(unsigned long);
+  std::vector<unsigned int> numerosDeFibo = {1, 2, 3, 5, 8, 13, 21, 34, 55};
+  bool seFibo(unsigned long);
   long double cacularPorcentagem(unsigned long, unsigned long);
   std::vector<unsigned long> resultado;
 
  public:
   unsigned long getResultado(unsigned long);
   long double getResultadoPorcentagem(unsigned long);
-  ParesEimpares(std::vector<std::vector<unsigned long>>&);
+  Fibonacci(std::vector<std::vector<unsigned long>>&);
 };
 
 #endif
