@@ -15,6 +15,7 @@
 #include "Listadejogos.h"
 #include "ParesEimpares.h"
 #include "Primos.h"
+#include "Sequencia.h"
 
 #include <iostream>
 #include <vector>
@@ -68,6 +69,16 @@ int main(void) {
   for (int i = 0; i <= 6; ++i) {
     std::cout << "Resultado para " << i << ": " << regraCinco.getResultado(i)
               << " " << regraCinco.getResultadoPorcentagem(i) << "%"
+              << std::endl;
+  }
+
+  std::cout << std::endl;
+
+  std::cout << "REGRA Quantidade de números em Seguência" << std::endl;
+  Sequencia regraSeis(novaLista.jogos);
+  for (int i = 0; i <= 6; ++i) {
+    std::cout << "Resultado para " << i << ": " << regraSeis.getResultado(i)
+              << " " << regraSeis.getResultadoPorcentagem(i) << "%"
               << std::endl;
   }
 
