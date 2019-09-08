@@ -9,6 +9,7 @@
  *
  */
 
+#include "Anterior.h"
 #include "Divisiveis.h"
 #include "Fibonacci.h"
 #include "Listadejogos.h"
@@ -61,6 +62,14 @@ int main(void) {
   }
 
   std::cout << std::endl;
+
+  std::cout << "REGRA Quantidade do jogo Anterior" << std::endl;
+  Anterior regraCinco(novaLista.jogos);
+  for (int i = 0; i <= 6; ++i) {
+    std::cout << "Resultado para " << i << ": " << regraCinco.getResultado(i)
+              << " " << regraCinco.getResultadoPorcentagem(i) << "%"
+              << std::endl;
+  }
 
   return 0;
 }
