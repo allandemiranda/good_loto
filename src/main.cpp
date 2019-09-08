@@ -13,6 +13,7 @@
 #include "Fibonacci.h"
 #include "Listadejogos.h"
 #include "ParesEimpares.h"
+#include "Primos.h"
 
 #include <iostream>
 #include <vector>
@@ -47,10 +48,19 @@ int main(void) {
                 << " " << regraTres.getResultadoPorcentagem(j) << "%"
                 << std::endl;
     }
-    std::cout << std::endl;
   }
 
-  
+  std::cout << std::endl;
+
+  std::cout << "REGRA Quantidade de Primos" << std::endl;
+  Primos regraQuatro(novaLista.jogos);
+  for (int i = 0; i <= 6; ++i) {
+    std::cout << "Resultado para " << i << ": " << regraQuatro.getResultado(i)
+              << " " << regraQuatro.getResultadoPorcentagem(i) << "%"
+              << std::endl;
+  }
+
+  std::cout << std::endl;
 
   return 0;
 }
