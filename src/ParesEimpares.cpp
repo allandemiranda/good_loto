@@ -19,17 +19,17 @@
  * @param jogos Jogos sorteados
  */
 ParesEimpares::ParesEimpares(std::vector<std::vector<unsigned long>>& jogos) {
-  for (unsigned long i = 0; i < jogos[0].size(); ++i) {
+  for (unsigned long i = 0; i <= jogos[0].size(); ++i) {
     resultado.push_back(0);
   }
   quantidadeDeJogos = jogos.size();
 
-#pragma omp parallel for
   for (unsigned long i = 0; i < jogos.size(); ++i) {
     unsigned long contador = 0;
-    for (unsigned long j : jogos[i]) {
-      if (sePar(j)) {
-        ++contador;
+    #pragma omp parallel for reduction(+ : contador)
+    for (unsigned long j = 0; j < jogos[i].size(); ++j) {
+      if (sePar(jogos[i][j])) {
+        contador += 1;
       }
     }
     ++resultado[contador];
