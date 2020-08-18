@@ -94,6 +94,7 @@ double Discreta::getResultado(unsigned short int numero,
     return ((double)(quantidade * 100)) /
            ((double)(probabilidade[numero - 1].size() - 1));
   } else {
+    probabilidade[numero - 1].push_back(last);
     return 0.0;
   }
 }
